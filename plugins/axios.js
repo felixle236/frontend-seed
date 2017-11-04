@@ -42,6 +42,12 @@ export default ({app, redirect, route, store}, inject) => {
                 axiosInstance.put(url, data, option).then(({data}) => resolve(data)).catch(err => resolve(handleError(err)));
             });
         },
+        patch: (url, data, option) => {
+            return new Promise((resolve, reject) => {
+                option = setToken(option);
+                axiosInstance.patch(url, data, option).then(({data}) => resolve(data)).catch(err => resolve(handleError(err)));
+            });
+        },
         delete: (url, option) => {
             return new Promise((resolve, reject) => {
                 option = setToken(option);
