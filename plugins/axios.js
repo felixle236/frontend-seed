@@ -5,12 +5,6 @@ const axiosInstance = axios.create({
     timeout: 2000
 });
 
-function handleError(err) {
-    if (err.response && err.response.data && err.response.data.error)
-        return {error: err.response.data.error};
-    return {error: err};
-}
-
 export default ({app, redirect, route, store}, inject) => {
     let setToken = (option) => {
         if (!option)
@@ -22,6 +16,17 @@ export default ({app, redirect, route, store}, inject) => {
 
         return option;
     };
+
+    function handleError(err) {
+        if (err.response && err.response.status === 401) {
+            store.commit('SET_AUTH_USER', null);
+            return redirect('/login');
+        }
+        if (err.response && err.response.data && err.response.data.error)
+            err = err.response.data.error;
+
+        return {error: err};
+    }
 
     inject('axios', {
         get: (url, option) => {
