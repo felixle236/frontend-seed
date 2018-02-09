@@ -25,7 +25,6 @@ module.exports = {
         '~/assets/scss/style.scss'
     ],
     plugins: [
-        {src: '~/plugins/axios'},
         {src: '~/plugins/auth'},
         {src: '~/plugins/service'},
         {src: '~/plugins/event-bus', ssr: false},
