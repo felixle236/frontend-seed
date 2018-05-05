@@ -2,7 +2,7 @@ const webpack = require('webpack');
 
 module.exports = {
     env: {
-        apiBase: process.env.NODE_ENV === 'Production' ? 'http://your-domain' : (process.env.NODE_ENV === 'Staging' ? 'http://your-domain:3001' : 'http://localhost:3001'),
+        apiBase: process.env.NODE_ENV === 'Production' ? 'http://your-domain' : (process.env.NODE_ENV === 'Staging' ? 'http://your-domain:3001' : (process.env.NODE_ENV === 'Cloud' ? 'http://your-cloud-domain:3001' : 'http://localhost:3001')),
         environment: process.env.NODE_ENV
     },
     /*

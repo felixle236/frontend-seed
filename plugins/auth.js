@@ -1,8 +1,8 @@
 export default ({app, redirect, route, store}, inject) => {
     let isAuthenticated = () => {
-        let authUser = store.state.authUser;
-        if (authUser && authUser.user && authUser.user.token && authUser.user.token.tokenExpire && authUser.permission && authUser.accessToken) {
-            let expire = new Date(authUser.user.token.tokenExpire);
+        let userAuth = store.state.userAuth;
+        if (userAuth && userAuth.user && userAuth.user.token && userAuth.user.token.tokenExpire && userAuth.permission && userAuth.accessToken) {
+            let expire = new Date(userAuth.user.token.tokenExpire);
             if (expire >= new Date())
                 return true;
         }
@@ -10,10 +10,10 @@ export default ({app, redirect, route, store}, inject) => {
     };
 
     let isRoles = (...roles) => {
-        let authUser = store.state.authUser;
-        if (authUser && authUser.permission && authUser.permission.roles) {
-            for (let i = 0; i < authUser.permission.roles.length; i++) {
-                let role = authUser.permission.roles[i];
+        let userAuth = store.state.userAuth;
+        if (userAuth && userAuth.permission && userAuth.permission.roles) {
+            for (let i = 0; i < userAuth.permission.roles.length; i++) {
+                let role = userAuth.permission.roles[i];
                 if (roles.find(roleName => roleName.toLowerCase() === role.name.toLowerCase()))
                     return true;
             }

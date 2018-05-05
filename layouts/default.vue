@@ -50,3 +50,12 @@ html {
   background-color: #35495e;
 }
 </style>
+
+<script>
+export default {
+    // middleware: ['auth'],
+    data: () => ({
+
+    })
+};
+</script>

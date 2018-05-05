@@ -3,7 +3,7 @@ import UserService from '~/services/userService';
 
 const axiosInstance = axios.create({
     baseURL: process.env.apiBase,
-    timeout: 6000
+    timeout: 8000
 });
 
 export default ({app, redirect, route, store}, inject) => {
@@ -26,7 +26,7 @@ export default ({app, redirect, route, store}, inject) => {
 
     function handleError(err) {
         if (err.response && err.response.status === 401) {
-            store.commit('SET_AUTH_USER', null);
+            store.commit('SET_USER_AUTH', null);
             return redirect('/login');
         }
         if (err.response && err.response.data && err.response.data.error)

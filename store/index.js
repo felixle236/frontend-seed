@@ -1,27 +1,27 @@
 export const state = () => ({
-    authUserKey: '',
-    authUser: null
+    userAuthKey: '',
+    userAuth: null
 });
 
 export const mutations = {
-    SET_AUTH_USER: function(state, authUser) {
-        state.authUser = authUser;
-        if (state.authUser)
-            state.authUser.version = 1;
+    SET_USER_AUTH: function(state, userAuth) {
+        state.userAuth = userAuth;
+        if (state.userAuth)
+            state.userAuth.version = 1;
         if (process.browser)
-            setCookie(state.authUserKey, state.authUser, 15);
+            setCookie(state.userAuthKey, state.userAuth, 15);
     }
 };
 
 export const actions = {
     nuxtServerInit({commit, state}, {req}) {
-        state.authUserKey = `${process.env.systemType}.authUser`;
+        state.userAuthKey = `${process.env.systemType}.userAuth`;
         if (req.headers.cookie) {
-            let authUser = getCookie(state.authUserKey, req.headers.cookie);
-            if (authUser) {
-                authUser = JSON.parse(authUser);
-                if (authUser && authUser.version === 1)
-                    state.authUser = authUser;
+            let userAuth = getCookie(state.userAuthKey, req.headers.cookie);
+            if (userAuth) {
+                userAuth = JSON.parse(userAuth);
+                if (userAuth && userAuth.version === 1)
+                    state.userAuth = userAuth;
             }
         }
     }
