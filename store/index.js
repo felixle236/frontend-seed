@@ -1,5 +1,5 @@
 export const state = () => ({
-    userAuthKey: '',
+    userAuthKey: 'userAuth',
     userAuth: null
 });
 
@@ -14,8 +14,7 @@ export const mutations = {
 };
 
 export const actions = {
-    nuxtServerInit({commit, state}, {req}) {
-        state.userAuthKey = `${process.env.systemType}.userAuth`;
+    nuxtServerInit({state}, {req}) {
         if (req.headers.cookie) {
             let userAuth = getCookie(state.userAuthKey, req.headers.cookie);
             if (userAuth) {
