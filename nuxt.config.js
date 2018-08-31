@@ -1,47 +1,44 @@
 const webpack = require('webpack');
 
 module.exports = {
-    env: {
-        apiBase: process.env.NODE_ENV === 'Production' ? 'http://your-domain' : (process.env.NODE_ENV === 'Staging' ? 'http://your-domain:3001' : (process.env.NODE_ENV === 'Cloud' ? 'http://your-cloud-domain:3001' : 'http://localhost:3001')),
-        environment: process.env.NODE_ENV
-    },
     /*
     ** Headers of the page
     */
     head: {
-        title: 'FRONTEND SEED',
+        title: 'frontend-seed',
         meta: [
             {charset: 'utf-8'},
             {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-            {hid: 'description', name: 'description', content: 'FRONTEND SEED'}
+            {hid: 'description', name: 'description', content: 'Frontend seed'}
         ],
         link: [
             {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
         ]
     },
-    css: [
-        '~/node_modules/bootstrap/dist/css/bootstrap.min.css',
-        '~/node_modules/font-awesome/css/font-awesome.min.css',
-        '~/assets/scss/style.scss'
-    ],
-    plugins: [
-        {src: '~/plugins/auth'},
-        {src: '~/plugins/service'},
-        {src: '~/plugins/event-bus', ssr: false},
-        {src: '~/plugins/vue-cookie', ssr: false}
-    ],
     /*
     ** Customize the progress bar color
     */
     loading: {color: '#3B8070'},
+    modules: [
+        '@nuxtjs/axios'
+    ],
+    plugins: [
+        {src: '~/plugins/axios'},
+        {src: '~/plugins/authenticate'},
+        {src: '~/plugins/event-bus', ssr: false},
+    ],
+    axios: {
+        proxy: true // Can be also an object with default options
+    },
+    proxy: {
+        '/api/': 'http://localhost:3001'
+    },
     /*
     ** Build configuration
     */
     build: {
         vendor: [
-            'axios',
-            'bootstrap',
-            'vue-cookie'
+            'bootstrap'
         ],
         plugins: [
             new webpack.ProvidePlugin({
@@ -50,8 +47,11 @@ module.exports = {
                 'window.jQuery': 'jquery'
             })
         ],
-        extend(config, ctx) {
-            if (ctx.dev && ctx.isClient) {
+        /*
+        ** Run ESLint on save
+        */
+        extend(config, {isDev, isClient}) {
+            if (isDev && isClient) {
                 config.module.rules.push({
                     enforce: 'pre',
                     test: /\.(js|vue)$/,
@@ -62,3 +62,4 @@ module.exports = {
         }
     }
 };
+

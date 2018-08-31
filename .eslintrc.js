@@ -1,18 +1,22 @@
 module.exports = {
     root: true,
-    parser: 'babel-eslint',
-    extends: 'standard',
     env: {
         browser: true,
-        commonjs: true,
-        es6: true,
-        jquery: true,
         node: true
     },
+    parserOptions: {
+        parser: 'babel-eslint'
+    },
+    extends: [
+        // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
+        // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
+        'plugin:vue/strongly-recommended'
+    ],
     // required to lint *.vue files
     plugins: [
-        'html'
+        'vue'
     ],
+    // add your custom rules here
     rules: {
         'indent': ['error', 4],
         'semi': ['error', 'always'],
@@ -37,11 +41,7 @@ module.exports = {
             'anonymous': 'never',
             'named': 'never',
             'asyncArrow': 'always'
-        }]
-    },
-    parserOptions: {
-        ecmaVersion: 7,
-        sourceType: 'module',
-        ecmaFeatures: {}
+        }],
+        'vue/html-indent': ['error', 4]
     }
 }

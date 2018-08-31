@@ -51,11 +51,3 @@ html {
 }
 </style>
 
-<script>
-export default {
-    // middleware: ['auth'],
-    data: () => ({
-
-    })
-};
-</script>

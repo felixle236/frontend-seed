@@ -1,27 +1,33 @@
 <template>
     <section class="container">
         <div>
-            <logo/>
+            <app-logo/>
             <h1 class="title">
                 frontend-seed
             </h1>
             <h2 class="subtitle">
-                Nuxt.js project
+                Frontend seed
             </h2>
             <div class="links">
-                <a href="https://nuxtjs.org/" target="_blank" class="button--green">Documentation</a>
-                <a href="https://github.com/nuxt/nuxt.js" target="_blank" class="button--grey">GitHub</a>
+                <a 
+                    href="https://nuxtjs.org/" 
+                    target="_blank" 
+                    class="button--green">Documentation</a>
+                <a 
+                    href="https://github.com/nuxt/nuxt.js" 
+                    target="_blank" 
+                    class="button--grey">GitHub</a>
             </div>
         </div>
     </section>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue';
+import AppLogo from '~/components/AppLogo.vue';
 
 export default {
     components: {
-        Logo
+        AppLogo
     }
 };
 </script>
