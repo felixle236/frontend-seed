@@ -15,6 +15,11 @@ module.exports = {
             {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
         ]
     },
+    css: [
+        '~/node_modules/bootstrap/dist/css/bootstrap.min.css',
+        '~/node_modules/font-awesome/css/font-awesome.min.css',
+        '~/assets/scss/main.scss'
+    ],
     /*
     ** Customize the progress bar color
     */
@@ -31,7 +36,7 @@ module.exports = {
         proxy: true // Can be also an object with default options
     },
     proxy: {
-        '/api/': 'http://localhost:3001'
+        '/api': 'http://localhost:3001'
     },
     /*
     ** Build configuration
