@@ -3,10 +3,10 @@
         <br>
         <h3>USER AUTHENTICATION</h3>
         <br>
-        <div v-if="userAuth && profile">
+        <div v-if="profile">
             <h4>Name: {{ profile.firstName }} {{ profile.lastName }}</h4>
             <h4>Email: {{ profile.email }}</h4>
-            <h4>Role: {{ userAuth.role.name }}</h4>
+            <h4 v-if="userAuth && userAuth.role">Role: {{ userAuth.role.name }}</h4>
         </div>
         <br>
         <hr>
