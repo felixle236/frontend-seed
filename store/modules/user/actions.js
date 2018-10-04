@@ -25,6 +25,9 @@ export default {
         const userAuth = await this.$axios.$post('/api/users/authenticate', {email, password});
         storeUserAuthentication(commit, userAuth);
         return userAuth;
+    },
+    signout({commit}) {
+        storeUserAuthentication(commit);
     }
 };
 

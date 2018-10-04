@@ -15,6 +15,8 @@ export default function() {
                         if (userAuth && userAuth.accessToken && userAuth.tokenExpire && new Date(userAuth.tokenExpire) >= new Date())
                             state.user.userAuth = userAuth;
                     }
+                    else
+                        state.user.userAuth = null;
                 }
             }
         },

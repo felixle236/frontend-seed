@@ -1,11 +1,16 @@
 const webpack = require('webpack');
+const apiBase = process.env.NODE_ENV === 'production' ? 'https://domain-production' : (process.env.NODE_ENV === 'staging' ? 'https://domain-staging' : 'http://localhost:3001');
 
 module.exports = {
+    env: {
+        apiBase,
+        environment: process.env.NODE_ENV
+    },
     /*
     ** Headers of the page
     */
     head: {
-        title: 'frontend-seed',
+        title: 'Frontend seed',
         meta: [
             {charset: 'utf-8'},
             {name: 'viewport', content: 'width=device-width, initial-scale=1'},
@@ -36,7 +41,7 @@ module.exports = {
         proxy: true // Can be also an object with default options
     },
     proxy: {
-        '/api': 'http://localhost:3001'
+        '/api': apiBase
     },
     /*
     ** Build configuration
