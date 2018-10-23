@@ -21,8 +21,8 @@ module.exports = {
         ]
     },
     css: [
-        '~/node_modules/bootstrap/dist/css/bootstrap.min.css',
-        '~/node_modules/font-awesome/css/font-awesome.min.css',
+        'bootstrap/dist/css/bootstrap.min.css',
+        'font-awesome/css/font-awesome.min.css',
         '~/assets/scss/main.scss'
     ],
     /*
@@ -33,6 +33,7 @@ module.exports = {
         '@nuxtjs/axios'
     ],
     plugins: [
+        {src: '~/plugins/bootstrap'},
         {src: '~/plugins/axios'},
         {src: '~/plugins/authenticate'},
         {src: '~/plugins/event-bus', ssr: false},
@@ -48,7 +49,8 @@ module.exports = {
     */
     build: {
         vendor: [
-            'bootstrap'
+            'jquery',
+            'bootstrap',
         ],
         plugins: [
             new webpack.ProvidePlugin({
