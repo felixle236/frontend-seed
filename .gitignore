@@ -13,6 +13,16 @@ dist
 # Npm install
 package-lock.json
 
+# dotenv environment variables file
+.env
+
+# deployment
+staging.sh
+production.sh
+deployment/data/
+deployment/nginx/ssl/certs/*
+deployment/nginx/ssl/private/*
+
 # Others
 .idea
 .history

@@ -1,10 +1,11 @@
+require('dotenv').config();
 const webpack = require('webpack');
-const apiBase = process.env.NODE_ENV === 'production' ? 'https://domain-production' : (process.env.NODE_ENV === 'staging' ? 'https://domain-staging' : 'http://localhost:3001');
 
 module.exports = {
-    env: {
-        apiBase,
-        environment: process.env.NODE_ENV
+    env: process.env,
+    server: {
+        host: process.env.PROJECT_HOST,
+        port: process.env.PROJECT_PORT
     },
     /*
     ** Headers of the page
@@ -42,7 +43,7 @@ module.exports = {
         proxy: true // Can be also an object with default options
     },
     proxy: {
-        '/api': apiBase
+        '/api': process.env.API_BASE
     },
     /*
     ** Build configuration

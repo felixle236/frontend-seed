@@ -6,7 +6,9 @@
         <div v-if="profile">
             <h4>Name: {{ profile.firstName }} {{ profile.lastName }}</h4>
             <h4>Email: {{ profile.email }}</h4>
-            <h4 v-if="userAuth && userAuth.role">Role: {{ userAuth.role.name }}</h4>
+            <h4 v-if="userAuth && userAuth.role">
+                Role: {{ userAuth.role.name }}
+            </h4>
         </div>
         <br>
         <hr>
@@ -15,20 +17,32 @@
         <br>
         <table 
             class="table" 
-            style="text-align: center">
+            style="text-align: center"
+        >
             <thead>
                 <tr>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Role</th>
+                    <th scope="col">
+                        First Name
+                    </th>
+                    <th scope="col">
+                        Last Name
+                    </th>
+                    <th scope="col">
+                        Email
+                    </th>
+                    <th scope="col">
+                        Role
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 <tr 
                     v-for="user in list" 
-                    :key="user.id">
-                    <td scope="row">{{ user.firstName }}</td>
+                    :key="user.id"
+                >
+                    <td scope="row">
+                        {{ user.firstName }}
+                    </td>
                     <td>{{ user.lastName }}</td>
                     <td>{{ user.email }}</td>
                     <td>{{ user.role && user.role.name }}</td>

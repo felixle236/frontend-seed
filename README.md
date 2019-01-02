@@ -11,12 +11,8 @@ $ npm install # Or yarn install
 # serve with hot reload
 $ npm run dev
 
-# build for staging and launch server
-$ npm run build-staging
-$ npm start
-
-# build for production and launch server
-$ npm run build-production
+# build for staging and production
+$ npm run build
 $ npm start
 ```
 
