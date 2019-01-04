@@ -3,10 +3,6 @@ const webpack = require('webpack');
 
 module.exports = {
     env: process.env,
-    server: {
-        host: process.env.PROJECT_HOST,
-        port: process.env.PROJECT_PORT
-    },
     /*
     ** Headers of the page
     */
@@ -40,7 +36,7 @@ module.exports = {
         {src: '~/plugins/event-bus', ssr: false},
     ],
     axios: {
-        proxy: true // Can be also an object with default options
+        proxy: JSON.parse(process.env.USE_AXIOS_PROXY) // Can be also an object with default options
     },
     proxy: {
         '/api': process.env.API_BASE
