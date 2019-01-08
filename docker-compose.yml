@@ -1,7 +1,7 @@
 version: '3.7'
 services:
-    web_app:
-        container_name: web-app-${PROJECT_ID}
+    frontend_seed:
+        container_name: frontend-seed
         image: node:10.14.1
         command: bash -c ${DOCKER_CMD}
         working_dir: /usr/app

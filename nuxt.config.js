@@ -35,12 +35,6 @@ module.exports = {
         {src: '~/plugins/authenticate'},
         {src: '~/plugins/event-bus', ssr: false},
     ],
-    axios: {
-        proxy: JSON.parse(process.env.USE_AXIOS_PROXY) // Can be also an object with default options
-    },
-    proxy: {
-        '/api': process.env.API_BASE
-    },
     /*
     ** Build configuration
     */
@@ -71,4 +65,3 @@ module.exports = {
         }
     }
 };
-
