@@ -22,7 +22,7 @@ export default {
         return userAuth;
     },
     async signin({commit}, {email, password}) {
-        const userAuth = await this.$axios.$post('/api/users/authenticate', {email, password});
+        const userAuth = await this.$axios.$post('/api/users/signin', {email, password});
         storeUserAuthentication(commit, userAuth);
         return userAuth;
     },
