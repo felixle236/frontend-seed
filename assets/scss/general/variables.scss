@@ -1,0 +1,180 @@
+// Import Font
+@font-face {
+    font-family: 'SofiaProLight';
+    src: url('/fonts/SofiaProLight/SofiaProLight.eot');
+    src: url('/fonts/SofiaProLight/SofiaProLight.woff2') format('woff2'), url('/fonts/SofiaProLight/SofiaProLight.woff') format('woff'), url('/fonts/SofiaProLight/SofiaProLight.ttf') format('truetype'), url('/fonts/SofiaProLight/SofiaProLight.svg#SofiaProLight') format('svg'), url('/fonts/SofiaProLight/SofiaProLight.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SofiaProRegular';
+    src: url('/fonts/SofiaProRegular/SofiaProRegular.eot');
+    src: url('/fonts/SofiaProRegular/SofiaProRegular.woff2') format('woff2'), url('/fonts/SofiaProRegular/SofiaProRegular.woff') format('woff'), url('/fonts/SofiaProRegular/SofiaProRegular.ttf') format('truetype'), url('/fonts/SofiaProRegular/SofiaProRegular.svg#SofiaProRegular') format('svg'), url('/fonts/SofiaProRegular/SofiaProRegular.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SofiaProSemiBold';
+    src: url('/fonts/SofiaProSemiBold/SofiaProSemiBold.eot');
+    src: url('/fonts/SofiaProSemiBold/SofiaProSemiBold.woff2') format('woff2'), url('/fonts/SofiaProSemiBold/SofiaProSemiBold.woff') format('woff'), url('/fonts/SofiaProSemiBold/SofiaProSemiBold.ttf') format('truetype'), url('/fonts/SofiaProSemiBold/SofiaProSemiBold.svg#SofiaProSemiBold') format('svg'), url('/fonts/SofiaProSemiBold/SofiaProSemiBold.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SofiaProSemiBold-Italic';
+    src: url('/fonts/SofiaProSemiBold-Italic/SofiaProSemiBold-Italic.eot');
+    src: url('/fonts/SofiaProSemiBold-Italic/SofiaProSemiBold-Italic.woff2') format('woff2'), url('/fonts/SofiaProSemiBold-Italic/SofiaProSemiBold-Italic.woff') format('woff'), url('/fonts/SofiaProSemiBold-Italic/SofiaProSemiBold-Italic.ttf') format('truetype'), url('/fonts/SofiaProSemiBold-Italic/SofiaProSemiBold-Italic.svg#SofiaProSemiBold-Italic') format('svg'), url('/fonts/SofiaProSemiBold-Italic/SofiaProSemiBold-Italic.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Graduate-Regular';
+    src: url('/fonts/Graduate-Regular/Graduate-Regular.eot');
+    src: url('/fonts/Graduate-Regular/Graduate-Regular.eot?#iefix') format('embedded-opentype'), url('/fonts/Graduate-Regular/Graduate-Regular.woff2') format('woff2'), url('/fonts/Graduate-Regular/Graduate-Regular.woff') format('woff'), url('/fonts/Graduate-Regular/Graduate-Regular.ttf') format('truetype'), url('/fonts/Graduate-Regular/Graduate-Regular.svg#Graduate-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+// @font-face {
+//     font-family: 'Icomoon';
+//     src:  ('/fonts/Icomoon/icomoon.eot?vlm508');
+//     src:  ('/fonts/Icomoon/icomoon.eot?vlm508#iefix') format('embedded-opentype'), ('/fonts/Icomoon/icomoon.ttf?vlm508') format('truetype'), ('/fonts/Icomoon/icomoon.woff?vlm508') format('woff'), ('/fonts/Icomoon/icomoon.svg?vlm508#icomoon') format('svg');
+//     font-weight: normal;
+//     font-style: normal;
+// }
+  
+@font-face {
+    font-family: 'icomoon';
+    src:  url('/fonts/Icomoon/icomoon.eot?5hllax');
+    src:  url('/fonts/Icomoon/icomoon.eot?5hllax#iefix') format('embedded-opentype'), url('/fonts/Icomoon/icomoon.ttf?5hllax') format('truetype'), url('/fonts/Icomoon/icomoon.woff?5hllax') format('woff'), url('/fonts/Icomoon/icomoon.svg?5hllax#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+  
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+  
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+  
+.icon-close:before {
+    content: "\e900";
+}
+.icon-emoji:before {
+    content: "\e901";
+}
+.icon-send:before {
+    content: "\e902";
+}
+.icon-share:before {
+    content: "\e903";
+}
+.icon-nuxt:before {
+    content: "\e904";
+}
+.icon-notify:before {
+    content: "\e905";
+}
+.icon-bookmark:before {
+    content: "\e906";
+}
+.icon-info:before {
+    content: "\e907";
+}
+.icon-logout:before {
+    content: "\e908";
+}
+.icon-message:before {
+    content: "\e909";
+}
+.icon-move:before {
+    content: "\e910";
+}
+.icon-news:before {
+    content: "\e911";
+}
+.icon-scale:before {
+    content: "\e912";
+}
+.icon-transfer:before {
+    content: "\e913";
+}
+  
+// Color
+$black: #000;
+$black-light: #0f0f0f;
+$white: #fff;
+$red: #ff424a;
+$gray-light: #f0f2f5;
+$gray:  #8b8b8b;
+$gray-dark: #5c6069;
+$gray-darker: #16191c;
+$blue-light: #E9ECFF; 
+$blue: #1c5df4;
+$blue-lighter: #49b3af;
+$blue-dark: #3d83e1;
+$blue-darker:  #253752;
+$green: #2adf80;
+$green-darker: #00caa3; 
+$yellow: #fdd130;
+
+// Font
+$font-size-smallest: 7px;
+$font-size-smaller: 9px;
+$font-size-small: 10px;
+$font-size-normal: 12px;
+$font-size-primary: 13px;
+$font-size-big: 14px;
+$font-size-bigger: 15px;
+$font-size-biggest: 32px;
+
+// h1 
+h1, h2, h3, h4, h5, h6 {
+    margin: 0
+}
+.pd-0{
+    padding: 0 !important;
+}
+.pdr-5{
+    padding-right: 5px !important;
+}
+.pdl-5{
+    padding-left: 5px !important;
+}
+.pdr-15 {
+    padding-right: 15px !important;
+}
+.mt-0{
+    margin-top: 0 !important;
+}
+.mt-45{
+    margin-top: 45px !important;
+}
+.mb-0{
+    margin-bottom: 0 !important;
+}
+.mb-6{
+    margin-bottom: 6px !important;
+}
+.mb-15{
+    margin-bottom: 15px !important;
+}
+.mb-20{
+    margin-bottom: 20px !important;
+}
+.mb-30{
+    margin-bottom: 30px !important;
+}

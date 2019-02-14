@@ -1,0 +1,28 @@
+.theme-default{
+    //----Color
+    $color-primary: $white;
+    $color-second: $blue-lighter;
+    $color-third: $gray-darker;
+    $color-fourth: $blue-darker;
+    $color-fifth: $gray;
+    $color-sixth: $blue-dark;
+    $color-seventh: $green;
+    $color-eighth: $black-light;
+    $color-ninth: $blue-light;
+    $color-tenth: $gray-light;
+    $color-eleventh: $red;
+    $color-twelfth: $green-darker;
+    //----Font
+    $font-primary: 'SofiaProRegular';
+    $font-second: 'SofiaProLight';
+    $font-third: 'SofiaProSemiBold';
+    $font-fourth: 'SofiaProSemiBold-Italic';
+    $font-fifth: 'Graduate-Regular';
+
+    @import './general/general.scss';
+    @import './components/box-left.scss';
+    @import './components/chart.scss';
+    @import './pages/login.scss';
+    @import './pages/dashboard.scss';
+    @import './pages/message.scss';
+}

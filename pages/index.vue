@@ -1,70 +1,70 @@
 <template>
-    <section class="container">
-        <div>
-            <app-logo />
-            <h1 class="title">
-                frontend-seed
-            </h1>
-            <h2 class="subtitle">
-                Frontend seed
-            </h2>
-            <div class="links">
-                <a 
-                    href="https://nuxtjs.org/" 
-                    target="_blank" 
-                    class="button--green"
-                >
-                    Documentation
-                </a>
-                <a
-                    href="https://github.com/nuxt/nuxt.js" 
-                    target="_blank" 
-                    class="button--grey"
-                >
-                    GitHub
-                </a>
+    <section class="page-container dashboard">
+        <div class="page-header row align-items-end">
+            <div class="col">
+                <h1 class="page-title">
+                    Nuxt JS
+                </h1>
             </div>
+            <div class="col">
+                <div class="group-search">
+                    <input
+                        type="text"
+                        placeholder="Keyword"
+                        class="input-search"
+                    >
+                    <i
+                        class="fa fa-search"
+                        aria-hidden="true" 
+                    />
+                </div>
+            </div>
+        </div>
+        <div class="page-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Welcome to Nuxt JS</h1>
+                    <p class="description"> 
+                        Our goal is to create a framework flexible enough that you can use it as a main project base or in addition to your current project based on Node.js.<br>
+                        Nuxt.js presets all the configuration needed to make your development of a Vue.js Application Server Rendered more enjoyable.
+                    </p>
+                    <nuxt-link 
+                        :to="'login'" 
+                        class="btn-normal"
+                    >
+                        Login
+                    </nuxt-link>
+                </div>
+            </div>
+        </div>
+        <div class="page-footer">
+            <nuxt-link
+                to="/"
+                class="txt-link"
+            >
+                Help & Support
+            </nuxt-link> |
+            <nuxt-link
+                to="/"
+                class="txt-link"
+            >
+                Terms & Condition
+            </nuxt-link>|
+            <nuxt-link
+                to="/"
+                class="txt-link"
+            >
+                Tutorial
+            </nuxt-link>
         </div>
     </section>
 </template>
 
 <script>
-import AppLogo from '~/components/AppLogo.vue';
-
 export default {
     components: {
-        AppLogo
+     
     }
 };
 </script>
 
-<style>
-.container {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.title {
-    font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
-    display: block;
-    font-weight: 300;
-    font-size: 100px;
-    color: #35495e;
-    letter-spacing: 1px;
-}
-
-.subtitle {
-    font-weight: 300;
-    font-size: 42px;
-    color: #526488;
-    word-spacing: 5px;
-    padding-bottom: 15px;
-}
-
-.links {
-    padding-top: 15px;
-}
-</style>

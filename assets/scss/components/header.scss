@@ -1,0 +1,158 @@
+header{
+    position: relative;
+    z-index: 1;
+    background-color: $color-primary;
+    // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+    @include box-shadow(0, 2px, 4px, rgba(0, 0, 0, 0.03));
+    .logo{
+        padding: 21px 15px;
+        font-size: 13px;
+        line-height: 15px;
+    }
+    .user-header{
+        float:right;
+        padding: 20px 15px 21px 0px;
+    }
+    .dropdown{
+        display: inline-block;
+        .dropdown-menu{ 
+            margin-top: 27px;
+        }
+        .dropdown-toggle{
+            background-color: $color-primary !important;
+            border: 0;
+            font-family: 'CircularStd-Book';
+            font-size: 10px;
+            line-height: 1.6;
+            text-align: right;
+            color: $color-third;
+            box-shadow: none !important;
+            outline: none !important;
+            padding-right: 10px;
+            &::after{
+                display: none;
+            }
+            &.btn{
+                color: $color-third;
+                width: 135px;
+            }
+        }
+        .user-position{
+            display: block;
+            font-size: $font-size-smallest;
+            text-transform: uppercase;
+            color: $color-second;
+        }
+        .fa-caret-down{
+            top: 15px;
+            right: -48px;
+            position: absolute;
+            font-size: 12px;
+            color: $color-sixth;
+        }
+        &.open {
+            .dropdown-toggle{
+                color: $color-third !important;
+            }
+        }
+        &:hover {
+            .dropdown-toggle{
+                color: $color-third !important;
+            }
+        }
+    }
+    .user-notify{
+        position: relative;
+        display: inline-block;
+        top: 4px;
+        margin-right: 10px;
+        .icon-circle{
+            top: -5px;
+            left: 7px;
+            font-size: $font-size-smallest;
+        }
+        .dropdown-toggle{
+            position: relative;
+            z-index: 1066;
+            &::after{
+                display: none;
+            }
+        }
+        .list-notify{
+            max-height: 132px;
+            overflow-y: auto;
+            &::-webkit-scrollbar-track
+            {
+                -webkit-box-shadow: inset 0 0 6px #fff;
+                background-color: #ffffff;
+            }
+            &::-webkit-scrollbar
+            {
+                width: 2px;
+                background-color: #ffffff;
+            }
+            
+            &::-webkit-scrollbar-thumb
+            {
+                background-color: rgba(216, 216, 216, 0.62);
+                border-radius: 10px;
+                border: 1px solid rgba(216, 216, 216, 0.62);
+            }
+        }
+        .dropdown-menu{
+            margin-top: 0px;
+            min-width: 245px;
+            left: -109px !important;
+            .dropdown-menu-link{
+                padding: 9px 10px 5px 10px;
+                min-height: 36px;
+                position: relative;
+            }
+        }
+        .notify-img{
+            width: 20px;
+            height: 20px;
+            @include border-radius(50%);
+            border: 1px solid #eeeeee;
+            display: inline-block;
+            position: relative;
+            top: -7px;
+        }
+        .notify-description{
+            width: calc(75% - 25px);
+            display: inline-block;
+            font-size: 9px;
+        }
+        .notify-time{
+            text-align: right;
+            width: 24%;
+            display: inline-block;
+            position: relative;
+            top: -10px;
+            font-size: 9px;
+            color: $color-sixth;
+            &::after{
+                font: normal normal normal 14px/1 FontAwesome;
+                content: "\f111";
+                font-size: 5px;
+                position: relative;
+                top:-1px;
+                right: -5px;
+            }
+            &.active{
+                &::after{
+                    color: $color-second;
+                }
+            }
+        }
+    }
+    .user-avatar{
+        display: inline-block;
+        img{
+            width: 36px;
+            height: 36px;
+            @include border-radius(50%);
+            border: 1px solid #eeeeee;
+        }
+    }
+}

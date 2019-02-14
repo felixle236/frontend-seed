@@ -9,12 +9,6 @@
             <h4 v-if="userAuth && userAuth.role">
                 Role: {{ userAuth.role.name }}
             </h4>
-            <h4
-                v-show="isConnected"
-                style="color: red"
-            >
-                Socket IO is connected.
-            </h4>
         </div>
         <br>
         <hr>
@@ -59,25 +53,13 @@
 </template>
 
 <script>
-import io from 'socket.io-client';
 import {mapGetters, mapActions} from 'vuex';
 
 export default {
-    data: () => ({
-        isConnected: false
-    }),
     async mounted() {
         try {
-            const userAuth = await this.signin({email: 'admin@localhost.com', password: 'Backend-seed2'});
+            await this.signin({email: 'admin@localhost.com', password: 'Backend-seed2'});
             await this.findUsers();
-
-            const socket = io.connect(process.env.API_URL + '/messages', {
-                query: {token: userAuth.accessToken}
-            });
-
-            socket.on('connect', () => {
-                this.isConnected = true;
-            });
         }
         catch (error) {
             console.error(error.message);
