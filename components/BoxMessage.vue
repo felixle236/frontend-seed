@@ -106,22 +106,7 @@
 </template>
 
 <script>
-import Bar from '~/components/chart/Bar.vue';
-import Bubble from '~/components/chart/Bubble.vue';
-import Doughnut from '~/components/chart/Doughnut.vue';
-import Line from '~/components/chart/Line.vue';
-import Pie from '~/components/chart/Pie.vue';
-import PolarArea from '~/components/chart/PolarArea.vue';
-import Radar from '~/components/chart/Radar.vue';
-
 export default {
-    components: {
-      
-    },
-    methods: {
-        showContact() {
-            this.$emit('showContact');
-        }
-    }
+    
 };
 </script>

@@ -6,19 +6,6 @@
                     Nuxt JS
                 </h1>
             </div>
-            <div class="col">
-                <div class="group-search">
-                    <input
-                        type="text"
-                        placeholder="Keyword"
-                        class="input-search"
-                    >
-                    <i
-                        class="fa fa-search"
-                        aria-hidden="true" 
-                    />
-                </div>
-            </div>
         </div>
         <div class="page-body">
             <div class="row">
@@ -38,24 +25,13 @@
             </div>
         </div>
         <div class="page-footer">
-            <nuxt-link
-                to="/"
+            <a
+                href="https://github.com/felixle236/frontend-seed"
                 class="txt-link"
+                target="_blank"
             >
-                Help & Support
-            </nuxt-link> |
-            <nuxt-link
-                to="/"
-                class="txt-link"
-            >
-                Terms & Condition
-            </nuxt-link>|
-            <nuxt-link
-                to="/"
-                class="txt-link"
-            >
-                Tutorial
-            </nuxt-link>
+                Github
+            </a>
         </div>
     </section>
 </template>

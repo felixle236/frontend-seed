@@ -22,30 +22,6 @@
                     <i class="i-con icon-message" />
                 </nuxt-link>
             </li>
-            <li class="menu-item">
-                <nuxt-link
-                    to="/"
-                    class="menu-link"
-                >
-                    <i class="i-con icon-news" />
-                </nuxt-link>
-            </li>
-            <li class="menu-item">
-                <nuxt-link
-                    to="/"
-                    class="menu-link"
-                >
-                    <i class="i-con icon-transfer" />
-                </nuxt-link>
-            </li>
-            <li class="menu-item notify">
-                <nuxt-link
-                    to="/"
-                    class="menu-link"
-                >
-                    <i class="i-con icon-notify" />
-                </nuxt-link>
-            </li>
             <li class="menu-item logout">
                 <nuxt-link
                     to="/"
