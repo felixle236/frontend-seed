@@ -120,12 +120,14 @@ input[type=text], input[type=password]{
 .content-menu{
     background-color: #212121;
     height: 100%;
-    width: 88px;
+    width: 70px;
     position: relative;
     z-index: 2;
     .logo{
         padding: 20px;
-        max-width: 87px;
+         max-width: 75px;
+         position: relative;
+         left: -2px;
     }
 }
 .menu-left{
@@ -145,7 +147,7 @@ input[type=text], input[type=password]{
         background-color: transparent;
     }
     .menu-item{
-        padding: 28px 26px;
+        padding: 15px 17px;
         width: 100%;
         border-left: 4px solid transparent;
         &.active{
@@ -157,7 +159,7 @@ input[type=text], input[type=password]{
         &.logout{
             position: absolute;
             bottom: 10px;
-            padding: 14px 26px;
+            // padding: 14px 26px;
             
         }
         &.notify{
@@ -238,7 +240,7 @@ input[type=text], input[type=password]{
 }
 .group-search{
     position: relative;
-    margin-right: 64px;
+    // margin-right: 64px;
     .input-search{
         color: #989898;
         font-size: $font-size-big;
