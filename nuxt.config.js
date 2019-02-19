@@ -14,7 +14,7 @@ module.exports = {
             {hid: 'description', name: 'description', content: process.env.PROJECT_NAME}
         ],
         link: [
-            {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
+            {rel: 'icon', type: 'image/x-icon', href: '/favicon.png'}
         ]
     },
     css: [
@@ -25,7 +25,7 @@ module.exports = {
     /*
     ** Customize the progress bar color
     */
-    loading: {color: '#3B8070'},
+    loading: false,
     modules: [
         '@nuxtjs/axios'
     ],

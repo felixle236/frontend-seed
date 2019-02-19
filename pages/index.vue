@@ -57,6 +57,15 @@
                 Tutorial
             </nuxt-link>
         </div>
+        <div class="page-footer">
+            <a
+                href="https://github.com/felixle236/frontend-seed"
+                class="txt-link"
+                target="_blank"
+            >
+                Github
+            </a>
+        </div>
     </section>
 </template>
 
