@@ -7,7 +7,7 @@
     transition: 0.4s linear;
     &.box-message{
         // width: 488px;
-        width: calc(100vw - 340px);
+        width: calc(100vw - 321px);
         &.closed{
             margin-left: -488px;
         }
