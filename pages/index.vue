@@ -1,25 +1,5 @@
 <template>
     <section class="page-container dashboard">
-        <div class="page-header row align-items-end">
-            <div class="col">
-                <h1 class="page-title">
-                    Nuxt JS
-                </h1>
-            </div>
-            <div class="col">
-                <div class="group-search">
-                    <input
-                        type="text"
-                        placeholder="Keyword"
-                        class="input-search"
-                    >
-                    <i
-                        class="fa fa-search"
-                        aria-hidden="true" 
-                    />
-                </div>
-            </div>
-        </div>
         <div class="page-body">
             <div class="row">
                 <div class="col-md-12">
@@ -29,33 +9,21 @@
                         Nuxt.js presets all the configuration needed to make your development of a Vue.js Application Server Rendered more enjoyable.
                     </p>
                     <nuxt-link 
-                        :to="'login'" 
+                        to="login" 
                         class="btn-normal"
+                        v-if="!$auth.isAuthenticated()"
                     >
                         Login
                     </nuxt-link>
+                    <nuxt-link 
+                        to="message" 
+                        class="btn-normal"
+                        v-if="$auth.isAuthenticated()"
+                    >
+                        Join to chat
+                    </nuxt-link>
                 </div>
             </div>
-        </div>
-        <div class="page-footer">
-            <nuxt-link
-                to="/"
-                class="txt-link"
-            >
-                Help & Support
-            </nuxt-link> |
-            <nuxt-link
-                to="/"
-                class="txt-link"
-            >
-                Terms & Condition
-            </nuxt-link>|
-            <nuxt-link
-                to="/"
-                class="txt-link"
-            >
-                Tutorial
-            </nuxt-link>
         </div>
         <div class="page-footer">
             <a
@@ -68,12 +36,3 @@
         </div>
     </section>
 </template>
-
-<script>
-export default {
-    components: {
-     
-    }
-};
-</script>
-

@@ -1,50 +1,86 @@
 <template>
     <div class="box-left box-contact">
-        <div class="box-border box-head">
+        <div
+            class="box-border box-head"
+            v-if="profile"
+        >
             <img
-                src="/images/default_avatar.png"
-                alt="avatar"
+                :src="profile.avatar"
+                alt=""
+                :title="profile.firstName + ' ' + profile.lastName"
                 class="img-avatar"
             >
             <h3 class="user-name">
-                Admin
+                {{ profile.firstName + ' ' + profile.lastName }}
             </h3>
         </div>
         <div class="box-scroll">
             <div class="box-border box-direct">
                 <h3 class="heading-box">
-                    All users
+                    Group
+                </h3>
+                <ul class="nav-bot">
+                    <li class="nav-item">
+                        &emsp;
+                        All members
+                        <i
+                            class="fa fa-circle red pull-right"
+                            aria-hidden="true" 
+                        />
+                    </li>
+                </ul>
+            </div>
+            <div class="box-border box-direct">
+                <h3 class="heading-box">
+                    Direct
                 </h3>
                 <ul class="nav-bot">
                     <li class="nav-item">
                         <i
                             class="fa fa-circle"
                             aria-hidden="true"
-                        />Felix<i
+                        />
+                        Felix
+                        <i
                             class="fa fa-circle red pull-right"
                             aria-hidden="true" 
                         />
                     </li>
-                    <li class="nav-item">
+                    <li
+                        class="nav-item"
+                        v-for="(user, index) in userList"
+                        :key="index"
+                    >
                         <i
                             class="fa fa-circle"
                             aria-hidden="true" 
-                        />John
-                    </li>
-                    <li class="nav-item">
-                        <i
-                            class="fa fa-circle"
-                            aria-hidden="true" 
-                        />Aragon
-                    </li>
-                    <li class="nav-item">
-                        <i
-                            class="fa fa-circle"
-                            aria-hidden="true" 
-                        />Kency
+                        />
+                        {{ user.firstName + ' ' + user.lastName }}
                     </li>
                 </ul>
             </div>
         </div>
     </div>
 </template>
+
+<script>
+import {mapGetters, mapActions} from 'vuex';
+
+export default {
+    computed: {
+        ...mapGetters('user', [
+            'profile',
+            'userList'
+        ])
+    },
+    async mounted() {
+        await this.findUsers();
+    },
+    methods: {
+        ...mapActions('user', [
+            'findUsers'
+        ]),
+    }
+};
+</script>
+

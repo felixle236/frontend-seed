@@ -14,6 +14,7 @@ import BoxContact from '~/components/BoxContact';
 import BoxMessage from '~/components/BoxMessage';
 
 export default {
+    middleware: ['authentication'],
     components: {
         BoxContact,
         BoxMessage

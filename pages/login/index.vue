@@ -2,11 +2,14 @@
     <section class="page-blank">
         <div class="row row-default no-gutters">
             <div class="col-xl-7 col-lg-7 col-md-7 col-sm-12 col-form">
-                <form class="form-style">
+                <form
+                    class="form-style"
+                    @submit.prevent
+                >
                     <p>
                         <img
                             src="/images/logo.png"
-                            alt=" logo"
+                            alt="logo"
                             class="logo"
                         >
                     </p>
@@ -17,21 +20,26 @@
                         type="text"
                         placeholder="Your Email"
                         class="form-input"
+                        v-model="email"
                     >
                     <input
                         type="password"
                         placeholder="Password"
                         class="form-input"
+                        v-model="password"
                     >
-                    <button class="btn-normal">
+                    <button
+                        class="btn-normal"
+                        @click="login"
+                    >
                         Login
                     </button>
-                    <!-- <nuxt-link
-                        to="/"
-                        class="link-style"
+                    <p
+                        style="color: #f93c3c; margin-top: 20px;"
+                        v-if="signinMessage"
                     >
-                        Forgot password
-                    </nuxt-link> -->
+                        {{ signinMessage }}
+                    </p>
                 </form>
             </div>
         </div>
@@ -48,7 +56,32 @@
 </template>
 
 <script>
+import {mapGetters, mapActions} from 'vuex';
+
 export default {
     layout: 'blank',
+    middleware: ['non-authentication'],
+    data: () => ({
+        email: '',
+        password: '',
+    }),
+    computed: {
+        ...mapGetters('user', [
+            'signinMessage'
+        ])
+    },
+    methods: {
+        ...mapActions('user', [
+            'signin'
+        ]),
+        async login() {
+            const userAuth = await this.signin({
+                email: this.email,
+                password: this.password
+            });
+            if (userAuth)
+                this.$router.push('/');
+        }
+    }
 };
 </script>

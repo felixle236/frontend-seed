@@ -37,7 +37,7 @@
             </thead>
             <tbody>
                 <tr 
-                    v-for="user in list" 
+                    v-for="user in userList" 
                     :key="user.id"
                 >
                     <td scope="row">
@@ -69,7 +69,7 @@ export default {
         ...mapGetters('user', [
             'userAuth',
             'profile',
-            'list'
+            'userList'
         ])
     },
     methods: {
