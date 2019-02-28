@@ -74,7 +74,7 @@ export default {
         ])
     },
     async mounted() {
-        await this.findUsers();
+        // await this.findUsers();
     },
     methods: {
         ...mapActions('user', [

@@ -28,7 +28,7 @@
                             class="img-avatar"
                         >
                     </div>
-                    <div class="col col-style">
+                    <div class="col-md-10 col-style">
                         <div class="bg-content">
                             <h3 class="txt-name">
                                 kency
@@ -50,7 +50,7 @@
                             class="img-avatar"
                         >
                     </div>
-                    <div class="col col-style">
+                    <div class="col col-md-10 col-style">
                         <div class="bg-content">
                             <h3 class="txt-name">
                                 felix
@@ -65,18 +65,8 @@
                     </div>
                 </div>
                 <div class="row row-8">
-                    <div class="col-auto col-style">
-                        <img
-                            src="/images/default_avatar.png"
-                            alt="avatar"
-                            class="img-avatar"
-                        >
-                    </div>
-                    <div class="col col-style">
+                    <div class="col col-style text-right offset-md-4">
                         <div class="bg-content">
-                            <h3 class="txt-name">
-                                kency
-                            </h3>
                             <p class="txt-content">
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry
                             </p>
