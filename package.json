@@ -1,6 +1,6 @@
 {
   "name": "frontend-seed",
-  "version": "2.0.10",
+  "version": "2.0.14",
   "description": "Frontend seed",
   "author": "Felix Le <felix.le.236@gmail.com>",
   "private": true,
@@ -13,7 +13,7 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "bootstrap": "^4.3.0",
+    "bootstrap": "^4.3.1",
     "dotenv": "^6.2.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
@@ -24,10 +24,10 @@
   "devDependencies": {
     "@nuxtjs/axios": "^5.3.6",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.13.0",
+    "eslint": "^5.14.1",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^2.1.2",
-    "eslint-plugin-vue": "^5.1.0",
+    "eslint-plugin-vue": "^5.2.2",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0"
   }

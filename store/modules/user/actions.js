@@ -18,13 +18,14 @@ export default {
     },
     async signup({commit}, data) {
         const userAuth = await this.$axios.$post('/api/users/signup', data);
-        storeUserAuthentication(commit, userAuth);
-        return userAuth;
+        return storeUserAuthentication(commit, userAuth);
     },
     async signin({commit}, {email, password}) {
-        const userAuth = await this.$axios.$post('/api/users/signin', {email, password});
-        storeUserAuthentication(commit, userAuth);
-        return userAuth;
+        commit(types.USER_SIGNIN_MESSAGE, '');
+        const userAuth = await this.$axios.$post('/api/users/signin', {email, password}).catch(err => {
+            commit(types.USER_SIGNIN_MESSAGE, err.message);
+        });
+        return storeUserAuthentication(commit, userAuth);
     },
     signout({commit}) {
         storeUserAuthentication(commit);
@@ -32,10 +33,11 @@ export default {
 };
 
 function storeUserAuthentication(commit, userAuth) {
-    commit(types.USER_AUTHENTICATION, userAuth);
-
     if (userAuth)
         setCookie('userAuth', userAuth, 15);
     else
         setCookie('userAuth', null, -1);
+
+    commit(types.USER_AUTHENTICATION, userAuth);
+    return userAuth;
 }

@@ -32,7 +32,8 @@
         }
     }
     .box-heading{
-        padding: 20px 32px;
+        height: 61px;
+        padding: 10px 32px;
         border-bottom: 1px solid #e2e2e2;
         transition: 0.25s linear;
         .text-heading  {
@@ -201,7 +202,7 @@
         font-size: 20px;
         color: #c1c1c1;
         vertical-align: middle;
-        margin: 0 20px;
+        margin-right: 10px;
         cursor: pointer;
     }
     .icon-share{
@@ -241,10 +242,9 @@
     &.show{
         margin-left: 0;
     }
-    
     .box-border{
         border-bottom: 1px solid #e2e2e2;
-        padding: 24px 32px;
+        padding: 14px 32px;
         &:last-child{
             border-bottom: none;
         }
@@ -260,6 +260,7 @@
         }
         &.box-head{
             position: relative;
+            height: 61px;
             &::before{
                 content: '';
                 border-left: 1px solid #d8d8d8;
@@ -270,7 +271,7 @@
                 transform: rotate(45deg);
                 position: absolute;
                 right: -6px;
-                top: 32px;
+                top: 26px;
                 z-index: 1;
                 background-color: #fff;
             }

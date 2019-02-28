@@ -12,6 +12,6 @@ export default function({$axios, redirect, store}) {
         if (code >= 500)
             throw new Error('Sorry, something went wrong.');
 
-        throw error.response.data;
+        throw error.response ? error.response.data : error;
     });
 };

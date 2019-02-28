@@ -32,7 +32,7 @@ module.exports = {
     plugins: [
         {src: '~/plugins/bootstrap'},
         {src: '~/plugins/axios'},
-        {src: '~/plugins/authenticate'},
+        {src: '~/plugins/authentication'},
         {src: '~/plugins/event-bus', ssr: false},
     ],
     /*

@@ -9,14 +9,14 @@ export default function() {
         actions: {
             nuxtServerInit({state}, {req}) {
                 if (req.headers.cookie) {
+                    state.user.userAuth = null;
                     let userAuth = getCookie('userAuth', req.headers.cookie);
+
                     if (userAuth) {
                         userAuth = JSON.parse(userAuth);
                         if (userAuth && userAuth.accessToken && userAuth.tokenExpire && new Date(userAuth.tokenExpire) >= new Date())
                             state.user.userAuth = userAuth;
                     }
-                    else
-                        state.user.userAuth = null;
                 }
             }
         },

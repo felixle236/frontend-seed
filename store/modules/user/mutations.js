@@ -8,13 +8,16 @@ export default {
         if (state.userAuth)
             state.userAuth.profile = profile;
     },
+    [types.USER_SIGNIN_MESSAGE](state, message) {
+        state.signinMessage = message;
+    },
     [types.USER_LIST](state, list) {
-        state.list = list;
+        state.userList = list;
     },
     [types.USER_PAGINATION](state, pagination) {
-        state.pagination = pagination;
+        state.userPagination = pagination;
     },
     [types.USER_DETAIL](state, detail) {
-        state.detail = detail;
+        state.userDetail = detail;
     }
 };

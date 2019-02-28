@@ -7,9 +7,10 @@ export default {
     state: {
         userAuth: null,
         profile: null,
-        list: [],
-        pagination: null,
-        detail: null,
+        signinMessage: null,
+        userList: [],
+        userPagination: null,
+        userDetail: null,
     },
     getters,
     actions,

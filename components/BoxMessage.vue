@@ -90,23 +90,16 @@
         </div>
         <div class="row send-message no-gutters">
             <div class="col">
-                <i class="i-con icon-share" />
+                <i class="i-con icon-emoji" />
                 <input
                     type="text"
                     class="input-send"
-                    placeholder="Message #nuxtbot"
+                    placeholder="Message...."
                 >
             </div>
             <div class="col-3 text-right">
-                <i class="i-con icon-emoji" />
                 <i class="i-con icon-send" />
             </div>
         </div>
     </div>
 </template>
-
-<script>
-export default {
-    
-};
-</script>

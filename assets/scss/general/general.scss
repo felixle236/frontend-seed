@@ -124,10 +124,11 @@ input[type=text], input[type=password]{
     position: relative;
     z-index: 2;
     .logo{
-        padding: 20px;
-         max-width: 75px;
-         position: relative;
-         left: -2px;
+        padding: 17px 20px;
+        margin-bottom: 8px;
+        max-width: 75px;
+        position: relative;
+        left: -2px;
     }
 }
 .menu-left{
