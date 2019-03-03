@@ -4,8 +4,8 @@ const webpack = require('webpack');
 module.exports = {
     env: process.env,
     /*
-    ** Headers of the page
-    */
+     ** Headers of the page
+     */
     head: {
         title: process.env.PROJECT_NAME,
         meta: [
@@ -14,7 +14,7 @@ module.exports = {
             {hid: 'description', name: 'description', content: process.env.PROJECT_NAME}
         ],
         link: [
-            {rel: 'icon', type: 'image/x-icon', href: '/favicon.png'}
+            {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
         ]
     },
     css: [
@@ -23,8 +23,8 @@ module.exports = {
         '~/assets/scss/main.scss'
     ],
     /*
-    ** Customize the progress bar color
-    */
+     ** Customize the progress bar color
+     */
     loading: false,
     modules: [
         '@nuxtjs/axios'
@@ -36,8 +36,8 @@ module.exports = {
         {src: '~/plugins/event-bus', ssr: false},
     ],
     /*
-    ** Build configuration
-    */
+     ** Build configuration
+     */
     build: {
         vendor: [
             'jquery',
@@ -51,8 +51,8 @@ module.exports = {
             })
         ],
         /*
-        ** Run ESLint on save
-        */
+         ** Run ESLint on save
+         */
         extend(config, {isDev, isClient}) {
             if (isDev && isClient) {
                 config.module.rules.push({
