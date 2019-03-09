@@ -1,47 +1,3 @@
-.page-blank{
-    background-image: url('/images/bgLoginPage.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    padding: 0 168px;
-    font-family: $font-primary;
-    font-weight: normal;
-    overflow: auto;
-    height: 100vh;
-    .row-default{
-        min-height: 100%;
-        .col-content{
-            position: relative;
-        }
-        .col-form{
-            position: relative;
-            background-color: rgba($color-third, 0.95);
-        }
-        .link-style{
-            color: #6b6b6b;
-            font-size: $font-size-normal;
-            line-height: 16px;
-            text-decoration: underline;
-            display: inline-block;
-        }
-    }
-    .box-term{
-        font-size: $font-size-normal;
-        margin-top: -32px;
-        margin-left: 75px;
-        position: relative;
-        z-index: 1;
-        .txt-link{
-            color: rgba(#ffffff, 0.05);
-        }
-    }
-    .logo{
-        max-width: 60px;
-        margin-bottom: 30px;
-        text-align: center;
-    }
-}
-
 .form-style{
     opacity: 0.95;
     padding: 2% 45px 9% 75px;
@@ -59,7 +15,7 @@
         color: #8e8e8e;
         font-family: $font-second;
         font-size: 16px;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
     }
     .btn-normal{
         margin-right: 27px;
@@ -132,13 +88,67 @@
         }
     }
 }
+.login-page{
+    background-image: url('/images/bgLoginPage.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 0 168px;
+    font-family: $font-primary;
+    font-weight: normal;
+    overflow: auto;
+    height: 100vh;
+    .form-input{
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    .text-error{
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+    button{
+        margin-top: 20px;
+    }
+    .row-default{
+        min-height: 100%;
+        .col-content{
+            position: relative;
+        }
+        .col-form{
+            position: relative;
+            background-color: rgba($color-third, 0.95);
+        }
+        .link-style{
+            color: #6b6b6b;
+            font-size: $font-size-normal;
+            line-height: 16px;
+            text-decoration: underline;
+            display: inline-block;
+        }
+    }
+    .box-term{
+        font-size: $font-size-normal;
+        margin-top: -32px;
+        margin-left: 75px;
+        position: relative;
+        z-index: 1;
+        .txt-link{
+            color: rgba(#ffffff, 0.05);
+        }
+    }
+    .logo{
+        max-width: 60px;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+}
 @media screen and (max-width: 991px) {
-    .page-blank{
+    .login-page{
         padding: 0 40px;
     }
 }
 @media screen and (max-width: 767px) {
-    .page-blank{
+    .login-page{
         padding: 90px 0;
         .box-term{
             margin: 0 30px 20px;

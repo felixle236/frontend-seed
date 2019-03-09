@@ -1,5 +1,5 @@
 <template>
-    <section class="page-blank">
+    <section class="login-page">
         <div class="row row-default no-gutters">
             <div class="col-xl-7 col-lg-7 col-md-7 col-sm-12 col-form">
                 <form
@@ -20,14 +20,35 @@
                         type="text"
                         placeholder="Your Email"
                         class="form-input"
+                        :class="{'border-danger': errors.has('email')}"
+                        name="email"
+                        maxlength="100"
                         v-model="email"
+                        v-validate="'required|email'"
                     >
+                    <p
+                        v-show="errors.has('email')"
+                        class="text-danger text-error"
+                    >
+                        {{ errors.first('email') }}
+                    </p>
                     <input
                         type="password"
                         placeholder="Password"
+                        autocomplete="new-password"
                         class="form-input"
+                        :class="{'border-danger': errors.has('password')}"
+                        name="password"
+                        maxlength="20"
                         v-model="password"
+                        v-validate="'required|min:6'"
                     >
+                    <p
+                        v-show="errors.has('password')"
+                        class="text-danger text-error"
+                    >
+                        {{ errors.first('password') }}
+                    </p>
                     <button
                         class="btn-normal"
                         @click="login"
@@ -35,7 +56,7 @@
                         Login
                     </button>
                     <p
-                        style="color: #f93c3c; margin-top: 20px;"
+                        style="color: #f93c3c; margin-top: 20px; font-size: 12px; text-align: center;"
                         v-if="signinMessage"
                     >
                         {{ signinMessage }}
@@ -75,12 +96,15 @@ export default {
             'signin'
         ]),
         async login() {
-            const userAuth = await this.signin({
-                email: this.email,
-                password: this.password
-            });
-            if (userAuth)
-                this.$router.push('/');
+            const isValid = await this.$validator.validate();
+            if (isValid) {
+                const userAuth = await this.signin({
+                    email: this.email,
+                    password: this.password
+                });
+                if (userAuth)
+                    this.$router.push('/');
+            }
         }
     }
 };

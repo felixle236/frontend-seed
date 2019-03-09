@@ -33,6 +33,7 @@ module.exports = {
         {src: '~/plugins/bootstrap'},
         {src: '~/plugins/axios'},
         {src: '~/plugins/authentication'},
+        {src: '~/plugins/vue-validate'},
         {src: '~/plugins/event-bus', ssr: false},
     ],
     /*
