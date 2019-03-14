@@ -1,9 +1,9 @@
 version: '3.7'
 services:
-    frontend_seed:
+    web-app:
         container_name: ${PROJECT_ID}
-        image: node:10.15.1
-        command: bash -c ${DOCKER_CMD}
+        image: node:10.15.3
+        command: bash -c "if [ "$IS_BUILD" ]; then echo -e '\nInstalling....\n' && npm install && echo -e '\nBuilding....\n' && npm run build; else "${NODE_START_CMD}"; fi"
         working_dir: /usr/app
         volumes:
             - ./:/usr/app

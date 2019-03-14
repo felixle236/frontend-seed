@@ -27,3 +27,15 @@ For detailed explanation on how things work, checkout the [Nuxt.js docs](https:/
 - Refer to docker compose document in [here](https://docs.docker.com/compose/overview/#compose-documentation).
 
 > If `node_modules` is not exists, it will run `npm install` before into docker container.
+
+## Setup auto deployment
+
+- You should setup the testing step for make sure anything is good. Example:
+```
+npm install && npm run build
+```
+
+- Setup the deployment step like this:
+```
+ssh $STAG_USER@$STAG_ADDR "cd $STAG_PROJECT_PATH && git pull && env IS_BUILD=1 docker-compose up && docker-compose up -d && exit;"
+```

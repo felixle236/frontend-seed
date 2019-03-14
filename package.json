@@ -14,18 +14,18 @@
     },
     "dependencies": {
         "bootstrap": "^4.3.1",
-        "dotenv": "^6.2.0",
+        "dotenv": "^7.0.0",
         "font-awesome": "^4.7.0",
         "jquery": "^3.3.1",
         "nuxt": "^2.4.5",
         "popper.js": "^1.14.7",
         "socket.io-client": "^2.2.0",
-        "vee-validate": "^2.1.7"
+        "vee-validate": "^2.2.0"
     },
     "devDependencies": {
-        "@nuxtjs/axios": "^5.4.0",
+        "@nuxtjs/axios": "^5.4.1",
         "babel-eslint": "^10.0.1",
-        "eslint": "^5.15.0",
+        "eslint": "^5.15.1",
         "eslint-friendly-formatter": "^4.0.1",
         "eslint-loader": "^2.1.2",
         "eslint-plugin-vue": "^5.2.2",
