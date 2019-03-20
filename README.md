@@ -37,5 +37,6 @@ npm install && npm run build
 
 - Setup the deployment step like this:
 ```
-ssh $STAG_USER@$STAG_ADDR "cd $STAG_PROJECT_PATH && git pull && env IS_BUILD=1 docker-compose up && docker-compose up -d && exit;"
+- apk add --update openssh
+- ssh $STAG_USER@$STAG_ADDR "cd $STAG_PROJECT_PATH && git pull && docker system prune -f && docker-compose build && docker-compose up -d && exit;"
 ```

@@ -10,9 +10,6 @@ npm-debug.log
 # Nuxt generate
 dist
 
-# Npm install
-package-lock.json
-
 # dotenv environment variables file
 .env
 
