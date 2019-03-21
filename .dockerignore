@@ -1,3 +1,4 @@
-**/node_modules
-**/dist
 **/.nuxt
+**/.vscode
+**/dist
+**/node_modules
