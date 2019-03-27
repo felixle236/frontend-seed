@@ -7,6 +7,6 @@ WORKDIR /usr/app
 COPY . .
 
 # Install app dependencies
-RUN npm install && npm run build
+RUN npm install && npm run build && npm run lint
 
 CMD ["npm", "start"]
