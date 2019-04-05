@@ -20,7 +20,11 @@
         </div>
         <div class="box-content">
             <div class="chat-bot">
-                <div class="row row-8">
+                <div
+                    class="row row-8"
+                    v-for="(message, index) in messages"
+                    :key="index"
+                >
                     <div class="col-auto col-style">
                         <img
                             src="/images/default_avatar.png"
@@ -34,7 +38,7 @@
                                 kency
                             </h3>
                             <p class="txt-content">
-                                What is Lorem Ipsum?
+                                {{ message.content }}
                             </p>
                             <p class="txt-time">
                                 Today 12:45 PM
@@ -42,7 +46,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row row-8">
+                <!-- <div class="row row-8">
                     <div class="col-auto col-style">
                         <img
                             src="/images/default_avatar.png"
@@ -75,7 +79,7 @@
                             </p>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="row send-message no-gutters">
@@ -85,11 +89,51 @@
                     type="text"
                     class="input-send"
                     placeholder="Message...."
+                    v-model="content"
                 >
             </div>
             <div class="col-3 text-right">
-                <i class="i-con icon-send" />
+                <i
+                    class="i-con icon-send"
+                    @click="send"
+                />
             </div>
         </div>
     </div>
 </template>
+
+<script>
+import {mapGetters, mapActions} from 'vuex';
+
+export default {
+    data: () => ({
+        room: 0,
+        isMessageGroup: true,
+        content: ''
+    }),
+    computed: {
+        ...mapGetters('socket', [
+            'contacts',
+            'messages'
+        ]),
+    },
+    methods: {
+        ...mapActions('socket', [
+            'sendMessage',
+            'sendMessageRoom',
+            'loadMessages'
+        ]),
+        load(room, isMessageGroup) {
+            this.room = room;
+            this.isMessageGroup = isMessageGroup;
+            this.loadMessages({room});
+        },
+        send() {
+            if (!this.isMessageGroup)
+                this.sendMessage({room: this.room, content: this.content});
+            else
+                this.sendMessageRoom({room: this.room, content: this.content});
+        }
+    }
+};
+</script>

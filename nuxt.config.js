@@ -34,6 +34,7 @@ module.exports = {
         {src: '~/plugins/axios'},
         {src: '~/plugins/authentication'},
         {src: '~/plugins/vee-validate'},
+        {src: '~/plugins/socket.io', ssr: false},
         {src: '~/plugins/event-bus', ssr: false},
     ],
     /*

@@ -20,12 +20,15 @@
                     Group
                 </h3>
                 <ul class="nav-bot">
-                    <li class="nav-item">
+                    <li
+                        class="nav-item"
+                        @click="changeRoom(0)"
+                    >
                         &emsp;
                         All members
                         <i
                             class="fa fa-circle red pull-right"
-                            aria-hidden="true" 
+                            aria-hidden="true"
                         />
                     </li>
                 </ul>
@@ -35,7 +38,9 @@
                     Direct
                 </h3>
                 <ul class="nav-bot">
-                    <li class="nav-item">
+                    <li
+                        class="nav-item"
+                    >
                         <i
                             class="fa fa-circle"
                             aria-hidden="true"
@@ -50,10 +55,11 @@
                         class="nav-item"
                         v-for="(user, index) in userList"
                         :key="index"
+                        @click="changeRoom(user.id)"
                     >
                         <i
                             class="fa fa-circle"
-                            aria-hidden="true" 
+                            aria-hidden="true"
                         />
                         {{ user.firstName + ' ' + user.lastName }}
                     </li>
@@ -74,12 +80,16 @@ export default {
         ])
     },
     async mounted() {
-        // await this.findUsers();
+        await this.findUsers();
+        this.changeRoom(0);
     },
     methods: {
         ...mapActions('user', [
             'findUsers'
         ]),
+        changeRoom(room) {
+            this.$emit('change', {room, isMessageGroup: !room});
+        }
     }
 };
 </script>

@@ -20,7 +20,8 @@
         "nuxt": "^2.4.5",
         "popper.js": "^1.14.7",
         "socket.io-client": "^2.2.0",
-        "vee-validate": "^2.2.0"
+        "vee-validate": "^2.2.0",
+        "vue-socket.io": "^3.0.7"
     },
     "devDependencies": {
         "@nuxtjs/axios": "^5.4.1",

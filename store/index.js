@@ -1,5 +1,6 @@
 import Vuex from 'vuex';
 import user from './modules/user';
+import socket from './modules/socket';
 import {getCookie} from '../helpers/dataHelper';
 
 export default function() {
@@ -20,7 +21,8 @@ export default function() {
             }
         },
         modules: {
-            user
+            user,
+            socket
         }
     });
 };

@@ -1,10 +1,13 @@
 <template>
     <div class="message row">
         <div class="col-auto pd-0">
-            <box-contact class="show" />
+            <box-contact
+                @change="changeRoom"
+                class="show"
+            />
         </div>
         <div class="col-auto pd-0">
-            <box-message />
+            <box-message ref="boxMessage" />
         </div>
     </div>
 </template>
@@ -19,5 +22,10 @@ export default {
         BoxContact,
         BoxMessage
     },
+    methods: {
+        changeRoom({room, isMessageGroup}) {
+            this.$refs.boxMessage.load(room, isMessageGroup);
+        }
+    }
 };
 </script>

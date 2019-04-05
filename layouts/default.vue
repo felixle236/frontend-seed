@@ -14,11 +14,20 @@
 </template>
 
 <script>
+import {mapGetters, mapActions} from 'vuex';
 import MenuLeft from '~/components/MenuLeft';
 
 export default {
     components: {
         MenuLeft,
+    },
+    mounted() {
+        this.connectMessageSocket();
+    },
+    methods: {
+        ...mapActions('socket', [
+            'connectMessageSocket'
+        ])
     }
 };
 </script>
