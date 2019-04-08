@@ -4,33 +4,55 @@ export default {
     [types.SOCKET_CURRENT_ROOM](state, room) {
         state.currentRoom = room;
     },
+    [types.SOCKET_CLEAR_CONTACTS](state) {
+        state.contacts.splice(0, state.contacts.length);
+    },
     [types.SOCKET_CONTACTS](state, contacts) {
-        state.contacts = contacts || [];
+        contacts.forEach(contact => {
+            const index = state.contacts.findIndex(c => c.id === contact.id);
+            if (index !== -1)
+                Object.assign(state.contacts[index], contact);
+            else
+                state.contacts.push(contact);
+        });
     },
     [types.SOCKET_CONTACT](state, contact) {
-        if (!state.contacts)
-            state.contacts = [];
-            
         const index = state.contacts.findIndex(c => c.id === contact.id);
         if (index !== -1)
-            state.contacts[index] = contact;
+            Object.assign(state.contacts[index], contact);
         else
             state.contacts.push(contact);
     },
-    [types.SOCKET_MESSAGES](state, messages) {
-        state.messages = messages;
+    [types.SOCKET_CLEAR_MESSAGES](state) {
+        state.messages.splice(0, state.messages.length);
     },
-    [types.SOCKET_MESSAGE](state, message) {
-        if (state.currentRoom === message.room) {
-            if (!state.messages)
-                state.messages = [];
-            
+    [types.SOCKET_MESSAGES](state, messages) {
+        messages.forEach(message => {
             if (!state.messages.length)
                 state.messages.push(message);
             else {
                 const index = state.messages.findIndex(m => m.code === message.code);
                 if (index !== -1)
-                    state.messages[index] = message;
+                    Object.assign(state.messages[index], message);
+                else {
+                    for (let i = state.messages.length - 1; i >= 0; i--) {
+                        if (message.time > state.messages[i].time) {
+                            state.messages.splice(i + 1, 0, message);
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+    },
+    [types.SOCKET_MESSAGE](state, message) {
+        if (state.currentRoom === message.room) {
+            if (!state.messages.length)
+                state.messages.push(message);
+            else {
+                const index = state.messages.findIndex(m => m.code === message.code);
+                if (index !== -1)
+                    Object.assign(state.messages[index], message);
                 else {
                     for (let i = state.messages.length - 1; i >= 0; i--) {
                         if (message.time > state.messages[i].time) {

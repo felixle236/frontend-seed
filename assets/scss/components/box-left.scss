@@ -136,7 +136,7 @@
         cursor: pointer;
     }
 }
-.chat-bot{
+.box-chat{
     margin-top: 20px;
     .heading-time{
         color: #979797;
@@ -399,6 +399,9 @@
             &.red{
                 color: #d31744;
                 margin: 2px 0 0;
+            }
+            &.gray{
+                color: $gray;
             }
         }
     }

@@ -18,78 +18,68 @@
                 </div>
             </div>
         </div>
-        <div class="box-content">
-            <div class="chat-bot">
+        <div
+            class="box-content"
+            ref="boxContent"
+        >
+            <div class="box-chat">
                 <div
                     class="row row-8"
                     v-for="(message, index) in messages"
                     :key="index"
                 >
-                    <div class="col-auto col-style">
+                    <div
+                        class="col-auto col-style"
+                        v-if="message.senderId !== userAuth.id"
+                    >
                         <img
-                            src="/images/default_avatar.png"
+                            :src="message.sender ? apiUrl + message.sender.avatar : '/images/default_avatar.png'"
                             alt="avatar"
                             class="img-avatar"
                         >
                     </div>
-                    <div class="col-md-10 col-style">
+                    <div
+                        class="col-md-10 col-style"
+                        v-if="message.senderId !== userAuth.id"
+                    >
                         <div class="bg-content">
                             <h3 class="txt-name">
-                                kency
+                                {{ message.sender ? message.sender.firstName + ' ' + message.sender.lastName : '' }}
                             </h3>
                             <p class="txt-content">
                                 {{ message.content }}
                             </p>
                             <p class="txt-time">
-                                Today 12:45 PM
+                                {{ message.time | formatDate }}
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="col col-style text-right offset-md-4"
+                        v-if="message.senderId === userAuth.id"
+                    >
+                        <div class="bg-content">
+                            <p class="txt-content">
+                                {{ message.content }}
+                            </p>
+                            <p class="txt-time">
+                                {{ message.time | formatDate }}
                             </p>
                         </div>
                     </div>
                 </div>
-                <!-- <div class="row row-8">
-                    <div class="col-auto col-style">
-                        <img
-                            src="/images/default_avatar.png"
-                            alt="avatar"
-                            class="img-avatar"
-                        >
-                    </div>
-                    <div class="col col-md-10 col-style">
-                        <div class="bg-content">
-                            <h3 class="txt-name">
-                                felix
-                            </h3>
-                            <p class="txt-content">
-                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                            </p>
-                            <p class="txt-time">
-                                Today 12:45 PM
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row row-8">
-                    <div class="col col-style text-right offset-md-4">
-                        <div class="bg-content">
-                            <p class="txt-content">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry
-                            </p>
-                            <p class="txt-time">
-                                Today 12:45 PM
-                            </p>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
         <div class="row send-message no-gutters">
             <div class="col">
                 <i class="i-con icon-emoji" />
                 <input
+                    ref="content"
                     type="text"
                     class="input-send"
                     placeholder="Message...."
                     v-model="content"
+                    @keyup.enter="send"
                 >
             </div>
             <div class="col-3 text-right">
@@ -107,32 +97,85 @@ import {mapGetters, mapActions} from 'vuex';
 
 export default {
     data: () => ({
-        room: 0,
-        isMessageGroup: true,
+        apiUrl: process.env.API_URL,
+        receiverId: undefined,
+        room: undefined,
+        skip: 0,
+        limit: 50,
         content: ''
     }),
     computed: {
+        ...mapGetters('user', [
+            'userAuth'
+        ]),
         ...mapGetters('socket', [
-            'contacts',
             'messages'
         ]),
     },
+    watch: {
+        'messages': function(newMessages, oldMessages) {
+            if (this.skip === 0) {
+                setTimeout(() => {
+                    this.$refs.boxContent.scrollTo(0, this.$refs.boxContent.scrollHeight);
+                }, 10);
+            }
+            else {
+                if (this.$refs.boxContent.scrollTop + this.$refs.boxContent.offsetHeight === this.$refs.boxContent.scrollHeight) {
+                    setTimeout(() => {
+                        $(this.$refs.boxContent).animate({scrollTop: this.$refs.boxContent.scrollHeight});
+                    }, 10);
+                }
+            }
+            this.skip = newMessages.length;
+        }
+    },
+    mounted() {
+        if (this.room === undefined || this.room === null)
+            this.room = 0;
+    },
     methods: {
         ...mapActions('socket', [
+            'findMessages',
             'sendMessage',
-            'sendMessageRoom',
-            'loadMessages'
+            'sendMessageRoom'
         ]),
-        load(room, isMessageGroup) {
+        load(room, receiverId) {
+            this.receiverId = receiverId;
             this.room = room;
-            this.isMessageGroup = isMessageGroup;
-            this.loadMessages({room});
+            this.skip = 0;
+            this.$refs.content.select();
+            
+            this.findMessages({room: this.room, skip: this.skip, limit: this.limit});
         },
         send() {
-            if (!this.isMessageGroup)
-                this.sendMessage({room: this.room, content: this.content});
+            if (this.receiverId)
+                this.sendMessage({receiverId: this.receiverId, content: this.content});
             else
                 this.sendMessageRoom({room: this.room, content: this.content});
+            
+            this.content = '';
+        }
+    },
+    filters: {
+        formatDate(value) {
+            if (!value) return '';
+            
+            if (Date.now() - value <= 10000)
+                return 'Just a second';
+                
+            if (Date.now() - value <= 60000)
+                return 'Just a minute';
+            
+            const date = new Date(value);
+            const compareTime = new Date(value).setHours(0, 0, 0, 0) - new Date().setHours(0, 0, 0, 0);
+            
+            if (compareTime === 0)
+                return 'Today ' + date.toLocaleTimeString();
+                
+            if (compareTime === 86400000)
+                return 'Yesterday ' + date.toLocaleTimeString();
+            
+            return date.toLocaleString();
         }
     }
 };

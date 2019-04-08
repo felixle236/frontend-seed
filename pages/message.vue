@@ -23,8 +23,8 @@ export default {
         BoxMessage
     },
     methods: {
-        changeRoom({room, isMessageGroup}) {
-            this.$refs.boxMessage.load(room, isMessageGroup);
+        changeRoom({room, receiverId}) {
+            this.$refs.boxMessage.load(room, receiverId);
         }
     }
 };

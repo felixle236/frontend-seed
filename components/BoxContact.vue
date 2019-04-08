@@ -5,7 +5,7 @@
             v-if="profile"
         >
             <img
-                :src="profile.avatar"
+                :src="apiUrl + profile.avatar"
                 alt=""
                 :title="profile.firstName + ' ' + profile.lastName"
                 class="img-avatar"
@@ -40,28 +40,22 @@
                 <ul class="nav-bot">
                     <li
                         class="nav-item"
+                        v-for="(contact, index) in contacts"
+                        v-show="contact.id !== userAuth.id"
+                        :key="index"
+                        @click="changeRoom(undefined, contact.id)"
                     >
                         <i
                             class="fa fa-circle"
+                            :class="{'gray': !contact.isOnline}"
                             aria-hidden="true"
                         />
-                        Felix
+                        {{ contact.firstName + ' ' + contact.lastName }}
                         <i
                             class="fa fa-circle red pull-right"
-                            aria-hidden="true" 
-                        />
-                    </li>
-                    <li
-                        class="nav-item"
-                        v-for="(user, index) in userList"
-                        :key="index"
-                        @click="changeRoom(user.id)"
-                    >
-                        <i
-                            class="fa fa-circle"
                             aria-hidden="true"
+                            v-if="contact.hasNewMessages"
                         />
-                        {{ user.firstName + ' ' + user.lastName }}
                     </li>
                 </ul>
             </div>
@@ -73,22 +67,41 @@
 import {mapGetters, mapActions} from 'vuex';
 
 export default {
+    data: () => ({
+        apiUrl: process.env.API_URL,
+        keyword: '',
+        skip: 0,
+        limit: 50
+    }),
     computed: {
         ...mapGetters('user', [
             'profile',
-            'userList'
+            'userAuth'
+        ]),
+        ...mapGetters('socket', [
+            'contacts'
         ])
     },
-    async mounted() {
-        await this.findUsers();
-        this.changeRoom(0);
+    mounted() {
+        this.findContacts({keyword: this.keyword, skip: this.skip, limit: this.limit});
     },
     methods: {
-        ...mapActions('user', [
-            'findUsers'
+        ...mapActions('socket', [
+            'findContacts'
         ]),
-        changeRoom(room) {
-            this.$emit('change', {room, isMessageGroup: !room});
+        changeRoom(room, receiverId) {
+            if (receiverId) {
+                if (this.userAuth.id > receiverId)
+                    room = this.generateId(this.userAuth.id) + this.generateId(receiverId);
+                else
+                    room = this.generateId(receiverId) + this.generateId(this.userAuth.id);
+            }
+            this.$emit('change', {room, receiverId});
+        },
+        generateId(num) {
+            if (num.toString().length >= 7)
+                return num;
+            return num * Number('1'.padEnd(7 - num.toString().length, '0'));
         }
     }
 };

@@ -21,8 +21,9 @@ export default {
     components: {
         MenuLeft,
     },
-    mounted() {
-        this.connectMessageSocket();
+    created() {
+        if (process.browser && this.$auth.isAuthenticated())
+            this.connectMessageSocket();
     },
     methods: {
         ...mapActions('socket', [

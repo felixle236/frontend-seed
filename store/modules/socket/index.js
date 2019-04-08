@@ -5,7 +5,7 @@ import mutations from './mutations';
 export default {
     namespaced: true,
     state: {
-        currentRoom: null,
+        currentRoom: -1,
         contacts: [],
         messages: [],
     },

@@ -54,8 +54,12 @@ export default {
         ...mapActions('user', [
             'signout'
         ]),
+        ...mapActions('socket', [
+            'disconnectMessageSocket'
+        ]),
         logout() {
             this.signout();
+            this.disconnectMessageSocket();
             this.$router.push('/');
         }
     }

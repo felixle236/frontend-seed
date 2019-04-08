@@ -5,52 +5,91 @@ export default {
         const socket = this.$sockets.connect('message');
         
         socket.on('connect', () => {
-            console.log('connected');
+            console.log('Message socket is connected.');
         });
-        socket.on('message_directly', data => {
-            if (state.currentRoom === data.room) {
-                data.user = state.contacts.find(c => c.id === data.userId);
-                commit(types.SOCKET_MESSAGE, data);
+        socket.on('contact_status', contact => {
+            commit(types.SOCKET_CONTACT, contact);
+        });
+        socket.on('contact_list_error', error => {
+            console.log('contact_list_error', error);
+        });
+        socket.on('contact_list_successfully', contacts => {
+            commit(types.SOCKET_CONTACTS, contacts);
+            
+            if (state.currentRoom === -1) {
+                const room = 0;
+                commit(types.SOCKET_CURRENT_ROOM, room);
+                this.dispatch('socket/findMessages', {room, skip: 0, limit: 50});
+            }
+        });
+        socket.on('message_list_error', error => {
+            console.log('message_list_error', error);
+        });
+        socket.on('message_list_successfully', messages => {
+            const list = [];
+            messages.forEach(message => {
+                if (state.currentRoom === message.room) {
+                    message.sender = state.contacts.find(c => c.id === message.senderId);
+                    message.receiver = state.contacts.find(c => c.id === message.receiverId);
+                    list.push(message);
+                }
+            });
+            commit(types.SOCKET_MESSAGES, list);
+        });
+        socket.on('message_directly', message => {
+            if (state.currentRoom === message.room) {
+                message.sender = state.contacts.find(c => c.id === message.senderId);
+                message.receiver = state.contacts.find(c => c.id === message.receiverId);
+                commit(types.SOCKET_MESSAGE, message);
             }
         });
         socket.on('message_directly_error', error => {
             console.log('message_directly_error', error);
         });
-        socket.on('message_directly_successfully', data => {
-            console.log('message_directly_successfully', data);
+        socket.on('message_directly_successfully', message => {
+            console.log('message_directly_successfully', message);
         });
-        socket.on('message_room', data => {
-            if (state.currentRoom === data.room) {
-                data.user = state.contacts.find(c => c.id === data.userId);
-                commit(types.SOCKET_MESSAGE, data);
+        socket.on('message_room', message => {
+            if (state.currentRoom === message.room) {
+                message.sender = state.contacts.find(c => c.id === message.senderId);
+                commit(types.SOCKET_MESSAGE, message);
             }
         });
         socket.on('message_room_error', error => {
             console.log('message_room_error', error);
         });
-        socket.on('message_room_successfully', data => {
-            console.log('message_room_successfully', data);
+        socket.on('message_room_successfully', message => {
+            console.log('message_room_successfully', message);
+        });
+        socket.on('notification', notification => {
+            console.log('notification', notification);
         });
     },
-    sendMessage({state, commit}, {room, content}) {
+    disconnectMessageSocket({state, commit}) {
+        this.$sockets.disconnect('message');
+    },
+    findContacts({state, commit}, {keyword, skip, limit}) {
+        this.$sockets.message.emit('contact_list', {keyword, skip, limit});
+    },
+    findMessages({state, commit}, {room, skip, limit}) {
+        if (state.currentRoom !== room) {
+            commit(types.SOCKET_CLEAR_MESSAGES);
+            commit(types.SOCKET_CURRENT_ROOM, room);
+        }
+        this.$sockets.message.emit('message_list', {room, skip, limit});
+    },
+    sendMessage({state, commit}, {receiverId, content}) {
         this.$sockets.message.emit('message_directly', {
-            room: room,
+            receiverId,
             code: Date.now(),
             content
         });
     },
     sendMessageRoom({state, commit}, {room, content}) {
         this.$sockets.message.emit('message_room', {
-            room: room,
+            room,
             code: Date.now(),
             content
         });
-    },
-    loadMessages({state, commit}, {room}) {
-        if (state.currentRoom !== room) {
-            commit(types.SOCKET_MESSAGES, []);
-            commit(types.SOCKET_CURRENT_ROOM, room);
-        }
-        // Load message history and load more in here.
     }
 };
