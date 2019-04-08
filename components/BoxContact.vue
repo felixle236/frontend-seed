@@ -48,7 +48,7 @@
                     >
                         <img
                             class="img-avatar"
-                            src="/images/default-avatar.jpg"
+                            :src="contact.avatar ? apiUrl + contact.avatar : '/images/default-avatar.jpg'"
                         >
                         <i
                             v-if="contact.isOnline" 
@@ -98,7 +98,6 @@ export default {
         ]),
         changeRoom(room, receiverId) {
             this.activeTab = receiverId;
-            console.log('this.active', this.active);
             if (receiverId) {
                 if (this.userAuth.id > receiverId)
                     room = this.generateId(this.userAuth.id) + this.generateId(receiverId);
