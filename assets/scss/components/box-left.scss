@@ -144,10 +144,14 @@
         margin-bottom: 20px;
     }
     .img-avatar{
-        height: 32px;
-        width: 32px;
-        @include border-radius(4px);
-        object-fit: cover;  
+        height: 38px;
+        width: 38px;
+        @include border-radius(50%);
+        object-fit: cover;
+        border: 1px solid #efefef;
+        padding: 2px;
+        position: relative;
+        top: -21px;
     }
     .bg-chart{
         max-width: 288px;
@@ -156,18 +160,26 @@
         padding: 9px 16px;
         border-radius: 4px;
         background-color: #f5f5f5;
-        margin-bottom: 40px;
+        margin-bottom: 35px;
         .txt-name{
             color: #a9a9a9;
             font-size: $font-size-normal;
         }
         .txt-content{
             font-size: $font-size-big;
-            margin: 12px 0;
+            margin: 3px 0;
         }
         .txt-time{
             color: #aeaeae;
             margin-bottom: 0;
+            position: absolute;
+            right: 10px;
+            top: -22px;
+        }
+    }
+    .mess-left{
+        .txt-time{
+            left: 10px;
         }
     }
 }
@@ -218,6 +230,11 @@
         vertical-align: middle;
         margin: 0;
         cursor: pointer;
+        position: relative;
+        top: 3px;
+        &:hover{
+            color: #49b3af;
+        }
     }
     .input-send{
         color: #777777;
@@ -228,7 +245,7 @@
         background-color: transparent;
         position: relative;
         top: 2px;
-        width: 88%;
+        width: calc(100% - 34px);
         height: auto;
         margin-bottom: 0;
         &::placeholder{
@@ -241,6 +258,13 @@
     overflow: hidden;
     &.show{
         margin-left: 0;
+    }
+    .box-user{
+        .fa-circle{
+            position: absolute;
+            bottom: -2px;
+            left: 23px;
+        }
     }
     .box-border{
         border-bottom: 1px solid #e2e2e2;
@@ -323,6 +347,14 @@
         height: 32px;
         @include border-radius(4px);
         object-fit: cover;
+        border: 1px solid #efefef;  
+    }
+    .img-avatar-send{
+        width: 25px;
+        height: 25px;
+        border: 1px solid #cecece;
+        border-radius: 50%;
+        margin-right: 5px;
     }
     input[type=text]{
         &.border-gradient{
@@ -362,18 +394,20 @@
         width: 100%;
         margin-bottom: 14px;
         cursor: pointer;
+        position: relative;
         &:last-child{
             margin-bottom: 0;
         }
         &.active{
             position: relative;
+            background-color: #d8efec;
             &::before{
                 content: '';
                 position: absolute;
-                height: 24px;
+                height: 100%;
                 width: 4px;
                 left: -32px;
-                top: -2px;
+                top: -1px;
                 background-color: $color-seventh;
             }
         }
@@ -392,13 +426,13 @@
         }
         .fa{
             color: $color-seventh;
-            font-size: 9px;
+            font-size: 10px;
             margin-right: 14px;
             margin-left: 3px;
             vertical-align: 2px;
             &.red{
                 color: #d31744;
-                margin: 2px 0 0;
+                margin: 4px 0 0;
             }
             &.gray{
                 color: $gray;

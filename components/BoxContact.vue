@@ -5,7 +5,7 @@
             v-if="profile"
         >
             <img
-                :src="apiUrl + profile.avatar"
+                :src="profile.avatar ? apiUrl + profile.avatar : '/images/default-avatar.jpg'"
                 alt=""
                 :title="profile.firstName + ' ' + profile.lastName"
                 class="img-avatar"
@@ -33,7 +33,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="box-border box-direct">
+            <div class="box-border box-direct box-user">
                 <h3 class="heading-box">
                     Direct
                 </h3>
@@ -42,10 +42,16 @@
                         class="nav-item"
                         v-for="(contact, index) in contacts"
                         v-show="contact.id !== userAuth.id"
+                        :class="{'active': activeTab === contact.id}"
                         :key="index"
                         @click="changeRoom(undefined, contact.id)"
                     >
+                        <img
+                            class="img-avatar"
+                            src="/images/default-avatar.jpg"
+                        >
                         <i
+                            v-if="contact.isOnline" 
                             class="fa fa-circle"
                             :class="{'gray': !contact.isOnline}"
                             aria-hidden="true"
@@ -71,7 +77,8 @@ export default {
         apiUrl: process.env.API_URL,
         keyword: '',
         skip: 0,
-        limit: 50
+        limit: 50,
+        activeTab: null
     }),
     computed: {
         ...mapGetters('user', [
@@ -90,6 +97,8 @@ export default {
             'findContacts'
         ]),
         changeRoom(room, receiverId) {
+            this.activeTab = receiverId;
+            console.log('this.active', this.active);
             if (receiverId) {
                 if (this.userAuth.id > receiverId)
                     room = this.generateId(this.userAuth.id) + this.generateId(receiverId);

@@ -39,23 +39,23 @@
                         >
                     </div>
                     <div
-                        class="col-md-10 col-style"
+                        class="col-md-10 col-style mess-left"
                         v-if="message.senderId !== userAuth.id"
                     >
                         <div class="bg-content">
-                            <h3 class="txt-name">
-                                {{ message.sender ? message.sender.firstName + ' ' + message.sender.lastName : '' }}
-                            </h3>
+                            <!-- <h3 class="txt-name">
+                                {{  }}
+                            </h3> -->
                             <p class="txt-content">
                                 {{ message.content }}
                             </p>
                             <p class="txt-time">
-                                {{ message.time | formatDate }}
+                                {{ message.sender ? message.sender.firstName + ' ' + message.sender.lastName : '' }}, {{ message.time | formatDate }}
                             </p>
                         </div>
                     </div>
                     <div
-                        class="col col-style text-right offset-md-4"
+                        class="col col-style text-right offset-md-2"
                         v-if="message.senderId === userAuth.id"
                     >
                         <div class="bg-content">
@@ -72,7 +72,13 @@
         </div>
         <div class="row send-message no-gutters">
             <div class="col">
-                <i class="i-con icon-emoji" />
+                <!-- <i class="i-con icon-emoji" /> -->
+                <img
+                    v-if="profile" 
+                    :src="profile.avatar ? apiUrl + profile.avatar : '/images/default-avatar.jpg'"
+                    alt="avatar"
+                    class="img-avatar-send"
+                >
                 <input
                     ref="content"
                     type="text"
@@ -82,7 +88,7 @@
                     @keyup.enter="send"
                 >
             </div>
-            <div class="col-3 text-right">
+            <div class="col-1 text-right w50">
                 <i
                     class="i-con icon-send"
                     @click="send"
@@ -106,7 +112,8 @@ export default {
     }),
     computed: {
         ...mapGetters('user', [
-            'userAuth'
+            'userAuth',
+            'profile'
         ]),
         ...mapGetters('socket', [
             'messages'
