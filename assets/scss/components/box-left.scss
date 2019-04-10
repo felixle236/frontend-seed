@@ -11,6 +11,7 @@
         &.closed{
             margin-left: -488px;
         }
+        
         .box-content{
             height: calc(100vh - 150px);
             overflow-y: auto;
@@ -28,6 +29,24 @@
         .box-heading{
             .text-heading{
                 cursor: pointer;
+            }
+            .fa-circle{
+                position: absolute;
+                bottom: 0;
+                left: 43px;
+                &.green{
+                    color: #2adf80;
+                }
+            }
+            .time-activity{
+                position: absolute;
+                bottom: -3px;
+                left: 65px;
+            }
+            .user-name{
+                position: relative;
+                top: -6px;
+                font-size: 18px;
             }
         }
     }
@@ -341,12 +360,6 @@
             }
         }
     }
-    .user-name{
-        color: #7b7b7b;
-        font-size: $font-size-big;
-        display: inline-block;
-        margin-left: 4px;
-    }
     .btn-normal{
         margin: 16px 0;
     }
@@ -414,7 +427,7 @@
         }
         &.active{
             position: relative;
-            background-color: #d8efec;
+            background-color: #bdebe5;
             &::before{
                 content: '';
                 position: absolute;
@@ -424,6 +437,9 @@
                 top: -1px;
                 background-color: $color-seventh;
             }
+        }
+        &:hover{
+            background-color: #d8efec;
         }
         &.nuxt-bot{
             color: #3baaa6;

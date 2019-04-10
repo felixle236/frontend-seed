@@ -2,7 +2,22 @@
     <div class="box-left box-message">
         <div class="box-heading">
             <div class="row">
-                <div class="col-md-8" />
+                <div class="col-md-8">
+                    <img
+                        :src="'/images/default_avatar.png'"
+                        alt=""
+                        :title="''"
+                        class="img-avatar"
+                    >
+                    <i
+                        class="fa fa-circle green"
+                        aria-hidden="true"
+                    />
+                    <h3 class="user-name">
+                        Kency
+                    </h3>
+                    <span class="time-activity">Last seen 32m ago</span>
+                </div>
                 <div class="col-md-4">
                     <div class="group-search">
                         <input

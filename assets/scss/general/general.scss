@@ -287,3 +287,19 @@ input[type=text], input[type=password]{
         color: #8a8a8a;
     }
 }
+.user-name{
+    color: #7b7b7b;
+    font-size: $font-size-big;
+    display: inline-block;
+    margin-left: 4px;
+}
+.img-avatar{
+    width: 40px;
+    height: 40px;
+    position: relative;
+    @include border-radius(50%);
+    padding: 3px;
+    margin-right: 2px;
+    object-fit: cover;
+    border: 1px solid #efefef;  
+}
