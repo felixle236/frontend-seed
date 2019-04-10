@@ -144,7 +144,8 @@ export default {
         ...mapActions('socket', [
             'findMessages',
             'sendMessage',
-            'sendMessageRoom'
+            'sendMessageRoom',
+            'clearNewMessageStatus'
         ]),
         load(room, receiverId) {
             this.receiverId = receiverId;
@@ -153,6 +154,7 @@ export default {
             this.$refs.content.select();
             
             this.findMessages({room: this.room, skip: this.skip, limit: this.limit});
+            this.clearNewMessageStatus({room: this.receiverId});
         },
         send() {
             if (this.receiverId)

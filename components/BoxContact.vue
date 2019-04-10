@@ -15,13 +15,14 @@
             </h3>
         </div>
         <div class="box-scroll">
-            <div class="box-border box-direct">
+            <div class="box-border box-team">
                 <h3 class="heading-box">
                     Group
                 </h3>
                 <ul class="nav-bot">
                     <li
                         class="nav-item"
+                        :class="{'active': activeTab === 0}"
                         @click="changeRoom(0)"
                     >
                         &emsp;
@@ -29,11 +30,12 @@
                         <i
                             class="fa fa-circle red pull-right"
                             aria-hidden="true"
+                            v-show="hasRoomNewMessage"
                         />
                     </li>
                 </ul>
             </div>
-            <div class="box-border box-direct box-user">
+            <div class="box-border box-direct">
                 <h3 class="heading-box">
                     Direct
                 </h3>
@@ -60,7 +62,7 @@
                         <i
                             class="fa fa-circle red pull-right"
                             aria-hidden="true"
-                            v-if="contact.hasNewMessages"
+                            v-show="contact.hasNewMessage"
                         />
                     </li>
                 </ul>
@@ -86,6 +88,8 @@ export default {
             'userAuth'
         ]),
         ...mapGetters('socket', [
+            'currentRoom',
+            'hasRoomNewMessage',
             'contacts'
         ])
     },
@@ -97,7 +101,7 @@ export default {
             'findContacts'
         ]),
         changeRoom(room, receiverId) {
-            this.activeTab = receiverId;
+            this.activeTab = receiverId || 0;
             if (receiverId) {
                 if (this.userAuth.id > receiverId)
                     room = this.generateId(this.userAuth.id) + this.generateId(receiverId);

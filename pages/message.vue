@@ -1,5 +1,8 @@
 <template>
-    <div class="message row">
+    <div
+        class="message row"
+        v-if="userAuth"
+    >
         <div class="col-auto pd-0">
             <box-contact
                 @change="changeRoom"
@@ -13,6 +16,7 @@
 </template>
 
 <script>
+import {mapGetters, mapActions} from 'vuex';
 import BoxContact from '~/components/BoxContact';
 import BoxMessage from '~/components/BoxMessage';
 
@@ -21,6 +25,11 @@ export default {
     components: {
         BoxContact,
         BoxMessage
+    },
+    computed: {
+        ...mapGetters('user', [
+            'userAuth'
+        ])
     },
     methods: {
         changeRoom({room, receiverId}) {

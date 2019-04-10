@@ -7,12 +7,15 @@ export default {
         socket.on('connect', () => {
             console.log('Message socket is connected.');
         });
+        
         socket.on('contact_status', contact => {
             commit(types.SOCKET_CONTACT, contact);
         });
+        
         socket.on('contact_list_error', error => {
             console.log('contact_list_error', error);
         });
+        
         socket.on('contact_list_successfully', contacts => {
             commit(types.SOCKET_CONTACTS, contacts);
             
@@ -22,9 +25,11 @@ export default {
                 this.dispatch('socket/findMessages', {room, skip: 0, limit: 50});
             }
         });
+        
         socket.on('message_list_error', error => {
             console.log('message_list_error', error);
         });
+        
         socket.on('message_list_successfully', messages => {
             const list = [];
             messages.forEach(message => {
@@ -36,31 +41,45 @@ export default {
             });
             commit(types.SOCKET_MESSAGES, list);
         });
+        
         socket.on('message_directly', message => {
             if (state.currentRoom === message.room) {
                 message.sender = state.contacts.find(c => c.id === message.senderId);
                 message.receiver = state.contacts.find(c => c.id === message.receiverId);
                 commit(types.SOCKET_MESSAGE, message);
             }
+            else {
+                const contact = state.contacts.find(contact => contact.id === message.senderId);
+                if (contact)
+                    contact.hasNewMessage = true;
+            }
         });
+        
         socket.on('message_directly_error', error => {
             console.log('message_directly_error', error);
         });
+        
         socket.on('message_directly_successfully', message => {
             console.log('message_directly_successfully', message);
         });
+        
         socket.on('message_room', message => {
             if (state.currentRoom === message.room) {
                 message.sender = state.contacts.find(c => c.id === message.senderId);
                 commit(types.SOCKET_MESSAGE, message);
             }
+            else
+                commit(types.SOCKET_HAS_ROOM_NEW_MESSAGE, true);
         });
+        
         socket.on('message_room_error', error => {
             console.log('message_room_error', error);
         });
+        
         socket.on('message_room_successfully', message => {
             console.log('message_room_successfully', message);
         });
+        
         socket.on('notification', notification => {
             console.log('notification', notification);
         });
@@ -91,5 +110,14 @@ export default {
             code: Date.now(),
             content
         });
+    },
+    clearNewMessageStatus({state, commit}, {room}) {
+        if (room) {
+            const contact = state.contacts.find(contact => contact.id === room);
+            if (contact)
+                contact.hasNewMessage = false;
+        }
+        else
+            commit(types.SOCKET_HAS_ROOM_NEW_MESSAGE, false);
     }
 };
