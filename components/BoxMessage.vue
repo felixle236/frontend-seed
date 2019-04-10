@@ -4,19 +4,20 @@
             <div class="row">
                 <div class="col-md-8">
                     <img
-                        :src="'/images/default_avatar.png'"
+                        v-if="receiver"
+                        :src="receiver.avatar ? apiUrl + receiver.avatar : '/images/default-avatar.jpg'"
                         alt=""
-                        :title="''"
                         class="img-avatar"
                     >
                     <i
+                        v-if="receiver && receiver.isOnline"
                         class="fa fa-circle green"
+                        :class="{'gray': !receiver.isOnline}"
                         aria-hidden="true"
                     />
                     <h3 class="user-name">
-                        Kency
+                        {{ receiver ? receiver.firstName + ' ' + receiver.lastName : 'All members' }}
                     </h3>
-                    <span class="time-activity">Last seen 32m ago</span>
                 </div>
                 <div class="col-md-4">
                     <div class="group-search">
@@ -48,7 +49,7 @@
                         v-if="message.senderId !== userAuth.id"
                     >
                         <img
-                            :src="message.sender ? apiUrl + message.sender.avatar : '/images/default_avatar.png'"
+                            :src="message.sender ? apiUrl + message.sender.avatar : '/images/default-avatar.jpg'"
                             alt="avatar"
                             class="img-avatar"
                         >
@@ -65,7 +66,7 @@
                                 {{ message.content }}
                             </p>
                             <p class="txt-time">
-                                {{ message.sender ? message.sender.firstName + ' ' + message.sender.lastName : '' }}, {{ message.time | formatDate }}
+                                {{ message.sender ? (message.sender.firstName + ' ' + message.sender.lastName).trim() : '' }}, {{ message.time | formatDate }}
                             </p>
                         </div>
                     </div>
@@ -73,7 +74,7 @@
                         class="col col-style text-right offset-md-2"
                         v-if="message.senderId === userAuth.id"
                     >
-                        <div class="bg-content">
+                        <div class="bg-content owner">
                             <p class="txt-content">
                                 {{ message.content }}
                             </p>
@@ -120,6 +121,7 @@ export default {
     data: () => ({
         apiUrl: process.env.API_URL,
         receiverId: undefined,
+        receiver: undefined,
         room: undefined,
         skip: 0,
         limit: 50,
@@ -131,6 +133,7 @@ export default {
             'profile'
         ]),
         ...mapGetters('socket', [
+            'contacts',
             'messages'
         ]),
     },
@@ -167,17 +170,20 @@ export default {
             this.room = room;
             this.skip = 0;
             this.$refs.content.select();
+            this.receiver = receiverId && this.contacts.find(contact => contact.id === receiverId);
             
             this.findMessages({room: this.room, skip: this.skip, limit: this.limit});
             this.clearNewMessageStatus({room: this.receiverId});
         },
         send() {
-            if (this.receiverId)
-                this.sendMessage({receiverId: this.receiverId, content: this.content});
-            else
-                this.sendMessageRoom({room: this.room, content: this.content});
+            if (this.content) {
+                if (this.receiverId)
+                    this.sendMessage({receiverId: this.receiverId, content: this.content});
+                else
+                    this.sendMessageRoom({room: this.room, content: this.content});
             
-            this.content = '';
+                this.content = '';
+            }
         }
     },
     filters: {
@@ -199,7 +205,7 @@ export default {
             if (compareTime === 86400000)
                 return 'Yesterday ' + date.toLocaleTimeString();
             
-            return date.toLocaleString();
+            return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
         }
     }
 };

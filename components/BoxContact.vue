@@ -53,7 +53,7 @@
                             :src="contact.avatar ? apiUrl + contact.avatar : '/images/default-avatar.jpg'"
                         >
                         <i
-                            v-if="contact.isOnline" 
+                            v-if="contact.isOnline"
                             class="fa fa-circle"
                             :class="{'gray': !contact.isOnline}"
                             aria-hidden="true"
@@ -80,7 +80,7 @@ export default {
         keyword: '',
         skip: 0,
         limit: 50,
-        activeTab: null
+        activeTab: 0
     }),
     computed: {
         ...mapGetters('user', [
