@@ -80,7 +80,7 @@ export default {
         keyword: '',
         skip: 0,
         limit: 50,
-        activeTab: 0
+        activeTab: -1
     }),
     computed: {
         ...mapGetters('user', [
@@ -94,26 +94,28 @@ export default {
         ])
     },
     mounted() {
-        this.findContacts({keyword: this.keyword, skip: this.skip, limit: this.limit});
+        this.clearMenuNewMessageStatus();
+        // this.findContacts({keyword: this.keyword, skip: this.skip, limit: this.limit});
     },
     methods: {
         ...mapActions('socket', [
-            'findContacts'
+            'findContacts',
+            'clearMenuNewMessageStatus'
         ]),
         changeRoom(room, receiverId) {
-            this.activeTab = receiverId || 0;
+            this.activeTab = receiverId || room;
             if (receiverId) {
                 if (this.userAuth.id > receiverId)
-                    room = this.generateId(this.userAuth.id) + this.generateId(receiverId);
+                    room = Number(this.generateId(this.userAuth.id) + this.generateId(receiverId));
                 else
-                    room = this.generateId(receiverId) + this.generateId(this.userAuth.id);
+                    room = Number(this.generateId(receiverId) + this.generateId(this.userAuth.id));
             }
             this.$emit('change', {room, receiverId});
         },
         generateId(num) {
             if (num.toString().length >= 7)
-                return num;
-            return num * Number('1'.padEnd(7 - num.toString().length, '0'));
+                return num.toString();
+            return (num * Number('1'.padEnd(8 - num.toString().length, '0'))).toString();
         }
     }
 };

@@ -29,7 +29,10 @@
                     class="menu-link"
                 >
                     <i class="i-con icon-message" />
-                    <span class="notify-message"><label>10</label></span>
+                    <span
+                        class="notify-message"
+                        v-show="hasMenuNewMessage"
+                    />
                 </nuxt-link>
             </li>
             <li
@@ -48,9 +51,14 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex';
+import {mapGetters, mapActions} from 'vuex';
 
 export default {
+    computed: {
+        ...mapGetters('socket', [
+            'hasMenuNewMessage'
+        ])
+    },
     methods: {
         ...mapActions('user', [
             'signout'

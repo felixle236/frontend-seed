@@ -3,6 +3,7 @@ import types from '../../mutation-types';
 export default {
     connectMessageSocket({state, commit}) {
         const socket = this.$sockets.connect('message');
+        this.$sockets.message.emit('contact_list', {keyword: '', skip: 0, limit: 50});
         
         socket.on('connect', () => {
             console.log('Message socket is connected.');
@@ -18,12 +19,9 @@ export default {
         
         socket.on('contact_list_successfully', contacts => {
             commit(types.SOCKET_CONTACTS, contacts);
-            
-            if (state.currentRoom === -1) {
-                const room = 0;
-                commit(types.SOCKET_CURRENT_ROOM, room);
-                this.dispatch('socket/findMessages', {room, skip: 0, limit: 50});
-            }
+
+            if (!this.$router.currentRoute.path.toLowerCase().startsWith('/message') && contacts.find(contact => contact.hasNewMessage))
+                commit(types.SOCKET_HAS_MENU_NEW_MESSAGE, true);
         });
         
         socket.on('message_list_error', error => {
@@ -53,6 +51,8 @@ export default {
                 if (contact)
                     contact.hasNewMessage = true;
             }
+            if (!this.$router.currentRoute.path.toLowerCase().startsWith('/message'))
+                commit(types.SOCKET_HAS_MENU_NEW_MESSAGE, true);
         });
         
         socket.on('message_directly_error', error => {
@@ -70,6 +70,9 @@ export default {
             }
             else
                 commit(types.SOCKET_HAS_ROOM_NEW_MESSAGE, true);
+                
+            if (!this.$router.currentRoute.path.toLowerCase().startsWith('/message'))
+                commit(types.SOCKET_HAS_MENU_NEW_MESSAGE, true);
         });
         
         socket.on('message_room_error', error => {
@@ -91,7 +94,7 @@ export default {
         this.$sockets.message.emit('contact_list', {keyword, skip, limit});
     },
     findMessages({state, commit}, {room, skip, limit}) {
-        if (state.currentRoom !== room) {
+        if (state.currentRoom !== room || !skip) {
             commit(types.SOCKET_CLEAR_MESSAGES);
             commit(types.SOCKET_CURRENT_ROOM, room);
         }
@@ -119,5 +122,8 @@ export default {
         }
         else
             commit(types.SOCKET_HAS_ROOM_NEW_MESSAGE, false);
+    },
+    clearMenuNewMessageStatus({state, commit}) {
+        commit(types.SOCKET_HAS_MENU_NEW_MESSAGE, false);
     }
 };

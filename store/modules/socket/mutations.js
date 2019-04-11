@@ -4,6 +4,9 @@ export default {
     [types.SOCKET_CURRENT_ROOM](state, room) {
         state.currentRoom = room;
     },
+    [types.SOCKET_HAS_MENU_NEW_MESSAGE](state, hasMenuNewMessage) {
+        state.hasMenuNewMessage = hasMenuNewMessage;
+    },
     [types.SOCKET_HAS_ROOM_NEW_MESSAGE](state, hasRoomNewMessage) {
         state.hasRoomNewMessage = hasRoomNewMessage;
     },
@@ -43,6 +46,8 @@ export default {
                             state.messages.splice(i + 1, 0, message);
                             break;
                         }
+                        if (i === 0)
+                            state.messages.splice(i, 0, message);
                     }
                 }
             }
@@ -62,6 +67,8 @@ export default {
                             state.messages.splice(i + 1, 0, message);
                             break;
                         }
+                        if (i === 0)
+                            state.messages.splice(i, 0, message);
                     }
                 }
             }

@@ -34,9 +34,17 @@
                 </div>
             </div>
         </div>
+        <div v-show="room === -1">
+            <h1>Welcome to Nuxt JS</h1>
+            <p class="description"> 
+                Our goal is to create a framework flexible enough that you can use it as a main project base or in addition to your current project based on Node.js.<br>
+                Nuxt.js presets all the configuration needed to make your development of a Vue.js Application Server Rendered more enjoyable.
+            </p>
+        </div>
         <div
             class="box-content"
             ref="boxContent"
+            v-show="room !== -1"
         >
             <div class="box-chat">
                 <div
@@ -86,7 +94,10 @@
                 </div>
             </div>
         </div>
-        <div class="row send-message no-gutters">
+        <div
+            class="row send-message no-gutters"
+            v-show="room !== -1"
+        >
             <div class="col">
                 <!-- <i class="i-con icon-emoji" /> -->
                 <img
@@ -122,7 +133,7 @@ export default {
         apiUrl: process.env.API_URL,
         receiverId: undefined,
         receiver: undefined,
-        room: undefined,
+        room: -1,
         skip: 0,
         limit: 50,
         content: ''
@@ -139,24 +150,22 @@ export default {
     },
     watch: {
         'messages': function(newMessages, oldMessages) {
-            if (this.skip === 0) {
-                setTimeout(() => {
-                    this.$refs.boxContent.scrollTo(0, this.$refs.boxContent.scrollHeight);
-                }, 10);
-            }
-            else {
-                if (this.$refs.boxContent.scrollTop + this.$refs.boxContent.offsetHeight === this.$refs.boxContent.scrollHeight) {
+            if (this.$refs.boxContent) {
+                if (this.skip === 0) {
                     setTimeout(() => {
-                        $(this.$refs.boxContent).animate({scrollTop: this.$refs.boxContent.scrollHeight});
+                        this.$refs.boxContent.scrollTo(0, this.$refs.boxContent.scrollHeight);
                     }, 10);
                 }
+                else {
+                    if (this.$refs.boxContent.scrollTop + this.$refs.boxContent.offsetHeight === this.$refs.boxContent.scrollHeight) {
+                        setTimeout(() => {
+                            $(this.$refs.boxContent).animate({scrollTop: this.$refs.boxContent.scrollHeight});
+                        }, 10);
+                    }
+                }
+                this.skip = newMessages.length;
             }
-            this.skip = newMessages.length;
         }
-    },
-    mounted() {
-        if (this.room === undefined || this.room === null)
-            this.room = 0;
     },
     methods: {
         ...mapActions('socket', [
@@ -169,8 +178,9 @@ export default {
             this.receiverId = receiverId;
             this.room = room;
             this.skip = 0;
-            this.$refs.content.select();
             this.receiver = receiverId && this.contacts.find(contact => contact.id === receiverId);
+            if (this.$refs.content)
+                setTimeout(() => this.$refs.content.select(), 10);
             
             this.findMessages({room: this.room, skip: this.skip, limit: this.limit});
             this.clearNewMessageStatus({room: this.receiverId});

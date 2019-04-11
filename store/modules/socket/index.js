@@ -6,6 +6,7 @@ export default {
     namespaced: true,
     state: {
         currentRoom: -1,
+        hasMenuNewMessage: false,
         hasRoomNewMessage: false,
         contacts: [],
         messages: [],
