@@ -26,9 +26,10 @@
             >
                 <nuxt-link
                     to="/message"
-                    class="menu-link new-message"
+                    class="menu-link"
                 >
                     <i class="i-con icon-message" />
+                    <span class="notify-message"><label>10</label></span>
                 </nuxt-link>
             </li>
             <li

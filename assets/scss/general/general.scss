@@ -180,6 +180,7 @@ input[type=text], input[type=password]{
         width: 32px;
         display: block;
         text-align: center;
+        position: relative;
         &.new-message{
             position: relative;
             &:after {
@@ -292,6 +293,18 @@ input[type=text], input[type=password]{
     font-size: $font-size-big;
     display: inline-block;
     margin-left: 4px;
+}
+.notify-message{
+    height: 6px;
+    width: 6px;
+    background: red;
+    color: #fff;
+    font-size: 9px;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    top: 1px;
+    right: 0;
 }
 .img-avatar{
     width: 40px;
