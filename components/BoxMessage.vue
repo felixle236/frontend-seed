@@ -34,12 +34,22 @@
                 </div>
             </div>
         </div>
-        <div v-show="room === -1">
-            <h1>Welcome to Nuxt JS</h1>
-            <p class="description"> 
-                Our goal is to create a framework flexible enough that you can use it as a main project base or in addition to your current project based on Node.js.<br>
-                Nuxt.js presets all the configuration needed to make your development of a Vue.js Application Server Rendered more enjoyable.
-            </p>
+        <div
+            v-show="room === -1"
+            class="message-default"
+        >
+            <div class="row">
+                <div class="col-md-2 col-sm-2 col-xs-12">
+                    <img src="/images/logo.png">
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <h1>Welcome to Nuxt JS</h1>
+                    <p class="description"> 
+                        Our goal is to create a framework flexible enough that you can use it as a main project base or in addition to your current project based on Node.js.<br>
+                        Nuxt.js presets all the configuration needed to make your development of a Vue.js Application Server Rendered more enjoyable.
+                    </p>
+                </div>
+            </div>
         </div>
         <div
             class="box-content"
