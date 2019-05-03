@@ -316,3 +316,14 @@ input[type=text], input[type=password]{
     object-fit: cover;
     border: 1px solid #efefef;  
 }
+.message-default{
+    padding: 55px 80px;
+    img{
+        max-width: 100px;
+    }
+    .description{
+        font-size: 15px;
+        margin-top: 10px;
+        line-height: 25px;
+    }
+}
