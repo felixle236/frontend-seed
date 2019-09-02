@@ -8,7 +8,7 @@ export default {
         currentRoom: -1,
         hasMenuNewMessage: false,
         hasRoomNewMessage: false,
-        contacts: [],
+        members: [],
         messages: [],
     },
     getters,

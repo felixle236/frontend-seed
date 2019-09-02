@@ -1,7 +1,6 @@
 export default ({redirect, store}, inject) => {
     const isAuthenticated = () => {
-        const userAuth = store.state.user.userAuth;
-        return userAuth && userAuth.accessToken && userAuth.tokenExpire && new Date(userAuth.tokenExpire) >= new Date();
+        return !!store.state.user.userAuth;
     };
 
     const isRoles = (...roles) => {

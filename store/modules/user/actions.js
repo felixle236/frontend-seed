@@ -33,8 +33,8 @@ export default {
 };
 
 function storeUserAuthentication(commit, userAuth) {
-    if (userAuth)
-        setCookie('userAuth', userAuth, 15);
+    if (userAuth && userAuth.expiresIn && userAuth.expiresIn > 0)
+        setCookie('userAuth', userAuth, userAuth.expiresIn);
     else
         setCookie('userAuth', null, -1);
 

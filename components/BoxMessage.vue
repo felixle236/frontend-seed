@@ -64,7 +64,8 @@
                 >
                     <div
                         class="col-auto col-style"
-                        v-if="message.senderId !== userAuth.id"
+                        :class="{'space-top': !isNearTime(index)}"
+                        v-if="message.senderId !== userAuth.id && !isNearTime(index)"
                     >
                         <img
                             :src="message.sender ? apiUrl + message.sender.avatar : '/images/default-avatar.jpg'"
@@ -73,7 +74,8 @@
                         >
                     </div>
                     <div
-                        class="col-md-10 col-style mess-left"
+                        class="col-md-8 col-style mess-left"
+                        :class="{'space-left': isNearTime(index), 'space-top': !isNearTime(index)}"
                         v-if="message.senderId !== userAuth.id"
                     >
                         <div class="bg-content">
@@ -83,21 +85,28 @@
                             <p class="txt-content">
                                 {{ message.content }}
                             </p>
-                            <p class="txt-time">
-                                {{ message.sender ? (message.sender.firstName + ' ' + message.sender.lastName).trim() : '' }}, {{ message.time | formatDate }}
+                            <p
+                                class="txt-time"
+                                v-if="!isNearTime(index)"
+                            >
+                                {{ message.sender ? (message.sender.firstName + ' ' + message.sender.lastName).trim() : '' }}, {{ message.createdAt | formatDate }}
                             </p>
                         </div>
                     </div>
                     <div
-                        class="col col-style text-right offset-md-2"
+                        class="col col-style text-right offset-md-4"
+                        :class="{'space-top': !isNearTime(index)}"
                         v-if="message.senderId === userAuth.id"
                     >
                         <div class="bg-content owner">
                             <p class="txt-content">
                                 {{ message.content }}
                             </p>
-                            <p class="txt-time">
-                                {{ message.time | formatDate }}
+                            <p
+                                class="txt-time"
+                                v-if="!isNearTime(index)"
+                            >
+                                {{ message.createdAt | formatDate }}
                             </p>
                         </div>
                     </div>
@@ -154,7 +163,7 @@ export default {
             'profile'
         ]),
         ...mapGetters('socket', [
-            'contacts',
+            'members',
             'messages'
         ]),
     },
@@ -188,11 +197,11 @@ export default {
             this.receiverId = receiverId;
             this.room = room;
             this.skip = 0;
-            this.receiver = receiverId && this.contacts.find(contact => contact.id === receiverId);
+            this.receiver = receiverId && this.members.find(member => member.id === receiverId);
             if (this.$refs.content)
                 setTimeout(() => this.$refs.content.select(), 10);
             
-            this.findMessages({room: this.room, skip: this.skip, limit: this.limit});
+            this.findMessages({room: this.room, receiverId: this.receiverId, skip: this.skip, limit: this.limit});
             this.clearNewMessageStatus({room: this.receiverId});
         },
         send() {
@@ -204,20 +213,26 @@ export default {
             
                 this.content = '';
             }
+        },
+        isNearTime(index) {
+            if (index > 0 &&
+                this.messages[index].senderId === this.messages[index - 1].senderId &&
+                this.messages[index].createdAt - this.messages[index - 1].createdAt <= 2 * 60 * 1000)
+                return true;
+            return false;
         }
     },
     filters: {
-        formatDate(value) {
-            if (!value) return '';
+        formatDate(date) {
+            if (!date) return '';
             
-            if (Date.now() - value <= 10000)
+            if (Date.now() - date.getTime() <= 10000)
                 return 'Just a second';
                 
-            if (Date.now() - value <= 60000)
+            if (Date.now() - date.getTime() <= 60000)
                 return 'Just a minute';
             
-            const date = new Date(value);
-            const compareTime = new Date(value).setHours(0, 0, 0, 0) - new Date().setHours(0, 0, 0, 0);
+            const compareTime = new Date(date.getTime()).setHours(0, 0, 0, 0) - new Date().setHours(0, 0, 0, 0);
             
             if (compareTime === 0)
                 return 'Today ' + date.toLocaleTimeString();

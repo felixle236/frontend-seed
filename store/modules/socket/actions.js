@@ -3,24 +3,28 @@ import types from '../../mutation-types';
 export default {
     connectMessageSocket({state, commit}) {
         const socket = this.$sockets.connect('message');
-        this.$sockets.message.emit('contact_list', {keyword: '', skip: 0, limit: 50});
+        this.$sockets.message.emit('member_list', {keyword: '', skip: 0, limit: 50});
         
         socket.on('connect', () => {
-            console.log('Message socket is connected.');
+            console.log('Message socket is connected!');
         });
         
-        socket.on('contact_status', contact => {
-            commit(types.SOCKET_CONTACT, contact);
+        socket.on('disconnect', () => {
+            console.log('Message socket is disconnected!');
         });
-        
-        socket.on('contact_list_error', error => {
-            console.log('contact_list_error', error);
-        });
-        
-        socket.on('contact_list_successfully', contacts => {
-            commit(types.SOCKET_CONTACTS, contacts);
 
-            if (!this.$router.currentRoute.path.toLowerCase().startsWith('/message') && contacts.find(contact => contact.hasNewMessage))
+        socket.on('member_status', member => {
+            commit(types.SOCKET_MEMBER, member);
+        });
+        
+        socket.on('member_list_error', error => {
+            console.log('member_list_error', error);
+        });
+        
+        socket.on('member_list_successfully', members => {
+            commit(types.SOCKET_MEMBERS, members);
+
+            if (!this.$router.currentRoute.path.toLowerCase().startsWith('/message') && members.find(member => member.hasNewMessage))
                 commit(types.SOCKET_HAS_MENU_NEW_MESSAGE, true);
         });
         
@@ -28,28 +32,30 @@ export default {
             console.log('message_list_error', error);
         });
         
-        socket.on('message_list_successfully', messages => {
+        socket.on('message_list_successfully', data => {
             const list = [];
-            messages.forEach(message => {
-                if (state.currentRoom === message.room) {
-                    message.sender = state.contacts.find(c => c.id === message.senderId);
-                    message.receiver = state.contacts.find(c => c.id === message.receiverId);
-                    list.push(message);
-                }
-            });
+            if (data && data.results) {
+                data.results.forEach(message => {
+                    if ((message.room === 0 && state.currentRoom === message.room) || state.currentRoom === message.receiverId || state.currentRoom === message.senderId) {
+                        message.sender = state.members.find(member => member.id === message.senderId);
+                        message.receiver = state.members.find(member => member.id === message.receiverId);
+                        list.push(message);
+                    }
+                });
+            }
             commit(types.SOCKET_MESSAGES, list);
         });
         
         socket.on('message_directly', message => {
-            if (state.currentRoom === message.room) {
-                message.sender = state.contacts.find(c => c.id === message.senderId);
-                message.receiver = state.contacts.find(c => c.id === message.receiverId);
+            if (state.currentRoom === message.receiverId || state.currentRoom === message.senderId) {
+                message.sender = state.members.find(c => c.id === message.senderId);
+                message.receiver = state.members.find(c => c.id === message.receiverId);
                 commit(types.SOCKET_MESSAGE, message);
             }
             else {
-                const contact = state.contacts.find(contact => contact.id === message.senderId);
-                if (contact)
-                    contact.hasNewMessage = true;
+                const member = state.members.find(member => member.id === message.senderId);
+                if (member)
+                    member.hasNewMessage = true;
             }
             if (!this.$router.currentRoute.path.toLowerCase().startsWith('/message'))
                 commit(types.SOCKET_HAS_MENU_NEW_MESSAGE, true);
@@ -65,7 +71,7 @@ export default {
         
         socket.on('message_room', message => {
             if (state.currentRoom === message.room) {
-                message.sender = state.contacts.find(c => c.id === message.senderId);
+                message.sender = state.members.find(c => c.id === message.senderId);
                 commit(types.SOCKET_MESSAGE, message);
             }
             else
@@ -90,35 +96,33 @@ export default {
     disconnectMessageSocket({state, commit}) {
         this.$sockets.disconnect('message');
     },
-    findContacts({state, commit}, {keyword, skip, limit}) {
-        this.$sockets.message.emit('contact_list', {keyword, skip, limit});
+    findMembers({state, commit}, {keyword, skip, limit}) {
+        this.$sockets.message.emit('member_list', {keyword, skip, limit});
     },
-    findMessages({state, commit}, {room, skip, limit}) {
-        if (state.currentRoom !== room || !skip) {
+    findMessages({state, commit}, {room, receiverId, skip, limit}) {
+        if ((room === 0 && state.currentRoom !== room) || (receiverId && state.currentRoom !== receiverId) || !skip) {
             commit(types.SOCKET_CLEAR_MESSAGES);
-            commit(types.SOCKET_CURRENT_ROOM, room);
+            commit(types.SOCKET_CURRENT_ROOM, receiverId || room);
         }
-        this.$sockets.message.emit('message_list', {room, skip, limit});
+        this.$sockets.message.emit('message_list', {room, receiverId, skip, limit});
     },
     sendMessage({state, commit}, {receiverId, content}) {
         this.$sockets.message.emit('message_directly', {
             receiverId,
-            code: Date.now(),
             content
         });
     },
     sendMessageRoom({state, commit}, {room, content}) {
         this.$sockets.message.emit('message_room', {
             room,
-            code: Date.now(),
             content
         });
     },
     clearNewMessageStatus({state, commit}, {room}) {
         if (room) {
-            const contact = state.contacts.find(contact => contact.id === room);
-            if (contact)
-                contact.hasNewMessage = false;
+            const member = state.members.find(member => member.id === room);
+            if (member)
+                member.hasNewMessage = false;
         }
         else
             commit(types.SOCKET_HAS_ROOM_NEW_MESSAGE, false);

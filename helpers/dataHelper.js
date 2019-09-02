@@ -12,9 +12,9 @@ export function convertToCurrency(value, option) {
     return value.toLocaleString(option.format, {style: 'currency', currency: option.currency});
 };
 
-export function setCookie(cname, cvalue, exdays) {
+export function setCookie(cname, cvalue, expireSecond) {
     let d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    d.setTime(d.getTime() + (expireSecond * 1000));
     let expires = 'expires=' + d.toUTCString();
     document.cookie = cname + '=' + JSON.stringify(cvalue) + ';' + expires + ';path=/';
 };

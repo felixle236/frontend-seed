@@ -42,27 +42,27 @@
                 <ul class="nav-bot">
                     <li
                         class="nav-item"
-                        v-for="(contact, index) in contacts"
-                        v-show="contact.id !== userAuth.id"
-                        :class="{'active': activeTab === contact.id}"
+                        v-for="(member, index) in members"
+                        v-show="member.id !== userAuth.id"
+                        :class="{'active': activeTab === member.id}"
                         :key="index"
-                        @click="changeRoom(undefined, contact.id)"
+                        @click="changeRoom(undefined, member.id)"
                     >
                         <img
                             class="img-avatar"
-                            :src="contact.avatar ? apiUrl + contact.avatar : '/images/default-avatar.jpg'"
+                            :src="member.avatar ? apiUrl + member.avatar : '/images/default-avatar.jpg'"
                         >
                         <i
-                            v-if="contact.isOnline"
+                            v-if="member.isOnline"
                             class="fa fa-circle"
-                            :class="{'gray': !contact.isOnline}"
+                            :class="{'gray': !member.isOnline}"
                             aria-hidden="true"
                         />
-                        {{ contact.firstName + ' ' + contact.lastName }}
+                        {{ member.firstName + ' ' + member.lastName }}
                         <i
                             class="fa fa-circle red pull-right"
                             aria-hidden="true"
-                            v-show="contact.hasNewMessage"
+                            v-show="member.hasNewMessage"
                         />
                     </li>
                 </ul>
@@ -90,26 +90,20 @@ export default {
         ...mapGetters('socket', [
             'currentRoom',
             'hasRoomNewMessage',
-            'contacts'
+            'members'
         ])
     },
     mounted() {
         this.clearMenuNewMessageStatus();
-        // this.findContacts({keyword: this.keyword, skip: this.skip, limit: this.limit});
+        // this.findMembers({keyword: this.keyword, skip: this.skip, limit: this.limit});
     },
     methods: {
         ...mapActions('socket', [
-            'findContacts',
+            'findMembers',
             'clearMenuNewMessageStatus'
         ]),
         changeRoom(room, receiverId) {
             this.activeTab = receiverId || room;
-            if (receiverId) {
-                if (this.userAuth.id > receiverId)
-                    room = Number(this.generateId(this.userAuth.id) + this.generateId(receiverId));
-                else
-                    room = Number(this.generateId(receiverId) + this.generateId(this.userAuth.id));
-            }
             this.$emit('change', {room, receiverId});
         },
         generateId(num) {

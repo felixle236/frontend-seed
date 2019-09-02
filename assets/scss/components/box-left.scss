@@ -178,10 +178,10 @@
         max-width: 288px;
     }
     .bg-content{
-        padding: 9px 16px;
-        border-radius: 4px;
+        padding: 6px 10px;
+        border-radius: 6px;
         background-color: #e4eaef;
-        margin-bottom: 35px;
+        margin-bottom: 1px;
         &.owner{
             background-color: #7de6e3;
         }
@@ -202,9 +202,15 @@
         }
     }
     .mess-left{
+        &.space-left{
+            margin-left: 56px;
+        }
         .txt-time{
             left: 10px;
         }
+    }
+    .space-top {
+        margin-top: 36px;
     }
 }
 .label-info{

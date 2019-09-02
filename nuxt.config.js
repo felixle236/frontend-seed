@@ -27,13 +27,14 @@ module.exports = {
      */
     loading: false,
     modules: [
-        '@nuxtjs/axios'
+        '@nuxtjs/axios',
+        'nuxt-validate'
     ],
     plugins: [
         {src: '~/plugins/bootstrap'},
         {src: '~/plugins/axios'},
         {src: '~/plugins/authentication'},
-        {src: '~/plugins/vee-validate'},
+        // {src: '~/plugins/vee-validate', ssr: false},
         {src: '~/plugins/socket.io', ssr: false},
         {src: '~/plugins/event-bus', ssr: false},
     ],
@@ -44,6 +45,7 @@ module.exports = {
         vendor: [
             'jquery',
             'bootstrap',
+            // 'vee-validate'
         ],
         plugins: [
             new webpack.ProvidePlugin({
