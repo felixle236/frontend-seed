@@ -4,11 +4,11 @@ export default {
     connectMessageSocket({state, commit}) {
         const socket = this.$sockets.connect('message');
         this.$sockets.message.emit('member_list', {keyword: '', skip: 0, limit: 50});
-        
+
         socket.on('connect', () => {
             console.log('Message socket is connected!');
         });
-        
+
         socket.on('disconnect', () => {
             console.log('Message socket is disconnected!');
         });
@@ -16,22 +16,22 @@ export default {
         socket.on('member_status', member => {
             commit(types.SOCKET_MEMBER, member);
         });
-        
+
         socket.on('member_list_error', error => {
             console.log('member_list_error', error);
         });
-        
+
         socket.on('member_list_successfully', members => {
             commit(types.SOCKET_MEMBERS, members);
 
             if (!this.$router.currentRoute.path.toLowerCase().startsWith('/message') && members.find(member => member.hasNewMessage))
                 commit(types.SOCKET_HAS_MENU_NEW_MESSAGE, true);
         });
-        
+
         socket.on('message_list_error', error => {
             console.log('message_list_error', error);
         });
-        
+
         socket.on('message_list_successfully', data => {
             const list = [];
             if (data && data.results) {
@@ -45,7 +45,7 @@ export default {
             }
             commit(types.SOCKET_MESSAGES, list);
         });
-        
+
         socket.on('message_directly', message => {
             if (state.currentRoom === message.receiverId || state.currentRoom === message.senderId) {
                 message.sender = state.members.find(c => c.id === message.senderId);
@@ -60,15 +60,15 @@ export default {
             if (!this.$router.currentRoute.path.toLowerCase().startsWith('/message'))
                 commit(types.SOCKET_HAS_MENU_NEW_MESSAGE, true);
         });
-        
+
         socket.on('message_directly_error', error => {
             console.log('message_directly_error', error);
         });
-        
+
         socket.on('message_directly_successfully', message => {
             console.log('message_directly_successfully', message);
         });
-        
+
         socket.on('message_room', message => {
             if (state.currentRoom === message.room) {
                 message.sender = state.members.find(c => c.id === message.senderId);
@@ -76,19 +76,19 @@ export default {
             }
             else
                 commit(types.SOCKET_HAS_ROOM_NEW_MESSAGE, true);
-                
+
             if (!this.$router.currentRoute.path.toLowerCase().startsWith('/message'))
                 commit(types.SOCKET_HAS_MENU_NEW_MESSAGE, true);
         });
-        
+
         socket.on('message_room_error', error => {
             console.log('message_room_error', error);
         });
-        
+
         socket.on('message_room_successfully', message => {
             console.log('message_room_successfully', message);
         });
-        
+
         socket.on('notification', notification => {
             console.log('notification', notification);
         });

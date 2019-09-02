@@ -1,5 +1,5 @@
-import types from '../../mutation-types';
 import {setCookie} from '../../../helpers/dataHelper';
+import types from '../../mutation-types';
 
 export default {
     async findUsers({commit}, conditions) {

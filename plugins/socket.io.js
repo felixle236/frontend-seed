@@ -16,7 +16,7 @@ export default ({store}, inject) => {
             return sockets[field];
         },
         disconnect: (namespace) => {
-            let field = namespace ? namespace : 'default';
+            const field = namespace || 'default';
             if (sockets[field] && sockets[field].connected)
                 sockets[field].disconnect();
             delete sockets[field];

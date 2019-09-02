@@ -15,8 +15,8 @@
         <br>
         <h3>USER LIST</h3>
         <br>
-        <table 
-            class="table" 
+        <table
+            class="table"
             style="text-align: center"
         >
             <thead>
@@ -36,8 +36,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr 
-                    v-for="user in userList" 
+                <tr
+                    v-for="user in userList"
                     :key="user.id"
                 >
                     <td scope="row">
@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
 
 export default {
     async mounted() {

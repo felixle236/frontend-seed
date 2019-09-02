@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex';
 import BoxContact from '~/components/BoxContact';
 import BoxMessage from '~/components/BoxMessage';
+import {mapGetters} from 'vuex';
 
 export default {
     middleware: ['authentication'],

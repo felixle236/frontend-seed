@@ -5,7 +5,7 @@ export default ({redirect, store}, inject) => {
 
     const isRoles = (...roles) => {
         const userAuth = store.state.user.userAuth;
-        return userAuth && userAuth.role && roles.find(roleCode => roleCode === userAuth.role.code) ? true : false;
+        return !!(userAuth && userAuth.role && roles.find(roleCode => roleCode === userAuth.role.code));
     };
 
     inject('auth', {

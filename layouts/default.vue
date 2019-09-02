@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex';
 import MenuLeft from '~/components/MenuLeft';
+import {mapActions} from 'vuex';
 
 export default {
     components: {

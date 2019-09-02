@@ -1,7 +1,7 @@
 import Vuex from 'vuex';
-import user from './modules/user';
-import socket from './modules/socket';
 import {getCookie} from '../helpers/dataHelper';
+import socket from './modules/socket';
+import user from './modules/user';
 
 export default function() {
     return new Vuex.Store({
@@ -11,7 +11,7 @@ export default function() {
             nuxtServerInit({state}, {req}) {
                 state.user.userAuth = null;
                 if (req.headers.cookie) {
-                    let userAuth = getCookie('userAuth', req.headers.cookie);
+                    const userAuth = getCookie('userAuth', req.headers.cookie);
                     if (userAuth)
                         state.user.userAuth = JSON.parse(userAuth);
                 }

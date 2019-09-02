@@ -15,9 +15,9 @@ export function convertToString(date, option) {
 };
 
 export function convertToDateString(date, option) {
-    if (date) {
+    if (date)
         return date.toLocaleDateString([], option);
-    }
+
     return '';
 };
 

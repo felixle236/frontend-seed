@@ -6,4 +6,3 @@ export default {
     userPagination: state => state.userPagination,
     userDetail: state => state.userDetail,
 };
-  

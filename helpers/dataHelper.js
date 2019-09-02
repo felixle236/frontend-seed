@@ -13,14 +13,14 @@ export function convertToCurrency(value, option) {
 };
 
 export function setCookie(cname, cvalue, expireSecond) {
-    let d = new Date();
+    const d = new Date();
     d.setTime(d.getTime() + (expireSecond * 1000));
-    let expires = 'expires=' + d.toUTCString();
+    const expires = 'expires=' + d.toUTCString();
     document.cookie = cname + '=' + JSON.stringify(cvalue) + ';' + expires + ';path=/';
 };
 
 export function getCookie(cookieName, stringCookie) {
-    let strCookie = new RegExp('' + cookieName + '[^;]+').exec(stringCookie);
+    const strCookie = new RegExp('' + cookieName + '[^;]+').exec(stringCookie);
     if (!strCookie)
         return null;
     return unescape(strCookie[0] ? strCookie[0].toString().replace(/^[^=]+./, '') : '');

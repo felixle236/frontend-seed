@@ -28,7 +28,7 @@
                         >
                         <i
                             class="fa fa-search"
-                            aria-hidden="true" 
+                            aria-hidden="true"
                         />
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                 </div>
                 <div class="col-md-9 col-sm-9 col-xs-12">
                     <h1>Welcome to Nuxt JS</h1>
-                    <p class="description"> 
+                    <p class="description">
                         Our goal is to create a framework flexible enough that you can use it as a main project base or in addition to your current project based on Node.js.<br>
                         Nuxt.js presets all the configuration needed to make your development of a Vue.js Application Server Rendered more enjoyable.
                     </p>
@@ -120,7 +120,7 @@
             <div class="col">
                 <!-- <i class="i-con icon-emoji" /> -->
                 <img
-                    v-if="profile" 
+                    v-if="profile"
                     :src="profile.avatar ? apiUrl + profile.avatar : '/images/default-avatar.jpg'"
                     alt="avatar"
                     class="img-avatar-send"
@@ -145,7 +145,7 @@
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
 
 export default {
     data: () => ({
@@ -168,7 +168,7 @@ export default {
         ]),
     },
     watch: {
-        'messages': function(newMessages, oldMessages) {
+        messages: function(newMessages, oldMessages) {
             if (this.$refs.boxContent) {
                 if (this.skip === 0) {
                     setTimeout(() => {
@@ -200,7 +200,7 @@ export default {
             this.receiver = receiverId && this.members.find(member => member.id === receiverId);
             if (this.$refs.content)
                 setTimeout(() => this.$refs.content.select(), 10);
-            
+
             this.findMessages({room: this.room, receiverId: this.receiverId, skip: this.skip, limit: this.limit});
             this.clearNewMessageStatus({room: this.receiverId});
         },
@@ -210,7 +210,7 @@ export default {
                     this.sendMessage({receiverId: this.receiverId, content: this.content});
                 else
                     this.sendMessageRoom({room: this.room, content: this.content});
-            
+
                 this.content = '';
             }
         },
@@ -225,21 +225,21 @@ export default {
     filters: {
         formatDate(date) {
             if (!date) return '';
-            
+
             if (Date.now() - date.getTime() <= 10000)
                 return 'Just a second';
-                
+
             if (Date.now() - date.getTime() <= 60000)
                 return 'Just a minute';
-            
+
             const compareTime = new Date(date.getTime()).setHours(0, 0, 0, 0) - new Date().setHours(0, 0, 0, 0);
-            
+
             if (compareTime === 0)
                 return 'Today ' + date.toLocaleTimeString();
-                
+
             if (compareTime === 86400000)
                 return 'Yesterday ' + date.toLocaleTimeString();
-            
+
             return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
         }
     }

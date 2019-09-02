@@ -5,4 +5,3 @@ export default {
     members: state => state.members,
     messages: state => state.messages,
 };
-  

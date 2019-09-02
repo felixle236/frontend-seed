@@ -10,11 +10,11 @@
             />
             <i
                 class="fa fa-circle"
-                aria-hidden="true" 
+                aria-hidden="true"
             />
             <i
                 class="fa fa-circle"
-                aria-hidden="true" 
+                aria-hidden="true"
             />
         </span>
     </div>
