@@ -1,19 +1,19 @@
-import types from './types';
+import types from '../../mutation-types';
 
 export default {
-    [types.SOCKET_CURRENT_ROOM](state, room) {
+    [types.MESSAGE.CURRENT_ROOM](state, room) {
         state.currentRoom = room;
     },
-    [types.SOCKET_HAS_MENU_NEW_MESSAGE](state, hasMenuNewMessage) {
+    [types.MESSAGE.HAS_MENU_NEW_MESSAGE](state, hasMenuNewMessage) {
         state.hasMenuNewMessage = hasMenuNewMessage;
     },
-    [types.SOCKET_HAS_ROOM_NEW_MESSAGE](state, hasRoomNewMessage) {
+    [types.MESSAGE.HAS_ROOM_NEW_MESSAGE](state, hasRoomNewMessage) {
         state.hasRoomNewMessage = hasRoomNewMessage;
     },
-    [types.SOCKET_CLEAR_MEMBERS](state) {
+    [types.MESSAGE.CLEAR_MEMBERS](state) {
         state.members.splice(0, state.members.length);
     },
-    [types.SOCKET_MEMBERS](state, members) {
+    [types.MESSAGE.MEMBERS](state, members) {
         members.forEach(member => {
             const index = state.members.findIndex(c => c.id === member.id);
             if (index !== -1)
@@ -22,17 +22,17 @@ export default {
                 state.members.push(member);
         });
     },
-    [types.SOCKET_MEMBER](state, member) {
+    [types.MESSAGE.MEMBER](state, member) {
         const index = state.members.findIndex(c => c.id === member.id);
         if (index !== -1)
             Object.assign(state.members[index], member);
         else
             state.members.push(member);
     },
-    [types.SOCKET_CLEAR_MESSAGES](state) {
+    [types.MESSAGE.CLEAR_MESSAGES](state) {
         state.messages.splice(0, state.messages.length);
     },
-    [types.SOCKET_MESSAGES](state, messages) {
+    [types.MESSAGE.MESSAGES](state, messages) {
         messages.forEach(message => {
             message.createdAt = new Date(message.createdAt);
             message.updatedAt = new Date(message.updatedAt);
@@ -56,7 +56,7 @@ export default {
             }
         });
     },
-    [types.SOCKET_MESSAGE](state, message) {
+    [types.MESSAGE.MESSAGE](state, message) {
         message.createdAt = new Date(message.createdAt);
         message.updatedAt = new Date(message.updatedAt);
 

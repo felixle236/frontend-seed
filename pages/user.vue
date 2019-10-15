@@ -6,8 +6,8 @@
         <div v-if="profile">
             <h4>Name: {{ profile.firstName }} {{ profile.lastName }}</h4>
             <h4>Email: {{ profile.email }}</h4>
-            <h4 v-if="userAuth && userAuth.role">
-                Role: {{ userAuth.role.name }}
+            <h4 v-if="role">
+                Role: {{ role.name }}
             </h4>
         </div>
         <br>
@@ -67,15 +67,18 @@ export default {
     },
     computed: {
         ...mapGetters('user', [
-            'userAuth',
-            'profile',
-            'userList'
+            'users'
+        ]),
+        ...mapGetters('userAuth', [
+            'role'
         ])
     },
     methods: {
         ...mapActions('user', [
-            'signin',
             'findUsers'
+        ]),
+        ...mapActions('userAuth', [
+            'signin'
         ])
     }
 };

@@ -55,15 +55,15 @@ import {mapActions, mapGetters} from 'vuex';
 
 export default {
     computed: {
-        ...mapGetters('socket', [
+        ...mapGetters('message', [
             'hasMenuNewMessage'
         ])
     },
     methods: {
-        ...mapActions('user', [
+        ...mapActions('userAuth', [
             'signout'
         ]),
-        ...mapActions('socket', [
+        ...mapActions('message', [
             'disconnectMessageSocket'
         ]),
         logout() {

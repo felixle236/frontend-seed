@@ -5,7 +5,7 @@
                 <div class="col-md-8">
                     <img
                         v-if="receiver"
-                        :src="receiver.avatar ? apiUrl + receiver.avatar : '/images/default-avatar.jpg'"
+                        :src="receiver.avatar || '/images/default-avatar.jpg'"
                         alt=""
                         class="img-avatar"
                     >
@@ -65,10 +65,10 @@
                     <div
                         class="col-auto col-style"
                         :class="{'space-top': !isNearTime(index)}"
-                        v-if="message.senderId !== userAuth.id && !isNearTime(index)"
+                        v-if="message.senderId !== profile.id && !isNearTime(index)"
                     >
                         <img
-                            :src="message.sender ? apiUrl + message.sender.avatar : '/images/default-avatar.jpg'"
+                            :src="message.sender && message.sender.avatar ? message.sender.avatar : '/images/default-avatar.jpg'"
                             alt="avatar"
                             class="img-avatar"
                         >
@@ -76,7 +76,7 @@
                     <div
                         class="col-md-8 col-style mess-left"
                         :class="{'space-left': isNearTime(index), 'space-top': !isNearTime(index)}"
-                        v-if="message.senderId !== userAuth.id"
+                        v-if="message.senderId !== profile.id"
                     >
                         <div class="bg-content">
                             <!-- <h3 class="txt-name">
@@ -96,7 +96,7 @@
                     <div
                         class="col col-style text-right offset-md-4"
                         :class="{'space-top': !isNearTime(index)}"
-                        v-if="message.senderId === userAuth.id"
+                        v-if="message.senderId === profile.id"
                     >
                         <div class="bg-content owner">
                             <p class="txt-content">
@@ -121,7 +121,7 @@
                 <!-- <i class="i-con icon-emoji" /> -->
                 <img
                     v-if="profile"
-                    :src="profile.avatar ? apiUrl + profile.avatar : '/images/default-avatar.jpg'"
+                    :src="profile.avatar || '/images/default-avatar.jpg'"
                     alt="avatar"
                     class="img-avatar-send"
                 >
@@ -158,11 +158,10 @@ export default {
         content: ''
     }),
     computed: {
-        ...mapGetters('user', [
-            'userAuth',
+        ...mapGetters('userAuth', [
             'profile'
         ]),
-        ...mapGetters('socket', [
+        ...mapGetters('message', [
             'members',
             'messages'
         ]),
@@ -187,7 +186,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions('socket', [
+        ...mapActions('message', [
             'findMessages',
             'sendMessage',
             'sendMessageRoom',

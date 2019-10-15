@@ -1,7 +1,7 @@
 <template>
     <div
         class="message row"
-        v-if="userAuth"
+        v-if="profile"
     >
         <div class="col-auto pd-0">
             <box-contact
@@ -27,8 +27,8 @@ export default {
         BoxMessage
     },
     computed: {
-        ...mapGetters('user', [
-            'userAuth'
+        ...mapGetters('userAuth', [
+            'profile'
         ])
     },
     methods: {

@@ -26,7 +26,7 @@ export default {
             this.connectMessageSocket();
     },
     methods: {
-        ...mapActions('socket', [
+        ...mapActions('message', [
             'connectMessageSocket'
         ])
     }

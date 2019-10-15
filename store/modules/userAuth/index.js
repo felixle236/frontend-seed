@@ -5,9 +5,11 @@ import mutations from './mutations';
 export default {
     namespaced: true,
     state: {
-        users: [],
-        pagination: null,
-        user: null,
+        profile: null,
+        accessToken: null,
+        role: null,
+        claims: null,
+        signinMessage: null
     },
     getters,
     actions,

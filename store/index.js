@@ -1,7 +1,8 @@
 import Vuex from 'vuex';
 import {getCookie} from '../helpers/dataHelper';
-import socket from './modules/socket';
+import message from './modules/message';
 import user from './modules/user';
+import userAuth from './modules/userAuth';
 
 export default function() {
     return new Vuex.Store({
@@ -9,17 +10,27 @@ export default function() {
         mutations: {},
         actions: {
             nuxtServerInit({state}, {req}) {
-                state.user.userAuth = null;
+                state.userAuth.profile = null;
+                state.userAuth.accessToken = null;
+                state.userAuth.role = null;
+                state.userAuth.claims = null;
+
                 if (req.headers.cookie) {
                     const userAuth = getCookie('userAuth', req.headers.cookie);
-                    if (userAuth)
-                        state.user.userAuth = JSON.parse(userAuth);
+                    if (userAuth) {
+                        const data = JSON.parse(userAuth);
+                        state.userAuth.profile = data.profile;
+                        state.userAuth.accessToken = data.accessToken;
+                        state.userAuth.role = data.role;
+                        state.userAuth.claims = data.claims;
+                    }
                 }
             }
         },
         modules: {
             user,
-            socket
+            userAuth,
+            message
         }
     });
 };

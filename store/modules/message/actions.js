@@ -3,10 +3,12 @@ import types from '../../mutation-types';
 export default {
     connectMessageSocket({state, commit}) {
         const socket = this.$sockets.connect('message');
-        this.$sockets.message.emit('member_list', {keyword: '', skip: 0, limit: 50});
 
         socket.on('connect', () => {
             console.log('Message socket is connected!');
+            setTimeout(() => {
+                this.$sockets.message.emit('member_list', {keyword: '', skip: 0, limit: 50});
+            }, 100);
         });
 
         socket.on('disconnect', () => {
@@ -14,7 +16,7 @@ export default {
         });
 
         socket.on('member_status', member => {
-            commit(types.SOCKET_MEMBER, member);
+            commit(types.MESSAGE.MEMBER, member);
         });
 
         socket.on('member_list_error', error => {
@@ -22,10 +24,10 @@ export default {
         });
 
         socket.on('member_list_successfully', members => {
-            commit(types.SOCKET_MEMBERS, members);
+            commit(types.MESSAGE.MEMBERS, members);
 
             if (!this.$router.currentRoute.path.toLowerCase().startsWith('/message') && members.find(member => member.hasNewMessage))
-                commit(types.SOCKET_HAS_MENU_NEW_MESSAGE, true);
+                commit(types.MESSAGE.HAS_MENU_NEW_MESSAGE, true);
         });
 
         socket.on('message_list_error', error => {
@@ -43,14 +45,14 @@ export default {
                     }
                 });
             }
-            commit(types.SOCKET_MESSAGES, list);
+            commit(types.MESSAGE.MESSAGES, list);
         });
 
         socket.on('message_directly', message => {
             if (state.currentRoom === message.receiverId || state.currentRoom === message.senderId) {
                 message.sender = state.members.find(c => c.id === message.senderId);
                 message.receiver = state.members.find(c => c.id === message.receiverId);
-                commit(types.SOCKET_MESSAGE, message);
+                commit(types.MESSAGE.MESSAGE, message);
             }
             else {
                 const member = state.members.find(member => member.id === message.senderId);
@@ -58,7 +60,7 @@ export default {
                     member.hasNewMessage = true;
             }
             if (!this.$router.currentRoute.path.toLowerCase().startsWith('/message'))
-                commit(types.SOCKET_HAS_MENU_NEW_MESSAGE, true);
+                commit(types.MESSAGE.HAS_MENU_NEW_MESSAGE, true);
         });
 
         socket.on('message_directly_error', error => {
@@ -72,13 +74,13 @@ export default {
         socket.on('message_room', message => {
             if (state.currentRoom === message.room) {
                 message.sender = state.members.find(c => c.id === message.senderId);
-                commit(types.SOCKET_MESSAGE, message);
+                commit(types.MESSAGE.MESSAGE, message);
             }
             else
-                commit(types.SOCKET_HAS_ROOM_NEW_MESSAGE, true);
+                commit(types.MESSAGE.HAS_ROOM_NEW_MESSAGE, true);
 
             if (!this.$router.currentRoute.path.toLowerCase().startsWith('/message'))
-                commit(types.SOCKET_HAS_MENU_NEW_MESSAGE, true);
+                commit(types.MESSAGE.HAS_MENU_NEW_MESSAGE, true);
         });
 
         socket.on('message_room_error', error => {
@@ -101,8 +103,8 @@ export default {
     },
     findMessages({state, commit}, {room, receiverId, skip, limit}) {
         if ((room === 0 && state.currentRoom !== room) || (receiverId && state.currentRoom !== receiverId) || !skip) {
-            commit(types.SOCKET_CLEAR_MESSAGES);
-            commit(types.SOCKET_CURRENT_ROOM, receiverId || room);
+            commit(types.MESSAGE.CLEAR_MESSAGES);
+            commit(types.MESSAGE.CURRENT_ROOM, receiverId || room);
         }
         this.$sockets.message.emit('message_list', {room, receiverId, skip, limit});
     },
@@ -125,9 +127,9 @@ export default {
                 member.hasNewMessage = false;
         }
         else
-            commit(types.SOCKET_HAS_ROOM_NEW_MESSAGE, false);
+            commit(types.MESSAGE.HAS_ROOM_NEW_MESSAGE, false);
     },
     clearMenuNewMessageStatus({state, commit}) {
-        commit(types.SOCKET_HAS_MENU_NEW_MESSAGE, false);
+        commit(types.MESSAGE.HAS_MENU_NEW_MESSAGE, false);
     }
 };

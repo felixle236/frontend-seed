@@ -1,11 +1,11 @@
 export default ({redirect, store}, inject) => {
     const isAuthenticated = () => {
-        return !!store.state.user.userAuth;
+        return !!store.state.userAuth.profile;
     };
 
     const isRoles = (...roles) => {
-        const userAuth = store.state.user.userAuth;
-        return !!(userAuth && userAuth.role && roles.find(roleCode => roleCode === userAuth.role.code));
+        const role = store.state.userAuth.role;
+        return !!(role && roles.find(roleCode => roleCode === role.code));
     };
 
     inject('auth', {

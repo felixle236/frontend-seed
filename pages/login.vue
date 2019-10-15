@@ -87,12 +87,12 @@ export default {
         password: '',
     }),
     computed: {
-        ...mapGetters('user', [
+        ...mapGetters('userAuth', [
             'signinMessage'
         ])
     },
     methods: {
-        ...mapActions('user', [
+        ...mapActions('userAuth', [
             'signin'
         ]),
         async login() {

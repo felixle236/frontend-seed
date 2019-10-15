@@ -5,7 +5,7 @@
             v-if="profile"
         >
             <img
-                :src="profile.avatar ? apiUrl + profile.avatar : '/images/default-avatar.jpg'"
+                :src="profile.avatar || '/images/default-avatar.jpg'"
                 alt=""
                 :title="profile.firstName + ' ' + profile.lastName"
                 class="img-avatar"
@@ -43,14 +43,14 @@
                     <li
                         class="nav-item"
                         v-for="(member, index) in members"
-                        v-show="member.id !== userAuth.id"
+                        v-show="member.id !== profile.id"
                         :class="{'active': activeTab === member.id}"
                         :key="index"
                         @click="changeRoom(undefined, member.id)"
                     >
                         <img
                             class="img-avatar"
-                            :src="member.avatar ? apiUrl + member.avatar : '/images/default-avatar.jpg'"
+                            :src="member.avatar || '/images/default-avatar.jpg'"
                         >
                         <i
                             v-if="member.isOnline"
@@ -83,11 +83,10 @@ export default {
         activeTab: -1
     }),
     computed: {
-        ...mapGetters('user', [
-            'profile',
-            'userAuth'
+        ...mapGetters('userAuth', [
+            'profile'
         ]),
-        ...mapGetters('socket', [
+        ...mapGetters('message', [
             'currentRoom',
             'hasRoomNewMessage',
             'members'
@@ -98,7 +97,7 @@ export default {
         // this.findMembers({keyword: this.keyword, skip: this.skip, limit: this.limit});
     },
     methods: {
-        ...mapActions('socket', [
+        ...mapActions('message', [
             'findMembers',
             'clearMenuNewMessageStatus'
         ]),

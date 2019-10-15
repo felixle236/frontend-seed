@@ -1,7 +1,9 @@
-import socketTypes from './modules/socket/types';
+import messageTypes from './modules/message/types';
+import userAuthTypes from './modules/userAuth/types';
 import userTypes from './modules/user/types';
 
 export default {
-    ...userTypes,
-    ...socketTypes
+    USER: userTypes,
+    USER_AUTH: userAuthTypes,
+    MESSAGE: messageTypes
 };
