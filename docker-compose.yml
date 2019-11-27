@@ -3,7 +3,7 @@ services:
     web-app:
         container_name: ${PROJECT_ID}
         build: .
-        ports:
+        expose:
             - ${PORT}:${PORT}
         networks:
             - webnet
