@@ -11,7 +11,7 @@ export default ({store}, inject) => {
             if (sockets[field] && sockets[field].connected)
                 sockets[field].disconnect();
 
-            const accessToken = store.state.userAuth && store.state.userAuth.accessToken ? store.state.userAuth.accessToken : '';
+            const accessToken = store.state.auth && store.state.auth.accessToken ? store.state.auth.accessToken : '';
             sockets[field] = io(`${process.env.WS_URL}/${namespace}?token=${accessToken}`, {transports: ['websocket']});
             return sockets[field];
         },

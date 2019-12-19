@@ -1,7 +1,7 @@
 export default function({$axios, redirect, store}) {
     $axios.onRequest(config => {
-        if (store.state.userAuth && store.state.userAuth.accessToken)
-            config.headers.common.authorization = store.state.userAuth.accessToken;
+        if (store.state.auth && store.state.auth.accessToken)
+            config.headers.common.authorization = 'Bearer ' + store.state.auth.accessToken;
     });
 
     $axios.onError(error => {

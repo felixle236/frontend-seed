@@ -69,7 +69,7 @@ export default {
         ...mapGetters('user', [
             'users'
         ]),
-        ...mapGetters('userAuth', [
+        ...mapGetters('auth', [
             'role'
         ])
     },
@@ -77,7 +77,7 @@ export default {
         ...mapActions('user', [
             'findUsers'
         ]),
-        ...mapActions('userAuth', [
+        ...mapActions('auth', [
             'signin'
         ])
     }

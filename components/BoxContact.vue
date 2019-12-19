@@ -83,7 +83,7 @@ export default {
         activeTab: -1
     }),
     computed: {
-        ...mapGetters('userAuth', [
+        ...mapGetters('auth', [
             'profile'
         ]),
         ...mapGetters('message', [

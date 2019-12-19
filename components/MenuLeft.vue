@@ -60,7 +60,7 @@ export default {
         ])
     },
     methods: {
-        ...mapActions('userAuth', [
+        ...mapActions('auth', [
             'signout'
         ]),
         ...mapActions('message', [

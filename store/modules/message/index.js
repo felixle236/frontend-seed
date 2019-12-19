@@ -4,13 +4,13 @@ import mutations from './mutations';
 
 export default {
     namespaced: true,
-    state: {
+    state: () => ({
         currentRoom: -1,
         hasMenuNewMessage: false,
         hasRoomNewMessage: false,
         members: [],
         messages: [],
-    },
+    }),
     getters,
     actions,
     mutations

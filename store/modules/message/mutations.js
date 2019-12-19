@@ -10,6 +10,11 @@ export default {
     [types.MESSAGE.HAS_ROOM_NEW_MESSAGE](state, hasRoomNewMessage) {
         state.hasRoomNewMessage = hasRoomNewMessage;
     },
+    [types.MESSAGE.ONLINE_STATUS](state, onlineStatus) {
+        const member = state.members.find(member => member.id === onlineStatus.id);
+        if (member)
+            member.isOnline = onlineStatus.isOnline;
+    },
     [types.MESSAGE.CLEAR_MEMBERS](state) {
         state.members.splice(0, state.members.length);
     },

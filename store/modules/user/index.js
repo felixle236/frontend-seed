@@ -4,11 +4,11 @@ import mutations from './mutations';
 
 export default {
     namespaced: true,
-    state: {
+    state: () => ({
         users: [],
         pagination: null,
         user: null,
-    },
+    }),
     getters,
     actions,
     mutations

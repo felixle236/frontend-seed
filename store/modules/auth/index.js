@@ -4,13 +4,13 @@ import mutations from './mutations';
 
 export default {
     namespaced: true,
-    state: {
+    state: () => ({
         profile: null,
         accessToken: null,
         role: null,
         claims: null,
         signinMessage: null
-    },
+    }),
     getters,
     actions,
     mutations

@@ -27,7 +27,7 @@ export default {
         BoxMessage
     },
     computed: {
-        ...mapGetters('userAuth', [
+        ...mapGetters('auth', [
             'profile'
         ])
     },

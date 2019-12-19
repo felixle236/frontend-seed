@@ -15,8 +15,8 @@ export default {
             console.log('Message socket is disconnected!');
         });
 
-        socket.on('member_status', member => {
-            commit(types.MESSAGE.MEMBER, member);
+        socket.on('online_status', onlineStatus => {
+            commit(types.MESSAGE.ONLINE_STATUS, onlineStatus);
         });
 
         socket.on('member_list_error', error => {
@@ -53,6 +53,7 @@ export default {
                 message.sender = state.members.find(c => c.id === message.senderId);
                 message.receiver = state.members.find(c => c.id === message.receiverId);
                 commit(types.MESSAGE.MESSAGE, message);
+                this.$sockets.message.emit('message_status', state.currentRoom);
             }
             else {
                 const member = state.members.find(member => member.id === message.senderId);

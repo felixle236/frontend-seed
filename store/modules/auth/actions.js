@@ -19,10 +19,10 @@ export default {
 };
 
 function storeUserAuthentication(commit, userAuth) {
-    if (userAuth && userAuth.expiresIn && userAuth.expiresIn > 0)
-        setCookie('userAuth', userAuth, userAuth.expiresIn);
+    if (userAuth && userAuth.accessToken)
+        setCookie('auth', userAuth, 24 * 60 * 60);
     else
-        setCookie('userAuth', null, -1);
+        setCookie('auth', null, -1);
 
     commit(types.USER_AUTH.PROFILE, userAuth && userAuth.profile);
     commit(types.USER_AUTH.ACCESS_TOKEN, userAuth && userAuth.accessToken);

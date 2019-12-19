@@ -158,7 +158,7 @@ export default {
         content: ''
     }),
     computed: {
-        ...mapGetters('userAuth', [
+        ...mapGetters('auth', [
             'profile'
         ]),
         ...mapGetters('message', [
