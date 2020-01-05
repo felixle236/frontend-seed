@@ -24,6 +24,7 @@ module.exports = {
     rules: {
         'indent': ['error', 4],
         'semi': ['error', 'always'],
+        'one-var': ['error', 'never'],
         'require-jsdoc': 'off',
         'valid-jsdoc': 'off',
         'camelcase': ['error'],
