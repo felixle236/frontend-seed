@@ -26,7 +26,6 @@ function storeUserAuthentication(commit, userAuth) {
 
     commit(types.USER_AUTH.PROFILE, userAuth && userAuth.profile);
     commit(types.USER_AUTH.ACCESS_TOKEN, userAuth && userAuth.accessToken);
-    commit(types.USER_AUTH.ROLE, userAuth && userAuth.role);
     commit(types.USER_AUTH.CLAIMS, userAuth && userAuth.claims);
     return userAuth;
 }

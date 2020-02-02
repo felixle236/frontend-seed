@@ -4,7 +4,7 @@ export default ({redirect, store}, inject) => {
     };
 
     const isRoles = (...roles) => {
-        const role = store.state.auth.role;
+        const role = store.state.auth.profile.role;
         return !!(role && roles.find(roleCode => roleCode === role.code));
     };
 

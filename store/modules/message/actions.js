@@ -2,12 +2,12 @@ import types from '../../mutation-types';
 
 export default {
     connectMessageSocket({state, commit}) {
-        const socket = this.$sockets.connect('message');
+        const socket = this.$sockets.connect('messages');
 
         socket.on('connect', () => {
             console.log('Message socket is connected!');
             setTimeout(() => {
-                this.$sockets.message.emit('member_list', {keyword: '', skip: 0, limit: 50});
+                this.$sockets.messages.emit('member_list', {keyword: '', skip: 0, limit: 50});
             }, 100);
         });
 
@@ -23,10 +23,10 @@ export default {
             console.log('member_list_error', error);
         });
 
-        socket.on('member_list_successfully', members => {
-            commit(types.MESSAGE.MEMBERS, members);
+        socket.on('member_list_successfully', memberList => {
+            commit(types.MESSAGE.MEMBERS, memberList.results);
 
-            if (!this.$router.currentRoute.path.toLowerCase().startsWith('/message') && members.find(member => member.hasNewMessage))
+            if (!this.$router.currentRoute.path.toLowerCase().startsWith('/message') && memberList.results.find(member => member.hasNewMessage))
                 commit(types.MESSAGE.HAS_MENU_NEW_MESSAGE, true);
         });
 
@@ -53,7 +53,7 @@ export default {
                 message.sender = state.members.find(c => c.id === message.senderId);
                 message.receiver = state.members.find(c => c.id === message.receiverId);
                 commit(types.MESSAGE.MESSAGE, message);
-                this.$sockets.message.emit('message_status', state.currentRoom);
+                this.$sockets.messages.emit('message_status', state.currentRoom);
             }
             else {
                 const member = state.members.find(member => member.id === message.senderId);
@@ -100,23 +100,23 @@ export default {
         this.$sockets.disconnect('message');
     },
     findMembers({state, commit}, {keyword, skip, limit}) {
-        this.$sockets.message.emit('member_list', {keyword, skip, limit});
+        this.$sockets.messages.emit('member_list', {keyword, skip, limit});
     },
     findMessages({state, commit}, {room, receiverId, skip, limit}) {
         if ((room === 0 && state.currentRoom !== room) || (receiverId && state.currentRoom !== receiverId) || !skip) {
             commit(types.MESSAGE.CLEAR_MESSAGES);
             commit(types.MESSAGE.CURRENT_ROOM, receiverId || room);
         }
-        this.$sockets.message.emit('message_list', {room, receiverId, skip, limit});
+        this.$sockets.messages.emit('message_list', {room, receiverId, skip, limit});
     },
     sendMessage({state, commit}, {receiverId, content}) {
-        this.$sockets.message.emit('message_directly', {
+        this.$sockets.messages.emit('message_directly', {
             receiverId,
             content
         });
     },
     sendMessageRoom({state, commit}, {room, content}) {
-        this.$sockets.message.emit('message_room', {
+        this.$sockets.messages.emit('message_room', {
             room,
             content
         });

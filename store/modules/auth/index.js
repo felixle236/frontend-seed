@@ -7,7 +7,6 @@ export default {
     state: () => ({
         profile: null,
         accessToken: null,
-        role: null,
         claims: null,
         signinMessage: null
     }),
