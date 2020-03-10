@@ -5,14 +5,14 @@ export default {
         if (!conditions)
             conditions = {};
 
-        const data = await this.$axios.$get(`/api/users?keyword=${conditions.keyword || ''}&skip=${conditions.skip || ''}&limit=${conditions.limit || ''}`);
-        commit(types.USER.USERS, data.results);
-        commit(types.USER.PAGINATION, data.pagination);
-        return data;
+        const result = await this.$axios.$get(`/api/users?keyword=${conditions.keyword || ''}&skip=${conditions.skip || ''}&limit=${conditions.limit || ''}`);
+        commit(types.USER.USERS, result.data.results);
+        commit(types.USER.PAGINATION, result.data.pagination);
+        return result.data;
     },
     async getUser({commit}, id) {
-        const user = await this.$axios.$get(`/api/users/${id}`);
-        commit(types.USER.USER, user);
-        return user;
+        const result = await this.$axios.$get(`/api/users/${id}`);
+        commit(types.USER.USER, result.data);
+        return result.data;
     }
 };

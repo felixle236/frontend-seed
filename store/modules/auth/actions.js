@@ -3,15 +3,15 @@ import types from '../../mutation-types';
 
 export default {
     async signup({commit}, data) {
-        const userAuth = await this.$axios.$post('/api/auth/signup', data);
-        return storeUserAuthentication(commit, userAuth);
+        const result = await this.$axios.$post('/api/auth/signup', data);
+        return storeUserAuthentication(commit, result.data);
     },
     async signin({commit}, {email, password}) {
         commit(types.USER_AUTH.SIGNIN_MESSAGE, '');
-        const userAuth = await this.$axios.$post('/api/auth/signin', {email, password}).catch(err => {
+        const result = await this.$axios.$post('/api/auth/signin', {email, password}).catch(err => {
             commit(types.USER_AUTH.SIGNIN_MESSAGE, err.message);
         });
-        return storeUserAuthentication(commit, userAuth);
+        return storeUserAuthentication(commit, result.data);
     },
     signout({commit}) {
         storeUserAuthentication(commit);
@@ -26,6 +26,5 @@ function storeUserAuthentication(commit, userAuth) {
 
     commit(types.USER_AUTH.PROFILE, userAuth && userAuth.profile);
     commit(types.USER_AUTH.ACCESS_TOKEN, userAuth && userAuth.accessToken);
-    commit(types.USER_AUTH.CLAIMS, userAuth && userAuth.claims);
     return userAuth;
 }

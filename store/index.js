@@ -12,7 +12,6 @@ export default function() {
             nuxtServerInit({state}, {req}) {
                 state.auth.accessToken = null;
                 state.auth.profile = null;
-                state.auth.claims = null;
 
                 if (req.headers.cookie) {
                     const userAuth = getCookie('auth', req.headers.cookie);
@@ -20,7 +19,6 @@ export default function() {
                         const data = JSON.parse(userAuth);
                         state.auth.profile = data.profile;
                         state.auth.accessToken = data.accessToken;
-                        state.auth.claims = data.claims;
                     }
                 }
             }
