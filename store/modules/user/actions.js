@@ -5,13 +5,13 @@ export default {
         if (!conditions)
             conditions = {};
 
-        const result = await this.$axios.$get(`/api/users?keyword=${conditions.keyword || ''}&skip=${conditions.skip || ''}&limit=${conditions.limit || ''}`);
+        const result = await this.$axios.$get(`/api/v1/users?keyword=${conditions.keyword || ''}&skip=${conditions.skip || ''}&limit=${conditions.limit || ''}`);
         commit(types.USER.USERS, result.data.results);
         commit(types.USER.PAGINATION, result.data.pagination);
         return result.data;
     },
     async getUser({commit}, id) {
-        const result = await this.$axios.$get(`/api/users/${id}`);
+        const result = await this.$axios.$get(`/api/v1/users/${id}`);
         commit(types.USER.USER, result.data);
         return result.data;
     }
