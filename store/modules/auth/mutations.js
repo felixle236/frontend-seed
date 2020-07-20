@@ -7,7 +7,7 @@ export default {
     [types.USER_AUTH.ACCESS_TOKEN](state, accessToken) {
         state.accessToken = accessToken;
     },
-    [types.USER_AUTH.SIGNIN_MESSAGE](state, message) {
-        state.signinMessage = message;
+    [types.USER_AUTH.LOGIN_MESSAGE](state, message) {
+        state.loginMessage = message;
     }
 };

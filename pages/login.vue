@@ -51,15 +51,15 @@
                     </p>
                     <button
                         class="btn-normal"
-                        @click="login"
+                        @click="loginUser"
                     >
                         Login
                     </button>
                     <p
                         style="color: #f93c3c; margin-top: 20px; font-size: 12px; text-align: center;"
-                        v-if="signinMessage"
+                        v-if="loginMessage"
                     >
-                        {{ signinMessage }}
+                        {{ loginMessage }}
                     </p>
                 </form>
             </div>
@@ -88,14 +88,14 @@ export default {
     }),
     computed: {
         ...mapGetters('auth', [
-            'signinMessage'
+            'loginMessage'
         ])
     },
     methods: {
         ...mapActions('auth', [
             'login'
         ]),
-        async login() {
+        async loginUser() {
             const isValid = await this.$validator.validate();
             if (isValid) {
                 const userAuth = await this.login({

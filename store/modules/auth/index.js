@@ -7,7 +7,7 @@ export default {
     state: () => ({
         profile: null,
         accessToken: null,
-        signinMessage: null
+        loginMessage: null
     }),
     getters,
     actions,

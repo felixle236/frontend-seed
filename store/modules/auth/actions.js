@@ -3,9 +3,9 @@ import types from '../../mutation-types';
 
 export default {
     async login({commit}, {email, password}) {
-        commit(types.USER_AUTH.SIGNIN_MESSAGE, '');
+        commit(types.USER_AUTH.LOGIN_MESSAGE, '');
         const result = await this.$axios.$post('/api/v1/auth/login', {email, password}).catch(err => {
-            commit(types.USER_AUTH.SIGNIN_MESSAGE, err.message);
+            commit(types.USER_AUTH.LOGIN_MESSAGE, err.message);
         });
         return storeUserAuthentication(commit, result.data);
     },
