@@ -2,14 +2,14 @@ import {setCookie} from '../../../helpers/dataHelper';
 import types from '../../mutation-types';
 
 export default {
-    async signin({commit}, {email, password}) {
+    async login({commit}, {email, password}) {
         commit(types.USER_AUTH.SIGNIN_MESSAGE, '');
-        const result = await this.$axios.$post('/api/v1/auth/signin', {email, password}).catch(err => {
+        const result = await this.$axios.$post('/api/v1/auth/login', {email, password}).catch(err => {
             commit(types.USER_AUTH.SIGNIN_MESSAGE, err.message);
         });
         return storeUserAuthentication(commit, result.data);
     },
-    signout({commit}) {
+    logout({commit}) {
         storeUserAuthentication(commit);
     }
 };

@@ -58,7 +58,7 @@ import {mapActions, mapGetters} from 'vuex';
 export default {
     async mounted() {
         try {
-            await this.signin({email: 'admin@localhost.com', password: 'Backend-seed2'});
+            await this.login({email: 'admin@localhost.com', password: 'Backend-seed2'});
             await this.findUsers();
         }
         catch (error) {
@@ -78,7 +78,7 @@ export default {
             'findUsers'
         ]),
         ...mapActions('auth', [
-            'signin'
+            'login'
         ])
     }
 };

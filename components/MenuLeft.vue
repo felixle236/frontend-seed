@@ -61,13 +61,13 @@ export default {
     },
     methods: {
         ...mapActions('auth', [
-            'signout'
+            'logout'
         ]),
         ...mapActions('message', [
             'disconnectMessageSocket'
         ]),
         logout() {
-            this.signout();
+            this.logout();
             this.disconnectMessageSocket();
             this.$router.push('/');
         }

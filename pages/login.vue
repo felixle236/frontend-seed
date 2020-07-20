@@ -93,12 +93,12 @@ export default {
     },
     methods: {
         ...mapActions('auth', [
-            'signin'
+            'login'
         ]),
         async login() {
             const isValid = await this.$validator.validate();
             if (isValid) {
-                const userAuth = await this.signin({
+                const userAuth = await this.login({
                     email: this.email,
                     password: this.password
                 });
