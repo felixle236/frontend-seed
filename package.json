@@ -1,6 +1,6 @@
 {
     "name": "frontend-seed",
-    "version": "2.1.20",
+    "version": "2.1.22",
     "description": "Frontend seed",
     "author": "Felix Le <felix.le.236@gmail.com>",
     "private": true,
@@ -9,33 +9,33 @@
         "build": "npm run lint && nuxt build",
         "start": "nuxt start",
         "generate": "nuxt generate",
-        "lint": "./node_modules/.bin/eslint --ext .js,.vue --ignore-path .gitignore .",
+        "lint": "./node_modules/.bin/eslint --ext .js,.vue ./",
         "precommit": "npm run lint"
     },
     "dependencies": {
-        "@nuxtjs/axios": "^5.10.3",
-        "bootstrap": "^4.4.1",
+        "@nuxtjs/axios": "^5.12.0",
+        "bootstrap": "^4.5.0",
         "dotenv": "^8.2.0",
         "font-awesome": "^4.7.0",
-        "jquery": "^3.5.0",
-        "nuxt": "^2.12.2",
+        "jquery": "^3.5.1",
+        "nuxt": "^2.13.3",
         "nuxt-validate": "^1.0.1",
         "popper.js": "^1.16.1",
         "socket.io-client": "^2.3.0",
-        "vue-socket.io": "^3.0.8"
+        "vue-socket.io": "^3.0.9"
     },
     "devDependencies": {
         "babel-eslint": "^10.1.0",
-        "eslint": "^6.8.0",
+        "eslint": "^7.5.0",
         "eslint-config-standard": "^14.1.1",
         "eslint-friendly-formatter": "^4.0.1",
         "eslint-loader": "^4.0.2",
-        "eslint-plugin-import": "^2.20.2",
+        "eslint-plugin-import": "^2.22.0",
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-promise": "^4.2.1",
         "eslint-plugin-standard": "^4.0.1",
         "eslint-plugin-vue": "^6.2.2",
-        "node-sass": "^4.14.0",
-        "sass-loader": "^8.0.2"
+        "node-sass": "^4.14.1",
+        "sass-loader": "^9.0.2"
     }
 }

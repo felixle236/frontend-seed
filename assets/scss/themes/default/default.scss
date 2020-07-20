@@ -19,10 +19,10 @@
     $font-fourth: 'SofiaProSemiBold-Italic';
     $font-fifth: 'Graduate-Regular';
 
-    @import './general/general.scss';
-    @import './components/box-left.scss';
-    @import './components/chart.scss';
-    @import './pages/login.scss';
-    @import './pages/dashboard.scss';
-    @import './pages/message.scss';
+    @import '../../general/general.scss';
+    @import '../../components/box-left.scss';
+    @import '../../components/chart.scss';
+    @import '../../pages/login.scss';
+    @import '../../pages/dashboard.scss';
+    @import '../../pages/message.scss';
 }

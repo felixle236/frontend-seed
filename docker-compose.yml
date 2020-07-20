@@ -4,7 +4,7 @@ services:
         container_name: ${PROJECT_ID}
         build: .
         ports:
-            - ${PORT}:${PORT}
+            - 127.0.0.1:${PORT}:${PORT}
         networks:
             - webnet
         logging:

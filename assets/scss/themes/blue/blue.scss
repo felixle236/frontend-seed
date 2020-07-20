@@ -14,7 +14,7 @@
     $font-fourth: 'CircularStd-Black';
     $font-fifth: 'MarkPro-Bold';
 
-    @import './general/general.scss';
-    @import './general/header.scss';
-    @import './page/dashboard.scss';
+    @import '../../general/general.scss';
+    @import '../../general/header.scss';
+    @import '../../page/dashboard.scss';
 }

@@ -19,13 +19,13 @@
     $font-fourth: 'CircularStd-Black';
     $font-fifth: 'MarkPro-Bold';
 
-    @import './general/general.scss';
-    @import './page/dashboard.scss';
-    @import './page/login.scss';
-    @import './components/header.scss';
-    @import './components/box-list.scss';
-    @import './components/dropdown-filter.scss';
-    @import './components/box-popup.scss';
-    @import './components/loading.scss';
-    @import './components/success-notify.scss';
+    @import '../../general/general.scss';
+    @import '../../page/dashboard.scss';
+    @import '../../page/login.scss';
+    @import '../../components/header.scss';
+    @import '../../components/box-list.scss';
+    @import '../../components/dropdown-filter.scss';
+    @import '../../components/box-popup.scss';
+    @import '../../components/loading.scss';
+    @import '../../components/success-notify.scss';
 }

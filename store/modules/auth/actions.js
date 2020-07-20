@@ -2,10 +2,6 @@ import {setCookie} from '../../../helpers/dataHelper';
 import types from '../../mutation-types';
 
 export default {
-    async signup({commit}, data) {
-        const result = await this.$axios.$post('/api/v1/auth/signup', data);
-        return storeUserAuthentication(commit, result.data);
-    },
     async signin({commit}, {email, password}) {
         commit(types.USER_AUTH.SIGNIN_MESSAGE, '');
         const result = await this.$axios.$post('/api/v1/auth/signin', {email, password}).catch(err => {
