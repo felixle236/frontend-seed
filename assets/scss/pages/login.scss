@@ -89,10 +89,10 @@
     }
 }
 .login-page{
-    background-image: url('/images/bgLoginPage.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    // background-image: url('~assets/images/bgLoginPage.jpg');
+    // background-repeat: no-repeat;
+    // background-size: cover;
+    // background-position: center;
     padding: 0 168px;
     font-family: $font-primary;
     font-weight: normal;
@@ -133,7 +133,7 @@
         position: relative;
         z-index: 1;
         .txt-link{
-            color: rgba(#ffffff, 0.05);
+            color: rgb(24, 182, 245);
         }
     }
     .logo{

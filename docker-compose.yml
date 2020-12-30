@@ -1,6 +1,7 @@
-version: '3.7'
+version: '3.9'
 services:
     web-app:
+        image: ${PROJECT_ID}-img
         container_name: ${PROJECT_ID}
         build: .
         ports:

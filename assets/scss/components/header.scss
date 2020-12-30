@@ -2,7 +2,6 @@ header{
     position: relative;
     z-index: 1;
     background-color: $color-primary;
-    // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
     @include box-shadow(0, 2px, 4px, rgba(0, 0, 0, 0.03));
     .logo{
         padding: 21px 15px;
@@ -21,7 +20,6 @@ header{
         .dropdown-toggle{
             background-color: $color-primary !important;
             border: 0;
-            font-family: 'CircularStd-Book';
             font-size: 10px;
             line-height: 1.6;
             text-align: right;
@@ -83,6 +81,7 @@ header{
             overflow-y: auto;
             &::-webkit-scrollbar-track
             {
+                box-shadow: inset 0 0 6px #fff;
                 -webkit-box-shadow: inset 0 0 6px #fff;
                 background-color: #ffffff;
             }

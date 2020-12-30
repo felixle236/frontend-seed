@@ -1,0 +1,22 @@
+.theme-blue {
+    //----Color
+    $color-primary: $blue;
+    $color-second: $white;
+    $color-third: $gray-dark;
+    $color-fourth: $blue-darker;
+    $color-fifth: $green;
+    $color-sixth: $gray;
+    $color-seventh: $gray-light;
+    //----Font
+    $font-primary: 'GeneralGrotesque-Demi';
+    $font-second: 'GeneralGrotesque-Demi';
+    $font-third: 'GeneralGrotesque-Demi';
+    $font-fourth: 'GeneralGrotesque-Demi';
+    $font-fifth: 'GeneralGrotesque-Demi';
+
+    @import '~/assets/scss/general/general.scss';
+    @import '~/assets/scss/components/header.scss';
+    @import '~/assets/scss/components/loading.scss';
+    @import '~/assets/scss/components/box-left.scss';
+    @import '~/assets/scss/pages/login.scss';
+}

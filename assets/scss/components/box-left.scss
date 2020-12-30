@@ -6,7 +6,6 @@
     overflow-x: hidden;
     transition: 0.4s linear;
     &.box-message{
-        // width: 488px;
         width: calc(100vw - 321px);
         &.closed{
             margin-left: -488px;
@@ -23,6 +22,7 @@
                 border: 1px solid #fff;
             }
             &::-webkit-scrollbar-track {
+                box-shadow: none;
                 -webkit-box-shadow: none;
             }
         }
@@ -413,6 +413,7 @@
         width: 1px;
     }
     &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, .1);
         -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .1);
     }
 }

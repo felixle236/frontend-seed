@@ -1,4 +1,4 @@
-FROM node:14.5-alpine
+FROM node:15.4-alpine
 
 # Change working directory
 WORKDIR /usr/app
@@ -7,6 +7,6 @@ WORKDIR /usr/app
 COPY . .
 
 # Install app dependencies
-RUN npm install && npm run build && npm run lint
+RUN npm install && npm run build
 
 CMD ["npm", "start"]

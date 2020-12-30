@@ -1,0 +1,27 @@
+.theme-default {
+    //----Color
+    $color-primary: $white;
+    $color-second: $blue-lighter;
+    $color-third: $gray-darker;
+    $color-fourth: $blue-darker;
+    $color-fifth: $gray;
+    $color-sixth: $blue-dark;
+    $color-seventh: $green;
+    $color-eighth: $black-light;
+    $color-ninth: $blue-light;
+    $color-tenth: $gray-light;
+    $color-eleventh: $red;
+    $color-twelfth: $green-darker;
+    //----Font
+    $font-primary: 'GeneralGrotesque-Demi';
+    $font-second: 'GeneralGrotesque-Demi';
+    $font-third: 'GeneralGrotesque-Demi';
+    $font-fourth: 'GeneralGrotesque-Demi';
+    $font-fifth: 'GeneralGrotesque-Demi';
+
+    @import '~/assets/scss/general/general.scss';
+    @import '~/assets/scss/components/header.scss';
+    @import '~/assets/scss/components/loading.scss';
+    @import '~/assets/scss/components/box-left.scss';
+    @import '~/assets/scss/pages/login.scss';
+}

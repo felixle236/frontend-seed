@@ -13,22 +13,39 @@
     </div>
 </template>
 
-<script>
-import MenuLeft from '~/components/MenuLeft';
-import {mapActions} from 'vuex';
+<script lang="ts">
+import Vue from 'vue';
+import MenuLeft from '~/components/MenuLeft.vue';
+import {connect} from '~/utils/socket';
 
-export default {
+export default Vue.extend({
     components: {
         MenuLeft,
     },
-    created() {
-        if (process.browser && this.$auth.isAuthenticated())
-            this.connectMessageSocket();
-    },
-    methods: {
-        ...mapActions('message', [
-            'connectMessageSocket'
-        ])
+    mounted() {
+        if (process.client && this.$auth.isAuthenticated()) {
+            const socket = connect('messages', this.$store.state.auth.accessToken);
+
+            socket.on('connect', () => {
+                // eslint-disable-next-line no-console
+                console.log('Message channel is connected!');
+            });
+
+            socket.on('disconnect', () => {
+                // eslint-disable-next-line no-console
+                console.log('Message channel is disconnected!');
+            });
+
+            socket.on('online_status', (onlineStatus: {userId: string, isOnline: boolean}) => {
+                // eslint-disable-next-line no-console
+                console.log('online_status', onlineStatus);
+            });
+
+            socket.on('notification', (notification: {id: string, content: string}) => {
+                // eslint-disable-next-line no-console
+                console.log('notification', notification);
+            });
+        }
     }
-};
+});
 </script>

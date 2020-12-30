@@ -3,32 +3,19 @@
         "**/.nuxt": true
     },
     "editor.tabSize": 4,
-    "eslint.enable": true, //Enable eslint
     "eslint.options": {
         "extensions": [ //List of file extensions to activate eslint
             ".html",
             ".js",
             ".vue",
-            ".jsx"
+            ".jsx",
+            ".ts"
         ]
     },
-    "eslint.validate": [{ //list of extensions to validate
-        "language": "html",
-        "autoFix": true
-    }, {
-        "language": "vue",
-        "autoFix": true //Autofix any fixable errors when linting
-    }, {
-        "language": "javascript",
-        "autoFix": true
-    }, {
-        "language": "javascriptreact",
-        "autoFix": true
-    }],
+    "eslint.validate": ["html", "vue", "javascript", "typescript"],
     // Run the linter on save (onSave) or on type (onType)
     "eslint.run": "onSave",
-    "eslint.autoFixOnSave": true,
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
-    } //Autofix any fixable errors when linting
+    }
 }

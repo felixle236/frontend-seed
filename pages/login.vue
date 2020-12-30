@@ -8,7 +8,7 @@
                 >
                     <p>
                         <img
-                            src="/images/logo.png"
+                            src="~/assets/images/logo.png"
                             alt="logo"
                             class="logo"
                         >
@@ -17,14 +17,14 @@
                         Nuxt.js presets all the configuration needed to make your development of a Vue.js application enjoyable.
                     </p>
                     <input
+                        v-model="email"
+                        v-validate="'required|email'"
                         type="text"
                         placeholder="Your Email"
                         class="form-input"
                         :class="{'border-danger': errors.has('email')}"
                         name="email"
                         maxlength="100"
-                        v-model="email"
-                        v-validate="'required|email'"
                     >
                     <p
                         v-show="errors.has('email')"
@@ -33,6 +33,8 @@
                         {{ errors.first('email') }}
                     </p>
                     <input
+                        v-model="password"
+                        v-validate="'required|min:6'"
                         type="password"
                         placeholder="Password"
                         autocomplete="new-password"
@@ -40,8 +42,6 @@
                         :class="{'border-danger': errors.has('password')}"
                         name="password"
                         maxlength="20"
-                        v-model="password"
-                        v-validate="'required|min:6'"
                     >
                     <p
                         v-show="errors.has('password')"
@@ -51,13 +51,13 @@
                     </p>
                     <button
                         class="btn-normal"
-                        @click="loginUser"
+                        @click="login"
                     >
                         Login
                     </button>
                     <p
-                        style="color: #f93c3c; margin-top: 20px; font-size: 12px; text-align: center;"
                         v-if="loginMessage"
+                        style="color: #f93c3c; margin-top: 20px; font-size: 12px; text-align: center;"
                     >
                         {{ loginMessage }}
                     </p>
@@ -76,36 +76,21 @@
     </section>
 </template>
 
-<script>
-import {mapActions, mapGetters} from 'vuex';
+<script lang="ts">
+import Vue from 'vue';
 
-export default {
+export default Vue.extend({
     layout: 'blank',
     middleware: ['non-authentication'],
     data: () => ({
         email: '',
         password: '',
+        loginMessage: ''
     }),
-    computed: {
-        ...mapGetters('auth', [
-            'loginMessage'
-        ])
-    },
     methods: {
-        ...mapActions('auth', [
-            'login'
-        ]),
-        async loginUser() {
-            const isValid = await this.$validator.validate();
-            if (isValid) {
-                const userAuth = await this.login({
-                    email: this.email,
-                    password: this.password
-                });
-                if (userAuth)
-                    this.$router.push('/');
-            }
+        login() {
+            alert('Login function is not implemented yet!');
         }
     }
-};
+});
 </script>

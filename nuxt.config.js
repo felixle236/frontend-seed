@@ -1,11 +1,6 @@
-require('dotenv').config();
-const webpack = require('webpack');
-
-module.exports = {
+export default {
     env: process.env,
-    /*
-     ** Headers of the page
-     */
+    // Global page headers (https://go.nuxtjs.dev/config-head)
     head: {
         title: process.env.PROJECT_NAME,
         meta: [
@@ -17,54 +12,48 @@ module.exports = {
             {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
         ]
     },
+
+    // Global CSS (https://go.nuxtjs.dev/config-css)
     css: [
-        'bootstrap/dist/css/bootstrap.min.css',
-        'font-awesome/css/font-awesome.min.css',
         '~/assets/scss/main.scss'
     ],
-    /*
-     ** Customize the progress bar color
-     */
-    loading: false,
-    modules: [
-        '@nuxtjs/axios',
-        'nuxt-validate'
-    ],
+
+    // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
     plugins: [
-        {src: '~/plugins/bootstrap'},
         {src: '~/plugins/axios'},
         {src: '~/plugins/authentication'},
-        // {src: '~/plugins/vee-validate', ssr: false},
-        {src: '~/plugins/socket.io', ssr: false},
-        {src: '~/plugins/event-bus', ssr: false},
+        {src: '~/plugins/event-bus', mode: 'client'},
+        {src: '~/plugins/vee-validate', mode: 'client'}
     ],
-    /*
-     ** Build configuration
-     */
+
+    // Auto import components (https://go.nuxtjs.dev/config-components)
+    components: true,
+
+    // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
+    buildModules: [
+    // https://go.nuxtjs.dev/typescript
+        '@nuxt/typescript-build'
+    ],
+
+    // Modules (https://go.nuxtjs.dev/config-modules)
+    modules: [
+    // https://go.nuxtjs.dev/bootstrap
+        'bootstrap-vue/nuxt',
+        'nuxt-validate',
+        '@nuxtjs/axios'
+    ],
+
+    // Build Configuration (https://go.nuxtjs.dev/config-build)
     build: {
-        vendor: [
-            'jquery',
-            'bootstrap',
-            // 'vee-validate'
-        ],
-        plugins: [
-            new webpack.ProvidePlugin({
-                $: 'jquery',
-                jQuery: 'jquery',
-                'window.jQuery': 'jquery'
-            })
-        ],
-        /*
-         ** Run ESLint on save
-         */
-        extend(config, {isDev, isClient}) {
-            if (isDev && isClient) {
-                config.module.rules.push({
-                    enforce: 'pre',
-                    test: /\.(js|vue)$/,
-                    loader: 'eslint-loader',
-                    exclude: /(node_modules)/
-                });
+        babel: {
+            compact: true
+        }
+    },
+
+    typescript: {
+        typeCheck: {
+            eslint: {
+                files: './**/*.{ts,js,vue}'
             }
         }
     }

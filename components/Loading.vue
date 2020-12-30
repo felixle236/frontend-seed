@@ -1,49 +1,49 @@
 <template>
     <div
-        class="loading"
         v-if="isShowLoading"
+        class="loading"
     >
         <div
-            class="loading-page"
             v-if="isLoadingPage"
+            class="loading-page"
         >
             <div class="windows8">
                 <div
-                    class="wBall"
                     id="wBall_1"
+                    class="wBall"
                 >
                     <div class="wInnerBall" />
                 </div>
                 <div
-                    class="wBall"
                     id="wBall_2"
+                    class="wBall"
                 >
                     <div class="wInnerBall" />
                 </div>
                 <div
-                    class="wBall"
                     id="wBall_3"
+                    class="wBall"
                 >
                     <div class="wInnerBall" />
                 </div>
                 <div
-                    class="wBall"
                     id="wBall_4"
+                    class="wBall"
                 >
                     <div class="wInnerBall" />
                 </div>
                 <div
-                    class="wBall"
                     id="wBall_5"
+                    class="wBall"
                 >
                     <div class="wInnerBall" />
                 </div>
             </div>
         </div>
         <div
+            v-else
             :class="{'not-drop': backgroundAfter, 'full-box': fullBox}"
             class="loading-custom"
-            v-else
         >
             <div
                 class="lds-spinner"

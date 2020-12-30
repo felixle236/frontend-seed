@@ -27,7 +27,6 @@
         height: 78px;
         margin: auto;
     }
-
     .windows8 .wBall {
         position: absolute;
         width: 74px;
@@ -44,7 +43,6 @@
         -webkit-animation: orbit 3.3225s infinite;
         -moz-animation: orbit 3.3225s infinite;
     }
-
     .windows8 .wBall .wInnerBall {
         position: absolute;
         width: 10px;
@@ -54,7 +52,6 @@
         top: 0px;
         border-radius: 10px;
     }
-
     .windows8 #wBall_1 {
         animation-delay: 0.726s;
         -o-animation-delay: 0.726s;
@@ -62,7 +59,6 @@
         -webkit-animation-delay: 0.726s;
         -moz-animation-delay: 0.726s;
     }
-
     .windows8 #wBall_2 {
         animation-delay: 0.143s;
         -o-animation-delay: 0.143s;
@@ -70,7 +66,6 @@
         -webkit-animation-delay: 0.143s;
         -moz-animation-delay: 0.143s;
     }
-
     .windows8 #wBall_3 {
         animation-delay: 0.2865s;
         -o-animation-delay: 0.2865s;
@@ -78,7 +73,6 @@
         -webkit-animation-delay: 0.2865s;
         -moz-animation-delay: 0.2865s;
     }
-
     .windows8 #wBall_4 {
         animation-delay: 0.4295s;
         -o-animation-delay: 0.4295s;
@@ -86,7 +80,6 @@
         -webkit-animation-delay: 0.4295s;
         -moz-animation-delay: 0.4295s;
     }
-
     .windows8 #wBall_5 {
         animation-delay: 0.583s;
         -o-animation-delay: 0.583s;
@@ -94,7 +87,6 @@
         -webkit-animation-delay: 0.583s;
         -moz-animation-delay: 0.583s;
     }
-
     @keyframes orbit {
         0% {
             opacity: 1;
