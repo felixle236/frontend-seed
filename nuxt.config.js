@@ -40,7 +40,8 @@ export default {
     // https://go.nuxtjs.dev/bootstrap
         'bootstrap-vue/nuxt',
         'nuxt-validate',
-        '@nuxtjs/axios'
+        '@nuxtjs/axios',
+        'nuxt-healthcheck'
     ],
 
     // Build Configuration (https://go.nuxtjs.dev/config-build)
