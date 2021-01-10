@@ -1,26 +1,40 @@
-import {ActionTree, GetterTree, MutationTree} from 'vuex';
-import {namespace as actionNamespace} from '~/store/auth';
-import {getCookie} from '~/utils/cookie';
+import { ActionTree, GetterTree, MutationTree } from 'vuex';
+import { authService } from '~/services/auth';
+import { meService } from '~/services/me';
+import { namespace as authNamespace } from '~/store/auth';
+import { getCookie } from '~/utils/cookie';
 
-export interface RootState {}
+export interface IRootState {}
 
-export const state = (): RootState => ({
+export const state = (): IRootState => ({
 });
 
-export const getters: GetterTree<RootState, RootState> = {
+export const getters: GetterTree<IRootState, IRootState> = {
 };
 
-export const MutationType = {
+export const mutationType = {
 };
 
-export const mutations: MutationTree<RootState> = {
+export const mutations: MutationTree<IRootState> = {
 };
 
-export const actions: ActionTree<RootState, RootState> = {
-    async nuxtServerInit({dispatch}, {req}) {
+export const actions: ActionTree<IRootState, IRootState> = {
+    async nuxtServerInit({ dispatch }, { req }) {
         const token = getCookie('token', req.headers.cookie);
-        const userAuth = await dispatch(`${actionNamespace}/authenticate`, token);
-        if (userAuth)
-            await dispatch(`${actionNamespace}/getProfile`);
+        if (token) {
+            const authResult = await authService.authenticate(token).catch(err => {
+                // eslint-disable-next-line no-console
+                console.error(err);
+                throw err;
+            });
+            dispatch(`${authNamespace}/updateAuthentication`, authResult.data);
+
+            const profileResult = await meService.getProfile().catch(err => {
+                // eslint-disable-next-line no-console
+                console.error(err);
+                throw err;
+            });
+            dispatch(`${authNamespace}/updateProfile`, profileResult.data);
+        }
     }
 };

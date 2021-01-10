@@ -4,12 +4,12 @@ export default {
     head: {
         title: process.env.PROJECT_NAME,
         meta: [
-            {charset: 'utf-8'},
-            {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-            {hid: 'description', name: 'description', content: process.env.PROJECT_NAME}
+            { charset: 'utf-8' },
+            { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+            { hid: 'description', name: 'description', content: process.env.PROJECT_NAME }
         ],
         link: [
-            {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
+            { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
         ]
     },
 
@@ -20,10 +20,10 @@ export default {
 
     // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
     plugins: [
-        {src: '~/plugins/axios'},
-        {src: '~/plugins/authentication'},
-        {src: '~/plugins/event-bus', mode: 'client'},
-        {src: '~/plugins/vee-validate', mode: 'client'}
+        { src: '~/plugins/axios' },
+        { src: '~/plugins/auth' },
+        { src: '~/plugins/event-bus', mode: 'client' },
+        { src: '~/plugins/vee-validate', mode: 'client' }
     ],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)

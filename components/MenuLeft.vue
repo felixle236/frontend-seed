@@ -20,6 +20,17 @@
                 </nuxt-link>
             </li>
             <li
+                class="menu-item"
+                :class="$route.path.toLowerCase().startsWith('/secret') && 'active'"
+            >
+                <nuxt-link
+                    to="/secret"
+                    class="menu-link"
+                >
+                    <i class="i-con" :class="$auth.isAuthenticated() ? 'fa fa-unlock-alt' : 'fa fa-lock'" />
+                </nuxt-link>
+            </li>
+            <li
                 v-if="$auth.isAuthenticated()"
                 class="menu-item"
                 :class="$route.path.toLowerCase().startsWith('/message') && 'active'"
@@ -51,7 +62,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {mapActions} from 'vuex';
+import { mapActions } from 'vuex';
 
 export default Vue.extend({
     methods: {

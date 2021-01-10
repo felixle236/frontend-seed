@@ -1,8 +1,8 @@
-import {Middleware} from '@nuxt/types';
+import { Middleware } from '@nuxt/types';
 
-const middleware: Middleware = ({app, redirect}) => {
+const middleware: Middleware = ({ app, route, redirect }) => {
     if (!app.$auth.isAuthenticated())
-        return redirect('/login');
+        return redirect('/login?redirect=' + route.fullPath);
 };
 
 export default middleware;

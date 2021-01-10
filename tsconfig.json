@@ -1,12 +1,11 @@
 {
     "compilerOptions": {
         "target": "es2019",
-        "module": "ESNext",
+        "module": "commonjs",
         "moduleResolution": "Node",
         "lib": [
-            "ESNext",
-            "ESNext.AsyncIterable",
-            "DOM"
+            "es2019",
+            "dom"
         ],
         "esModuleInterop": true,
         "allowJs": true,

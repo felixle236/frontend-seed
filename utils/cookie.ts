@@ -3,7 +3,7 @@ export function setCookie(cname: string, cvalue: string, expireSecond: number) {
     const d = new Date();
     d.setTime(d.getTime() + (expireSecond * 1000));
     const expires = 'expires=' + d.toUTCString();
-    document.cookie = cname + '=' + JSON.stringify(cvalue) + ';' + expires + ';path=/';
+    document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/';
 };
 
 export function getCookie(cookieName: string, stringCookie: string) {

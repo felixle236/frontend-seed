@@ -78,6 +78,9 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { mapActions } from 'vuex';
+import { authService } from '~/services/auth';
+import { meService } from '~/services/me';
 
 export default Vue.extend({
     layout: 'blank',
@@ -88,8 +91,23 @@ export default Vue.extend({
         loginMessage: ''
     }),
     methods: {
-        login() {
-            alert('Login function is not implemented yet!');
+        ...mapActions('auth', ['updateAuthentication', 'updateProfile', 'clearAuthentication']),
+        async login() {
+            this.loginMessage = '';
+            try {
+                const { data } = await authService.login(this.email, this.password);
+                this.updateAuthentication(data);
+
+                const profileResult = await meService.getProfile();
+                this.updateProfile(profileResult.data);
+
+                const link = this.$route.query.redirect ? this.$route.query.redirect as string : '/';
+                this.$router.push(link);
+            }
+            catch (error) {
+                this.clearAuthentication();
+                this.loginMessage = error.message;
+            }
         }
     }
 });

@@ -6,14 +6,14 @@ export function convertMonthToWord(month: number) {
     return '';
 };
 
-export function convertToString(date: Date, option: Intl.DateTimeFormatOptions = {hour12: false}) {
+export function convertToString(date: Date, option: Intl.DateTimeFormatOptions = { hour12: false }) {
     return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], option);
 };
 
-export function convertToDateString(date: Date, option: Intl.DateTimeFormatOptions = {hour12: false}) {
+export function convertToDateString(date: Date, option: Intl.DateTimeFormatOptions = { hour12: false }) {
     return date.toLocaleDateString([], option);
 };
 
-export function convertToTimeString(date: Date, option: Intl.DateTimeFormatOptions = {hour12: false}) {
+export function convertToTimeString(date: Date, option: Intl.DateTimeFormatOptions = { hour12: false }) {
     return date.toLocaleTimeString([], option);
 };

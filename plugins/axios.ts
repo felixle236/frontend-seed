@@ -1,7 +1,7 @@
-import {Plugin} from '@nuxt/types';
-import {initializeAxios} from '~/utils/api';
+import { Plugin } from '@nuxt/types';
+import { initializeAxios } from '~/utils/api';
 
-const plugin: Plugin = ({$axios, redirect, store}) => {
+const plugin: Plugin = ({ $axios, redirect, store }) => {
     $axios.onRequest(_config => {
         // Set baseURL (both client and server)
         $axios.setBaseURL(process.env.API_URL as string);

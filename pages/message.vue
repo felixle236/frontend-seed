@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <h1 class="title">
-            Secret
+            Message
         </h1>
     </div>
 </template>
