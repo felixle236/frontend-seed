@@ -19,22 +19,22 @@ export const mutations: MutationTree<IRootState> = {
 };
 
 export const actions: ActionTree<IRootState, IRootState> = {
-    async nuxtServerInit({ dispatch }, { req }) {
+    async nuxtServerInit({ dispatch }, { req, res }) {
         const token = getCookie('token', req.headers.cookie);
         if (token) {
-            const authResult = await authService.authenticate(token).catch(err => {
-                // eslint-disable-next-line no-console
-                console.error(err);
-                throw err;
-            });
-            dispatch(`${authNamespace}/updateAuthentication`, authResult.data);
+            try {
+                const authResult = await authService.authenticate(token);
+                dispatch(`${authNamespace}/updateAuthentication`, authResult.data);
 
-            const profileResult = await meService.getProfile().catch(err => {
+                const profileResult = await meService.getProfile();
+                dispatch(`${authNamespace}/updateProfile`, profileResult.data);
+            }
+            catch (err) {
                 // eslint-disable-next-line no-console
                 console.error(err);
-                throw err;
-            });
-            dispatch(`${authNamespace}/updateProfile`, profileResult.data);
+                res.setHeader('set-cookie', 'token=; max-age=0');
+                dispatch(`${authNamespace}/clearAuthentication`);
+            }
         }
     }
 };
