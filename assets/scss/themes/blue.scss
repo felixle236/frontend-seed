@@ -1,12 +1,17 @@
-.theme-blue {
+.theme-default {
     //----Color
     $color-primary: $blue;
-    $color-second: $white;
+    $color-second: $blue-lighter;
     $color-third: $gray-dark;
     $color-fourth: $blue-darker;
     $color-fifth: $green;
     $color-sixth: $gray;
     $color-seventh: $gray-light;
+    $color-eighth: $black-light;
+    $color-ninth: $blue-light;
+    $color-tenth: $gray-light;
+    $color-eleventh: $red;
+    $color-twelfth: $green-darker;
     //----Font
     $font-primary: 'GeneralGrotesque-Demi';
     $font-second: 'GeneralGrotesque-Demi';

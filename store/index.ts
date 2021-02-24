@@ -30,8 +30,6 @@ export const actions: ActionTree<IRootState, IRootState> = {
                 dispatch(`${authNamespace}/updateProfile`, profileResult.data);
             }
             catch (err) {
-                // eslint-disable-next-line no-console
-                console.error(err);
                 res.setHeader('set-cookie', 'token=; max-age=0');
                 dispatch(`${authNamespace}/clearAuthentication`);
             }

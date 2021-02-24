@@ -1,3 +1,5 @@
+const webpack = require('webpack');
+
 export default {
     env: process.env,
     // Global page headers (https://go.nuxtjs.dev/config-head)
@@ -46,9 +48,19 @@ export default {
 
     // Build Configuration (https://go.nuxtjs.dev/config-build)
     build: {
+        vendor: [
+            'jquery'
+        ],
         babel: {
             compact: true
-        }
+        },
+        plugins: [
+            new webpack.ProvidePlugin({
+                $: 'jquery',
+                jQuery: 'jquery',
+                'window.jQuery': 'jquery'
+            })
+        ]
     },
 
     typescript: {

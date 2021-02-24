@@ -7,11 +7,10 @@
                     @submit.prevent
                 >
                     <p>
-                        <img
-                            src="~/assets/images/logo.png"
-                            alt="logo"
+                        <Logo
+                            name="logo"
                             class="logo"
-                        >
+                        />
                     </p>
                     <p class="txt-desc">
                         Nuxt.js presets all the configuration needed to make your development of a Vue.js application enjoyable.

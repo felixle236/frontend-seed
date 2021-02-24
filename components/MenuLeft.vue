@@ -1,11 +1,7 @@
 <template>
     <div class="content-menu">
         <nuxt-link to="/">
-            <img
-                src="~/assets//images/logo.png"
-                alt="logo menu"
-                class="logo"
-            >
+            <Logo class="logo" />
         </nuxt-link>
         <ul class="menu-left">
             <li

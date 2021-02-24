@@ -1,10 +1,16 @@
 <template>
     <div class="container">
         <div>
-            <Logo />
+            <Logo
+                class="home-logo"
+                width="245"
+                height="180"
+            />
+            <br>
             <h1 class="title">
-                frontend-seed
+                {{ title }}
             </h1>
+            <br>
             <div class="links">
                 <a
                     href="https://typescript.nuxtjs.org/"
@@ -31,11 +37,24 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-
+    data: () => ({
+        title: 'Frontend Seed'
+    })
 });
 </script>
 
 <style>
+.home-logo {
+    animation: 1s appear;
+    margin: auto;
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+    }
+}
+
 .container {
     margin: 0 auto;
     min-height: 100vh;
