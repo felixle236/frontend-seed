@@ -1,15 +1,15 @@
 import { Plugin } from '@nuxt/types';
 
 declare module 'vue/types/vue' {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  interface Vue {
-    $auth: {
-        isAuthenticated: ()=> boolean,
-        checkAuthentication: ()=> boolean,
-        isRoles: (...roles: string[])=> boolean,
-        checkRoles: (...roles: string[])=> boolean
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    interface Vue {
+        $auth: {
+            isAuthenticated: ()=> boolean,
+            checkAuthentication: ()=> boolean,
+            isRoles: (...roles: string[])=> boolean,
+            checkRoles: (...roles: string[])=> boolean
+        }
     }
-  }
 }
 
 const plugin: Plugin = ({ store, redirect }, inject) => {
