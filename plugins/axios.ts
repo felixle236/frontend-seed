@@ -2,7 +2,7 @@ import { Plugin } from '@nuxt/types';
 import { initializeAxios } from '~/utils/api';
 
 const plugin: Plugin = ({ $axios, redirect, store }) => {
-    $axios.onRequest(_config => {
+    $axios.onRequest(config => {
         // Set baseURL (both client and server)
         $axios.setBaseURL(process.env.API_URL as string);
 
@@ -15,7 +15,7 @@ const plugin: Plugin = ({ $axios, redirect, store }) => {
             $axios.setBaseURL(process.env.API_SSR_URL as string);
 
         if (store.state.auth && store.state.auth.accessToken)
-            $axios.setToken(store.state.auth.accessToken, 'Bearer');
+            config.headers.common.authorization = 'Bearer ' + store.state.auth.accessToken;
     });
 
     $axios.onError(error => {
