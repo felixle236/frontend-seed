@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 
 export default {
-    env: process.env,
     // Global page headers (https://go.nuxtjs.dev/config-head)
     head: {
         title: process.env.PROJECT_NAME,
@@ -33,18 +32,42 @@ export default {
 
     // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
     buildModules: [
-    // https://go.nuxtjs.dev/typescript
+        // https://go.nuxtjs.dev/typescript
         '@nuxt/typescript-build'
     ],
 
     // Modules (https://go.nuxtjs.dev/config-modules)
     modules: [
-    // https://go.nuxtjs.dev/bootstrap
+        // https://go.nuxtjs.dev/bootstrap
         'bootstrap-vue/nuxt',
         'nuxt-validate',
         '@nuxtjs/axios',
         'nuxt-healthcheck'
     ],
+
+    // Axios module configuration: https://go.nuxtjs.dev/config-axios
+    axios: {
+        baseURL: process.env.API_URL
+    },
+
+    publicRuntimeConfig: {
+        projectId: process.env.PROJECT_ID,
+        projectName: process.env.PROJECT_NAME,
+        prototype: process.env.PROTOTYPE,
+        domain: process.env.DOMAIN,
+        apiUrl: process.env.API_URL,
+        wsUrl: process.env.WS_URL,
+        axios: {
+            baseURL: process.env.API_URL
+        }
+    },
+
+    privateRuntimeConfig: {
+        apiUrl: process.env.API_SSR_URL,
+        axios: {
+            baseURL: process.env.API_SSR_URL
+        }
+    },
 
     // Build Configuration (https://go.nuxtjs.dev/config-build)
     build: {

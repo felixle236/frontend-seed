@@ -29,10 +29,10 @@
             <li
                 v-if="$auth.isAuthenticated()"
                 class="menu-item"
-                :class="$route.path.toLowerCase().startsWith('/message') && 'active'"
+                :class="$route.path.toLowerCase().startsWith('/chat') && 'active'"
             >
                 <nuxt-link
-                    to="/message"
+                    to="/chat"
                     class="menu-link"
                 >
                     <i class="i-con icon-message" />

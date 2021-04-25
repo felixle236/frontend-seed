@@ -20,16 +20,16 @@ import { connectWS } from '~/utils/socket';
 export default Vue.extend({
     mounted() {
         if (this.$auth.isAuthenticated()) {
-            const socket = connectWS('messages', this.$store.state.auth.accessToken);
+            const socket = connectWS(this.$config.wsUrl, 'chat', this.$store.state.auth.accessToken);
 
             socket.on('connect', () => {
                 // eslint-disable-next-line no-console
-                console.log('Message channel is connected!');
+                console.log('Chat channel is connected!');
             });
 
             socket.on('disconnect', () => {
                 // eslint-disable-next-line no-console
-                console.log('Message channel is disconnected!');
+                console.log('Chat channel is disconnected!');
             });
 
             socket.on('connect_error', (err: Error) => {
@@ -37,14 +37,14 @@ export default Vue.extend({
                 console.log('connect_error', err);
             });
 
-            socket.on('online_status', (onlineStatus: {userId: string, isOnline: boolean}) => {
+            socket.on('online_status_changed', (onlineStatus: {userId: string, isOnline: boolean}) => {
                 // eslint-disable-next-line no-console
                 console.log('online_status', onlineStatus);
             });
         }
 
         // eslint-disable-next-line no-console
-        const socket = connectWS('trackings');
+        const socket = connectWS(this.$config.wsUrl, 'tracking');
 
         socket.on('connect', () => {
             // eslint-disable-next-line no-console

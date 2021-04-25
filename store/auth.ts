@@ -1,30 +1,21 @@
 import { ActionTree, GetterTree, MutationTree } from 'vuex';
 import { IRootState } from '.';
+import { IUser } from '~/models/user';
 import { setCookie } from '~/utils/cookie';
 
 export const namespace = 'auth';
-
-export interface IUserProfile {
-    id: string;
-    roleId: string;
-    firstName: string;
-    lastName?: string;
-    email: string;
-    avatar?: string;
-}
-
 export interface IAuthState {
-    accessToken?: string;
-    userId?: string;
-    roleId?: string;
-    profile?: IUserProfile;
+    accessToken: string | null;
+    userId: string | null;
+    roleId: string | null;
+    profile: IUser | null;
 }
 
 export const state = (): IAuthState => ({
-    accessToken: undefined,
-    userId: undefined,
-    roleId: undefined,
-    profile: undefined
+    accessToken: null,
+    userId: null,
+    roleId: null,
+    profile: null
 });
 
 export const getters: GetterTree<IAuthState, IRootState> = {
@@ -42,22 +33,22 @@ export const mutationType = {
 };
 
 export const mutations: MutationTree<IAuthState> = {
-    [mutationType.ACCESS_TOKEN]: (state, accessToken?: string) => {
+    [mutationType.ACCESS_TOKEN]: (state, accessToken: string) => {
         state.accessToken = accessToken;
     },
-    [mutationType.USER_ID]: (state, userId?: string) => {
+    [mutationType.USER_ID]: (state, userId: string) => {
         state.userId = userId;
     },
-    [mutationType.ROLE_ID]: (state, roleId?: string) => {
+    [mutationType.ROLE_ID]: (state, roleId: string) => {
         state.roleId = roleId;
     },
-    [mutationType.PROFILE]: (state, profile?: IUserProfile) => {
+    [mutationType.PROFILE]: (state, profile: IUser) => {
         state.profile = profile;
     }
 };
 
 export const actions: ActionTree<IAuthState, IRootState> = {
-    updateProfile({ commit }, profile: IUserProfile) {
+    updateProfile({ commit }, profile: IUser) {
         commit(mutationType.PROFILE, profile);
     },
     updateAuthentication({ commit }, userAuth: {token: string, userId: string, roleId: string}) {
@@ -69,10 +60,10 @@ export const actions: ActionTree<IAuthState, IRootState> = {
             setCookie('token', userAuth.token, 24 * 60 * 60);
     },
     clearAuthentication({ commit }) {
-        commit(mutationType.ACCESS_TOKEN, undefined);
-        commit(mutationType.USER_ID, undefined);
-        commit(mutationType.ROLE_ID, undefined);
-        commit(mutationType.PROFILE, undefined);
+        commit(mutationType.ACCESS_TOKEN, null);
+        commit(mutationType.USER_ID, null);
+        commit(mutationType.ROLE_ID, null);
+        commit(mutationType.PROFILE, null);
 
         if (process.client)
             setCookie('token', '', -1);
