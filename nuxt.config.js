@@ -1,4 +1,4 @@
-const webpack = require('webpack');
+import webpack from 'webpack';
 
 export default {
     // Global page headers (https://go.nuxtjs.dev/config-head)
@@ -16,6 +16,7 @@ export default {
 
     // Global CSS (https://go.nuxtjs.dev/config-css)
     css: [
+        'bootstrap/scss/bootstrap.scss',
         '~/assets/scss/main.scss'
     ],
 
@@ -33,7 +34,7 @@ export default {
     // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
     buildModules: [
         // https://go.nuxtjs.dev/typescript
-        '@nuxt/typescript-build'
+        '@nuxt/typescript-build',
     ],
 
     // Modules (https://go.nuxtjs.dev/config-modules)
@@ -71,26 +72,19 @@ export default {
 
     // Build Configuration (https://go.nuxtjs.dev/config-build)
     build: {
-        vendor: [
-            'jquery'
-        ],
+        vendor: ['jquery'],
+        transpile: [/^element-ui/],
         babel: {
-            compact: true
+            plugins: [
+                ['@babel/plugin-proposal-private-methods', { loose: true }],
+            ],
         },
         plugins: [
             new webpack.ProvidePlugin({
                 $: 'jquery',
                 jQuery: 'jquery',
-                'window.jQuery': 'jquery'
-            })
-        ]
-    },
-
-    typescript: {
-        typeCheck: {
-            eslint: {
-                files: './**/*.{ts,js,vue}'
-            }
-        }
+                'window.jQuery': 'jquery',
+            }),
+        ],
     }
 };

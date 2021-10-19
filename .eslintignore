@@ -1,0 +1,5 @@
+.nuxt
+build
+dist
+node_modules
+sw.*

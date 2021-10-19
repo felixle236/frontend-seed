@@ -1,25 +1,31 @@
 {
     "compilerOptions": {
-        "target": "es2019",
-        "module": "commonjs",
+        "target": "ES2018",
+        "module": "ESNext",
         "moduleResolution": "Node",
         "lib": [
-            "es2019",
-            "dom"
+            "ESNext",
+            "ESNext.AsyncIterable",
+            "DOM"
         ],
         "esModuleInterop": true,
         "allowJs": true,
         "sourceMap": true,
         "strict": true,
         "noEmit": true,
-        "noImplicitThis": false,
         "experimentalDecorators": true,
         "baseUrl": ".",
         "paths": {
-            "~/*": ["./*"]
+            "~/*": [
+                "./*"
+            ],
+            "@/*": [
+                "./*"
+            ]
         },
         "types": [
             "@types/node",
+            "@types/jquery",
             "@nuxt/types",
             "@nuxtjs/axios"
         ]

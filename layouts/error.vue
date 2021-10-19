@@ -22,10 +22,8 @@ export default Vue.extend({
     },
     computed: {
         errorPage() {
-            if (this.error.statusCode === 404)
-                return error404;
-            else if (this.error.statusCode === 400)
-                return error400;
+            if (this.error.statusCode === 404) return error404;
+            else if (this.error.statusCode === 400) return error400;
 
             // catch everything else
             return error500;
@@ -37,12 +35,13 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .page-error {
     text-align: center;
+
     img {
         max-width: 474px;
         margin-top: 134px;
     }
+
     h1 {
-        font-family: 'Inter';
         font-style: normal;
         font-weight: 800;
         font-size: 70px;
@@ -50,12 +49,13 @@ export default Vue.extend({
         color: #272729;
         margin-top: 32px;
     }
+
     h3 {
         color: #8D8D94;
         margin-bottom: 12px;
     }
+
     p {
-        font-family: 'Inter';
         font-style: normal;
         font-weight: normal;
         font-size: 16px;
@@ -63,6 +63,7 @@ export default Vue.extend({
         text-align: center;
         color: #8D8D94;
     }
+
     button {
         margin: 32px 0;
     }
