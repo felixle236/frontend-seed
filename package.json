@@ -43,7 +43,7 @@
         "eslint-plugin-prettier": "^4.0.0",
         "eslint-plugin-vue": "^7.19.1",
         "husky": "^7.0.2",
-        "node-sass": "^6.0.1",
+        "node-sass": "^7.0.0",
         "prettier": "^2.4.1",
         "sass": "^1.32.13",
         "sass-loader": "^10.1.1",
